@@ -1,0 +1,5 @@
+add_subdirectory(interrupt)
+add_subdirectory(plic)
+add_subdirectory(aplic)
+add_subdirectory(aclint)
+add_subdirectory(imsic)

@@ -1,0 +1,29 @@
+[
+    {
+        "name": "miselect",
+        "class": "control_status",
+        "offset": "0x350"
+    },
+    {
+        "name": "mireg",
+        "class": "control_status",
+        "offset": "0x351"
+    },
+    {
+        "name": "mtopei",
+        "class": "control_status",
+        "offset": "0x35C",
+        "fields": [
+            {
+                "name": "priority",
+                "position": 0,
+                "length": 11
+            },
+            {
+                "name": "identity",
+                "position": 16,
+                "length": 11
+            }
+        ]
+    }
+]

@@ -1,0 +1,69 @@
+{
+    "$schema": "../../meta/device.schema.json",
+    "name": "imsic",
+    "instance": "$INSTANCE",
+    "memory_regions": [
+        {
+            "name": "machine_files",
+            "base": "$MACHINE_FILES_BASE",
+            "size": "$HART_COUNT * $PAGE_SIZE",
+            "registers": [
+                {
+                    "name": "mseteipnum_le",
+                    "class": "memory_mapped",
+                    "width": 32,
+                    "offset": "0x0",
+                    "indexing": {
+                        "upper_bound": "$HART_COUNT",
+                        "stride": "$PAGE_SIZE"
+                    }
+                },
+                {
+                    "name": "mseteipnum_be",
+                    "class": "memory_mapped",
+                    "width": 32,
+                    "offset": "0x0004",
+                    "indexing": {
+                        "upper_bound": "$HART_COUNT",
+                        "stride": "$PAGE_SIZE"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "supervisor_files",
+            "base": "$SUPERVISOR_FILES_BASE",
+            "size": "$HART_COUNT * $PAGE_SIZE",
+            "registers": [
+                {
+                    "name": "sseteipnum_le",
+                    "class": "memory_mapped",
+                    "width": 32,
+                    "offset": "0x0",
+                    "indexing": {
+                        "upper_bound": "$HART_COUNT",
+                        "stride": "$PAGE_SIZE"
+                    }
+                },
+                {
+                    "name": "sseteipnum_be",
+                    "class": "memory_mapped",
+                    "width": 32,
+                    "offset": "0x0004",
+                    "indexing": {
+                        "upper_bound": "$HART_COUNT",
+                        "stride": "$PAGE_SIZE"
+                    }
+                }
+            ]
+        }
+    ],
+    "parameters": [
+        {
+            "name": "page_size",
+            "stage": "compile",
+            "class": "uint32",
+            "value": "$PAGE_SIZE"
+        }
+    ]
+}

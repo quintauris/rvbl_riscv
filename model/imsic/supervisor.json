@@ -1,0 +1,29 @@
+[
+    {
+        "name": "siselect",
+        "class": "control_status",
+        "offset": "0x150"
+    },
+    {
+        "name": "sireg",
+        "class": "control_status",
+        "offset": "0x151"
+    },
+    {
+        "name": "stopei",
+        "class": "control_status",
+        "offset": "0x15C",
+        "fields": [
+            {
+                "name": "priority",
+                "position": 0,
+                "length": 11
+            },
+            {
+                "name": "identity",
+                "position": 16,
+                "length": 11
+            }
+        ]
+    }
+]

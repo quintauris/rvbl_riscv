@@ -1,0 +1,106 @@
+= RISC-V Base Layer Interrupt Library
+Quintauris GmbH
+:toc: left
+
+Implements trap-related types and functions. Across this module, the generic
+term _trap_ is used to refer to both RISC-V synchronous exceptions and
+asynchrounous interrupts.
+
+== Type `rvbl_interrupt_hart_context`
+
+In-memory representation of a RISC-V HART context, including:
+
+* All RISC-V architecture general-purpose registers (`x1`-`x31`) labeled
+according to their ABI meanings
+* Program Counter register (`m`/`sepc`)
+* Interrupt Cause register (`m`/`scause`)
+* Interrupt Value register (`m`/`sval`)
+
+== Type `rvbl_interrupt_trap_handler`
+
+Function type representing a trap handler.
+
+=== Parameters
+`volatile rvbl_interrupt_hart_context *`:: HART context recorded at the
+by the global trap handler.
+
+IMPORTANT: the HART context is stored in the interrupt handling stack before
+passing control to `rvbl_interrupt_trap_handler`, and restored from there
+right after `rvbl_interrupt_trap_handler` returns. If the HART context
+is to be saved or modified, it is the `rvbl_interrupt_trap_handler`'s
+responsibility to do so.
+
+== Enumeration `rvbl_interrupt_hart_privilege`
+
+RISC-V HART execution privilege levels.
+
+* `rvbl_interrupt_hart_privilege_u` = `0`
+
+* `rvbl_interrupt_hart_privilege_s` = `1`
+
+* `rvbl_interrupt_hart_privilege_m` = `3`
+
+== Function `rvbl_interrupt_hart_current_initialize_traps`
+
+Initializes trap-handling structures and registers.
+
+=== Parameters
+`rvbl_interrupt_trap_handler`:: Pointer to default trap handler.
+`rvbl_pointer_t`:: Extra data to pass trap handlers via
+`rvbl_interrupt_hart_context::extra`.
+
+=== Return Value
+`rvbl_result_t`:: Always `rvbl_result_success`.
+
+== Function `rvbl_interrupt_hart_current_enable_traps`
+
+Enables all Machine- and (if supported) Supervisor-level traps.
+
+=== Return Value
+`rvbl_result_t`:: Always `rvbl_result_success`.
+
+== Function `rvbl_interrupt_hart_current_disable_traps`
+
+Disables all Machine- and (if supported) Supervisor-level traps.
+
+=== Return Value
+`rvbl_result_t`:: Always `rvbl_result_success`.
+
+== Function `rvbl_interrupt_hart_current_set_trap_handler`
+
+Installs a trap handler for a given exception/interrupt.
+
+=== Parameters
+`rvbl_interrupt_hart_privilege`:: Execution privilege level at which the
+trap shall be handled.
+`rvbl_uword_t`:: Trap identification (use anchor:rvbl_exception[] or
+anchor:interrupt[] macros).
+`rvbl_interrupt_trap_handler`:: Trap handler.
+
+=== Return Value
+`rvbl_result_t`::
+* `rvbl_result_success` if operation is successful.
+* `rvbl_result_error_unsupported` if target_privilege value is unsupported.
+
+== Function `rvbl_interrupt_hart_current_set_delegation`
+
+Configure Machine- to Supervisor-level delegation of a given trap.
+
+=== Parameters
+`rvbl_uword_t`:: Trap identification (use <<rvbl_exception>> or
+<<rvbl_interrupt>> macros).
+`rvbl_bool_t`:: Whether to delegate to Supervisor level.
+
+=== Return Value
+`rvbl_result_t`::
+* `rvbl_result_success` if operation is successful.
+* `rvbl_result_error_unsupported` if supervisor mode is unsupported.
+
+== Macro `RVBL_EXCEPTION`
+
+[[rvbl_exception]] Formats a `rvbl_uword_t` to hold an exception code.
+
+== Macro `RVBL_INTERRUPT`
+
+[[rvbl_interrupt]] Formats a `rvbl_uword_t` to hold an interrupt code.
+

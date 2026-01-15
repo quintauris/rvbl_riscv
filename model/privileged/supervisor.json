@@ -1,0 +1,250 @@
+[
+    {
+        "name": "stvec",
+        "class": "control_status",
+        "offset": "0x105",
+        "fields": [
+            {
+                "name": "mode",
+                "position": 0,
+                "length": 2,
+                "values": [
+                    {
+                        "name": "Direct",
+                        "value": "0"
+                    },
+                    {
+                        "name": "Vectored",
+                        "value": "1"
+                    }
+                ]
+            },
+            {
+                "name": "base",
+                "position": 2
+            }
+        ]
+    },
+    {
+        "name": "sip",
+        "class": "control_status",
+        "offset": "0x144",
+        "fields": [
+            {
+                "name": "ssip",
+                "position": 1,
+                "length": 1
+            },
+            {
+                "name": "stip",
+                "position": 5,
+                "length": 1
+            },
+            {
+                "name": "seip",
+                "position": 9,
+                "length": 1
+            },
+            {
+                "name": "lcofip",
+                "position": 13,
+                "length": 1
+            }
+        ]
+    },
+    {
+        "name": "sie",
+        "class": "control_status",
+        "offset": "0x104",
+        "fields": [
+            {
+                "name": "ssie",
+                "position": 1,
+                "length": 1
+            },
+            {
+                "name": "stie",
+                "position": 5,
+                "length": 1
+            },
+            {
+                "name": "seie",
+                "position": 9,
+                "length": 1
+            },
+            {
+                "name": "lcofie",
+                "position": 13,
+                "length": 1
+            }
+        ]
+    },
+    {
+        "name": "scounteren",
+        "class": "control_status",
+        "offset": "0x106",
+        "fields": [
+            {
+                "name": "cy",
+                "position": 0,
+                "length": 1
+            },
+            {
+                "name": "tm",
+                "position": 1,
+                "length": 1
+            },
+            {
+                "name": "ir",
+                "position": 2,
+                "length": 1
+            },
+            {
+                "name": "hpm3",
+                "position": 3,
+                "length": 1
+            },
+            {
+                "name": "hpm4",
+                "position": 4,
+                "length": 1
+            }
+        ]
+    },
+    {
+        "name": "sscratch",
+        "class": "control_status",
+        "offset": "0x140"
+    },
+    {
+        "name": "sepc",
+        "class": "control_status",
+        "offset": "0x141"
+    },
+    {
+        "name": "scause",
+        "class": "control_status",
+        "offset": "0x142",
+        "fields": [
+            {
+                "name": "code",
+                "position": 0,
+                "length": 31,
+                "values": [
+                    {
+                        "name": "Interrupt_SupervisorSoftware",
+                        "value": "1"
+                    },
+                    {
+                        "name": "Interrupt_MachineSoftware",
+                        "value": "3"
+                    },
+                    {
+                        "name": "Interrupt_SupervisorTimer",
+                        "value": "5"
+                    },
+                    {
+                        "name": "Interrupt_MachineTimer",
+                        "value": "7"
+                    },
+                    {
+                        "name": "Interrupt_SupervisorExternal",
+                        "value": "9"
+                    },
+                    {
+                        "name": "Interrupt_MachineExternal",
+                        "value": "11"
+                    },
+                    {
+                        "name": "Interrupt_CounterOverflow",
+                        "value": "13"
+                    },
+                    {
+                        "name": "Exception_InstructionAddressMisaligned",
+                        "value": "0"
+                    },
+                    {
+                        "name": "Exception_InstructionAccessFault",
+                        "value": "1"
+                    },
+                    {
+                        "name": "Exception_IllegalInstruction",
+                        "value": "2"
+                    },
+                    {
+                        "name": "Exception_Breakpoint",
+                        "value": "3"
+                    },
+                    {
+                        "name": "Exception_LoadAddressMisaligned",
+                        "value": "4"
+                    },
+                    {
+                        "name": "Exception_LoadAccessFault",
+                        "value": "5"
+                    },
+                    {
+                        "name": "Exception_StoreAddressMisaligned",
+                        "value": "6"
+                    },
+                    {
+                        "name": "Exception_StoreAccessFault",
+                        "value": "7"
+                    },
+                    {
+                        "name": "Exception_EnvironmentCallFromUMode",
+                        "value": "8"
+                    },
+                    {
+                        "name": "Exception_EnvironmentCallFromSMode",
+                        "value": "9"
+                    },
+                    {
+                        "name": "Exception_EnvironmentCallFromMMode",
+                        "value": "11"
+                    },
+                    {
+                        "name": "Exception_InstructionPageFault",
+                        "value": "12"
+                    },
+                    {
+                        "name": "Exception_LoadPageFault",
+                        "value": "13"
+                    },
+                    {
+                        "name": "Exception_StorePageFault",
+                        "value": "15"
+                    },
+                    {
+                        "name": "Exception_SofwareCheck",
+                        "value": "18"
+                    },
+                    {
+                        "name": "Exception_HardwareError",
+                        "value": "19"
+                    }
+                ]
+            },
+            {
+                "name": "interrupt",
+                "position": 31,
+                "length": 1,
+                "values": [
+                    {
+                        "name": "Exception",
+                        "value": "0"
+                    },
+                    {
+                        "name": "Interrupt",
+                        "value": "1"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "stval",
+        "class": "control_status",
+        "offset": "0x143"
+    }
+]
