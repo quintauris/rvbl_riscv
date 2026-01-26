@@ -1,12 +1,12 @@
 rvbl_static_library(
-    NAME plic 
-    SOURCES
-        "${CMAKE_CURRENT_LIST_DIR}/source/rvbl_plic.c"
-        "${CMAKE_CURRENT_LIST_DIR}/include/rvbl/plic/rvbl_plic.h"
-    INCLUDES
-        "${CMAKE_CURRENT_LIST_DIR}/include"
-    LIBRARIES
-        machine
-)
+  NAME
+  plic
+  SOURCES
+  "${CMAKE_CURRENT_LIST_DIR}/source/rvbl_plic.c"
+  "${CMAKE_CURRENT_LIST_DIR}/include/rvbl/plic/rvbl_plic.h"
+  INCLUDES
+  "${CMAKE_CURRENT_LIST_DIR}/include"
+  LIBRARIES
+  machine)
 
 rvbl_test(NAME plic LIBRARIES interrupt plic)

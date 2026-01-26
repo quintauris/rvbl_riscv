@@ -1,5 +1,5 @@
     public machine_trap_table
-    public supervisor_trap_table 
+    public supervisor_trap_table
     extern rvbl_interrupt_hart_internal_select_trap_handler
     extern interrupt_stack_top
     extern supervisor_stack_top
@@ -63,7 +63,7 @@ machine_trap_wrapper:
     sw x29, 112(sp)
     sw x30, 116(sp)
     sw x31, 120(sp)
-    
+
     ;/* Use a1 as temporary to save mepc, mtval and mcause */
     csrr a1, mepc
     sw a1, 124(sp)
@@ -82,7 +82,7 @@ machine_trap_wrapper:
     lw t0, 0(a0)
     mv a0, sp
     jalr t0
-    
+
     ;/* Use a0 as temporary to restore mepc, mtval and mcause */
     lw a0, 124(sp)
     csrw mepc, a0
@@ -169,7 +169,7 @@ supervisor_trap_wrapper:
     sw x29, 112(sp)
     sw x30, 116(sp)
     sw x31, 120(sp)
-    
+
     ;/* Use a1 as temporary to save mepc, mtval and mcause */
     csrr a1, sepc
     sw a1, 124(sp)
@@ -188,7 +188,7 @@ supervisor_trap_wrapper:
     lw t0, 0(a0)
     mv a0, sp
     jalr t0
-    
+
     ;/* Use a0 as temporary to restore sepc, stval and scause */
     lw a0, 124(sp)
     csrw sepc, a0
