@@ -1,3 +1,4 @@
+add_subdirectory(abi)
 add_subdirectory(interrupt)
 add_subdirectory(plic)
 add_subdirectory(aplic)

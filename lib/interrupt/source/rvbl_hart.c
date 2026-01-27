@@ -1,8 +1,8 @@
 #include "rvbl/interrupt/rvbl_hart.h"
 
+#include "rvbl/abi/rvbl_abi.h"
 #include "rvbl/boot/rvbl_extension.h"
 #include "rvbl/compiler/rvbl_compiler.h"
-#include "rvbl/core/rvbl_abi.h"
 #include "rvbl/core/rvbl_types.h"
 #include "rvbl/machine/rvbl_configuration.h"
 
