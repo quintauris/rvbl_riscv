@@ -36,7 +36,7 @@ static void nop(volatile rvbl_interrupt_hart_context *context)
 
 rvbl_interrupt_trap_handler *rvbl_interrupt_hart_internal_select_trap_handler(
     const rvbl_interrupt_hart_privilege privilege,
-    rvbl_uword_t interrupt,
+    rvbl_uword_t interrupt_code,
     rvbl_interrupt_hart_context *context
 )
 {
@@ -61,9 +61,9 @@ rvbl_interrupt_trap_handler *rvbl_interrupt_hart_internal_select_trap_handler(
         break;
     }
 
-    if (interrupt & mask) {
+    if (interrupt_code & mask) {
         jump_table = jump_tables[0];
-        interrupt &= ~mask;
+        interrupt_code &= ~mask;
     } else {
         jump_table = jump_tables[1];
     }
@@ -72,7 +72,7 @@ rvbl_interrupt_trap_handler *rvbl_interrupt_hart_internal_select_trap_handler(
         context->extra = extra;
     }
 
-    return &jump_table[interrupt];
+    return &jump_table[interrupt_code];
 }
 
 rvbl_result_t rvbl_interrupt_hart_current_initialize_traps(
@@ -138,12 +138,12 @@ rvbl_result_t rvbl_interrupt_hart_current_disable_traps(void)
 
 rvbl_result_t rvbl_interrupt_hart_current_set_trap_handler(
     const rvbl_interrupt_hart_privilege privilege,
-    rvbl_uword_t interrupt,
+    rvbl_uword_t interrupt_code,
     const rvbl_interrupt_trap_handler handler
 )
 {
     rvbl_interrupt_trap_handler *target =
-        rvbl_interrupt_hart_internal_select_trap_handler(privilege, interrupt, NULL);
+        rvbl_interrupt_hart_internal_select_trap_handler(privilege, interrupt_code, NULL);
 
     if (target == NULL) {
         return rvbl_result_error_unsupported;
@@ -154,24 +154,24 @@ rvbl_result_t rvbl_interrupt_hart_current_set_trap_handler(
 }
 
 rvbl_result_t
-rvbl_interrupt_hart_current_set_delegation(rvbl_uword_t interrupt, const rvbl_bool_t delegate)
+rvbl_interrupt_hart_current_set_delegation(rvbl_uword_t interrupt_code, const rvbl_bool_t delegate)
 {
     if (supervisor_extension_enabled) {
         const rvbl_uint32_t mask = 0x80000000;
 
-        if (interrupt & mask) {
-            interrupt &= ~mask;
+        if (interrupt_code & mask) {
+            interrupt_code &= ~mask;
 
             if (delegate) {
-                rvbl_mideleg_write(rvbl_mideleg_read() | (1 << interrupt));
+                rvbl_mideleg_write(rvbl_mideleg_read() | (1 << interrupt_code));
             } else {
-                rvbl_mideleg_write(rvbl_mideleg_read() & ~(1 << interrupt));
+                rvbl_mideleg_write(rvbl_mideleg_read() & ~(1 << interrupt_code));
             }
         } else {
             if (delegate) {
-                rvbl_medeleg_write(rvbl_medeleg_read() | (1 << interrupt));
+                rvbl_medeleg_write(rvbl_medeleg_read() | (1 << interrupt_code));
             } else {
-                rvbl_medeleg_write(rvbl_medeleg_read() & ~(1 << interrupt));
+                rvbl_medeleg_write(rvbl_medeleg_read() & ~(1 << interrupt_code));
             }
         }
 
