@@ -1,8 +1,8 @@
 #ifndef RVBL_HART_H
 #define RVBL_HART_H
 
-#include "rvbl/core/rvbl_types.h"
 #include "rvbl/machine/rvbl_machine.h"
+#include "rvbl/type/rvbl_types.h"
 
 /// = RISC-V Base Layer Interrupt Library
 /// Quintauris GmbH

@@ -1,7 +1,7 @@
 #ifndef RVBL_SEMIHOST_H
 #define RVBL_SEMIHOST_H
 
-#include "rvbl/core/rvbl_types.h"
+#include "rvbl/type/rvbl_types.h"
 
 /// = RISC-V Semihost Library
 /// Quintauris GmbH

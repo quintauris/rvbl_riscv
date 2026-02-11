@@ -1,7 +1,7 @@
 #include "rvbl/aclint/rvbl_aclint.h"
 
-#include "rvbl/core/rvbl_types.h"
 #include "rvbl/machine/rvbl_aclint.h"
+#include "rvbl/type/rvbl_types.h"
 
 rvbl_result_t rvbl_aclint_set_compare(
     const struct rvbl_aclint_t *const instance,

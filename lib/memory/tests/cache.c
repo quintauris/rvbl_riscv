@@ -1,7 +1,7 @@
-#include "rvbl/core/rvbl_types.h"
 #include "rvbl/machine/rvbl_configuration.h"
 #include "rvbl/memory/rvbl_cache.h"
 #include "rvbl/test/rvbl_test.h"
+#include "rvbl/type/rvbl_types.h"
 
 int main(void)
 {

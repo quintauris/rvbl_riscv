@@ -1,9 +1,9 @@
 #include "rvbl/imsic/rvbl_file.h"
 
-#include "rvbl/core/rvbl_types.h"
 #include "rvbl/imsic/rvbl_common.h"
 #include "rvbl/machine/rvbl_configuration.h"
 #include "rvbl/machine/rvbl_imsic.h"
+#include "rvbl/type/rvbl_types.h"
 
 struct interrupt_file
 {

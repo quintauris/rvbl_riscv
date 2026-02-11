@@ -7,8 +7,8 @@
 ///
 /// Implements access to an APLIC device.
 
-#include "rvbl/core/rvbl_types.h"
 #include "rvbl/machine/rvbl_aplic.h"
+#include "rvbl/type/rvbl_types.h"
 
 /// == Type `rvbl_aplic_interrupt_source_t`
 ///

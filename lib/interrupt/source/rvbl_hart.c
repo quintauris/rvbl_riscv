@@ -3,8 +3,8 @@
 #include "rvbl/abi/rvbl_abi.h"
 #include "rvbl/boot/rvbl_extension.h"
 #include "rvbl/compiler/rvbl_compiler.h"
-#include "rvbl/core/rvbl_types.h"
 #include "rvbl/machine/rvbl_configuration.h"
+#include "rvbl/type/rvbl_types.h"
 
 #ifndef RVBL_INTERRUPT_HART_COUNT
 #define RVBL_INTERRUPT_HART_COUNT 1

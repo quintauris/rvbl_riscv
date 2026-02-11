@@ -1,9 +1,9 @@
 #include "rvbl/aplic/rvbl_aplic.h"
 
 #include "rvbl/compiler/rvbl_compiler.h"
-#include "rvbl/core/rvbl_types.h"
 #include "rvbl/machine/rvbl_aplic.h"
 #include "rvbl/machine/rvbl_configuration.h"
+#include "rvbl/type/rvbl_types.h"
 
 rvbl_result_t rvbl_aplic_set_source_configuration(
     const struct rvbl_aplic_t *const device,

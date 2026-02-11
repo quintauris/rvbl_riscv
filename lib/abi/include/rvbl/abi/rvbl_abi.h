@@ -1,7 +1,7 @@
 #ifndef RVBL_ABI_H
 #define RVBL_ABI_H
 
-#include "rvbl/core/rvbl_types.h"
+#include "rvbl/type/rvbl_types.h"
 
 /// == Function `rvbl_thread_pointer_register_read`
 /// Returns the current value of the `tp` (`x4`) register.

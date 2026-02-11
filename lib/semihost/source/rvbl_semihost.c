@@ -1,6 +1,6 @@
 #include "rvbl/semihost/rvbl_semihost.h"
 #include "rvbl/c/string.h"
-#include "rvbl/core/rvbl_types.h"
+#include "rvbl/type/rvbl_types.h"
 
 typedef enum rvbl_semihost_operation
 {

@@ -2,7 +2,7 @@
 #define RVBL_CACHE_H
 
 #include "rvbl/compiler/rvbl_compiler.h"
-#include "rvbl/core/rvbl_types.h"
+#include "rvbl/type/rvbl_types.h"
 
 /// == Function `rvbl_memory_cache_clean`
 /// Performs a clean operation on a cache block.

@@ -1,7 +1,7 @@
 #include "rvbl/abi/rvbl_abi.h"
 #include "rvbl/compiler/rvbl_compiler.h"
-#include "rvbl/core/rvbl_types.h"
 #include "rvbl/test/rvbl_test.h"
+#include "rvbl/type/rvbl_types.h"
 
 int main(void)
 {

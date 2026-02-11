@@ -1,10 +1,10 @@
 #include "rvbl/aplic/rvbl_aplic.h"
-#include "rvbl/core/rvbl_types.h"
 #include "rvbl/imsic/rvbl_hart.h"
 #include "rvbl/interrupt/rvbl_hart.h"
 #include "rvbl/machine/rvbl_aplic.h"
 #include "rvbl/machine/rvbl_machine.h"
 #include "rvbl/test/rvbl_test.h"
+#include "rvbl/type/rvbl_types.h"
 
 static const rvbl_imsic_interrupt_source_t kEEID = 5, kIrq = 5;
 static volatile rvbl_uint32_t count = 0;

@@ -1,7 +1,7 @@
 #include "rvbl/abi/rvbl_abi.h"
-#include "rvbl/core/rvbl_types.h"
 #include "rvbl/machine/rvbl_machine.h"
 #include "rvbl/test/rvbl_test.h"
+#include "rvbl/type/rvbl_types.h"
 
 __attribute__((naked)) void global_interrupt_handler(void)
 {

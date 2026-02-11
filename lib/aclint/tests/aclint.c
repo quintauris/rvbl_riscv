@@ -1,9 +1,9 @@
 #include "rvbl/aclint/rvbl_aclint.h"
-#include "rvbl/core/rvbl_types.h"
 #include "rvbl/interrupt/rvbl_hart.h"
 #include "rvbl/machine/rvbl_configuration.h"
 #include "rvbl/machine/rvbl_machine.h"
 #include "rvbl/test/rvbl_test.h"
+#include "rvbl/type/rvbl_types.h"
 
 static volatile rvbl_uint32_t count = 0;
 

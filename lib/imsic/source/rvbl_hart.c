@@ -1,8 +1,8 @@
 #include "rvbl/imsic/rvbl_hart.h"
 
-#include "rvbl/core/rvbl_types.h"
 #include "rvbl/imsic/rvbl_common.h"
 #include "rvbl/machine/rvbl_machine.h"
+#include "rvbl/type/rvbl_types.h"
 
 #define MAXIMUM_IDENTITIES 2047
 

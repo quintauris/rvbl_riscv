@@ -7,8 +7,8 @@
 ///
 /// Implements access to a PLIC device.
 
-#include "rvbl/core/rvbl_types.h"
 #include "rvbl/machine/rvbl_plic.h"
+#include "rvbl/type/rvbl_types.h"
 
 /// == Type `rvbl_plic_interrupt_source_t`
 ///

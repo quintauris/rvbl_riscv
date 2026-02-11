@@ -1,7 +1,7 @@
 #ifndef RVBL_PMP_H
 #define RVBL_PMP_H
 
-#include "rvbl/core/rvbl_types.h"
+#include "rvbl/type/rvbl_types.h"
 
 /// = RISC-V Base Layer Memory library
 /// Quintauris GmbH

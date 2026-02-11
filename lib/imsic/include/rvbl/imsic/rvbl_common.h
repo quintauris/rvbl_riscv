@@ -7,7 +7,7 @@
 ///
 /// Implements access to the IMSIC device.
 
-#include "rvbl/core/rvbl_types.h"
+#include "rvbl/type/rvbl_types.h"
 
 /// == Type `rvbl_imsic_hart_t`
 ///

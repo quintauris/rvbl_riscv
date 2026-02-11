@@ -7,8 +7,8 @@
 ///
 /// Implements access to the ACLINT device.
 
-#include "rvbl/core/rvbl_types.h"
 #include "rvbl/machine/rvbl_aclint.h"
+#include "rvbl/type/rvbl_types.h"
 
 /// == Type `rvbl_aclint_hart_t`
 ///
