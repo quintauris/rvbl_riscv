@@ -1,3 +1,8 @@
+/// = ABI Library
+/// Quintauris GmbH
+///
+/// Provides common semantics around RISC-V x0-x31 register set.
+
 #ifndef RVBL_ABI_H
 #define RVBL_ABI_H
 

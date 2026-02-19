@@ -1,0 +1,16 @@
+= Models
+include::common.adoc[]
+:toclevels: 4
+
+== Privileged CSRs
+include::generated/privileged_model.adoc[leveloffset=+2]
+include::generated/privileged_model_32.adoc[leveloffset=+2]
+include::generated/privileged_supervisor.adoc[leveloffset=+2]
+include::generated/privileged_supervisor_32.adoc[leveloffset=+2]
+include::generated/privileged_rnmi.adoc[leveloffset=+2]
+include::generated/plic_model.adoc[leveloffset=0]
+include::generated/aclint_model.adoc[leveloffset=0]
+include::generated/aplic_model.adoc[leveloffset=0]
+include::generated/imsic_model.adoc[leveloffset=0]
+include::generated/imsic_machine.adoc[leveloffset=+2]
+include::generated/imsic_supervisor.adoc[leveloffset=+2]

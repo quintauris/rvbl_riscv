@@ -2,6 +2,7 @@
     "$schema": "../../meta/device.schema.json",
     "name": "imsic",
     "instance": "$INSTANCE",
+    "description": "Incoming Message-Signaled Interrrupt Controller (IMSIC) Device Model.\nSee https://riscv.atlassian.net/wiki/spaces/HOME/pages/806289428/RISC-V+Advanced+Interrupt+Architecture.",
     "memory_regions": [
         {
             "name": "machine_files",

@@ -1,3 +1,9 @@
+/// = RISC-V Base Layer Memory library
+/// Quintauris GmbH
+/// :toc: left
+///
+/// Implements memory management functions.
+
 #ifndef RVBL_CACHE_H
 #define RVBL_CACHE_H
 
@@ -44,7 +50,7 @@ RVBL_INLINE() void rvbl_memory_cache_zero(const rvbl_pointer_t address)
     __asm__ volatile("cbo.zero (%0)" : : "r"(address));
 }
 
-/// == Function `rvbl_memory_cache_prefetch_instruction
+/// == Function `rvbl_memory_cache_prefetch_instruction`
 /// Hints the hardware of an upcoming instruction fetch.
 ///
 /// === Parameters
@@ -54,7 +60,7 @@ RVBL_INLINE() void rvbl_memory_cache_prefetch_instruction(const rvbl_pointer_t a
     __asm__ volatile("prefetch.i 0(%0)" : : "r"(address));
 }
 
-/// == Function `rvbl_memory_cache_prefetch_read
+/// == Function `rvbl_memory_cache_prefetch_read`
 /// Hints the hardware of an upcoming data read.
 ///
 /// === Parameters
@@ -64,7 +70,7 @@ RVBL_INLINE() void rvbl_memory_cache_prefetch_read(const rvbl_pointer_t address)
     __asm__ volatile("prefetch.r 0(%0)" : : "r"(address));
 }
 
-/// == Function `rvbl_memory_cache_prefetch_write
+/// == Function `rvbl_memory_cache_prefetch_write`
 /// Hints the hardware of an upcoming data write.
 ///
 /// === Parameters

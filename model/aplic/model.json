@@ -2,6 +2,7 @@
     "$schema": "../../meta/device.schema.json",
     "name": "aplic",
     "instance": "$INSTANCE",
+    "description": "Advanced Platform-Local Interrrupt Controller (APLIC) Device Model.\nSee https://riscv.atlassian.net/wiki/spaces/HOME/pages/806289428/RISC-V+Advanced+Interrupt+Architecture.",
     "memory_regions": [
         {
             "name": "registers",

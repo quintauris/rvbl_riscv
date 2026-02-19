@@ -3,12 +3,6 @@
 
 #include "rvbl/type/rvbl_types.h"
 
-/// = RISC-V Base Layer Memory library
-/// Quintauris GmbH
-/// :toc: left
-///
-/// Implements memory management functions.
-
 /// == Enumeration `rvbl_memory_pmp_region_access`
 ///
 /// RISC-V PMP valid access control policies.
