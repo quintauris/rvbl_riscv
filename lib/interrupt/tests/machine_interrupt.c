@@ -1,6 +1,5 @@
 #include "rvbl/interrupt/rvbl_hart.h"
 #include "rvbl/machine/rvbl_machine.h"
-#include "rvbl/machine/rvbl_rt_europa_m.h"
 #include "rvbl/test/rvbl_test.h"
 
 void supervisor_software_interrupt_handler(volatile rvbl_interrupt_hart_context *context)
