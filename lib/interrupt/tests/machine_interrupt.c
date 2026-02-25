@@ -1,5 +1,6 @@
 #include "rvbl/interrupt/rvbl_hart.h"
 #include "rvbl/machine/rvbl_machine.h"
+#include "rvbl/machine/rvbl_rt_europa_m.h"
 #include "rvbl/test/rvbl_test.h"
 
 void supervisor_software_interrupt_handler(volatile rvbl_interrupt_hart_context *context)
@@ -14,16 +15,20 @@ rvbl_bool_t is_sswi_supported(void)
 {
     const rvbl_uint32_t PRORIETARY_SINGLECORE_RHX = 0x80000402;
     const rvbl_uint32_t ARCV_RHX_1_0 = 0x00020100;
+    const rvbl_uint32_t NORDIC_VPR_IMP_ID = 0xE010502;
+    const rvbl_uint32_t NORDIC_VPR_ARCH_ID = 0x8000246E;
+    const rvbl_uint32_t arch_id = rvbl_marchid_read();
+    const rvbl_uint32_t imp_id = rvbl_mimpid_read();
 
-    if ((rvbl_marchid_read() == PRORIETARY_SINGLECORE_RHX) &&
-        (rvbl_mimpid_read() == ARCV_RHX_1_0)) {
+    if ((arch_id == PRORIETARY_SINGLECORE_RHX) && (imp_id == ARCV_RHX_1_0)) {
         rvbl_uint32_t arcv_clint_build = 0;
 
         __asm__ volatile("csrr %0, 0x0FD4" : "=r"(arcv_clint_build) : :);
 
         // SSWI [3] Indicates supervisor level interrupt device.
         return (arcv_clint_build & (1UL << 3)) ? rvbl_true : rvbl_false;
-
+    } else if ((arch_id == NORDIC_VPR_ARCH_ID) && (imp_id == NORDIC_VPR_IMP_ID)) {
+        return rvbl_false;
     } else {
         return rvbl_true;
     }

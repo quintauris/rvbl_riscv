@@ -40,7 +40,7 @@ rvbl_interrupt_trap_handler *rvbl_interrupt_hart_internal_select_trap_handler(
     rvbl_interrupt_hart_context *context
 )
 {
-    const rvbl_uint32_t mask = 0x80000000;
+    const rvbl_uint32_t interrupt_mask = 0x80000000, code_mask = 0x0000003F;
     hart_jump_tables *hart = &harts[(rvbl_uint32_t)rvbl_global_pointer_register_read()];
     rvbl_interrupt_trap_handler **jump_tables;
     rvbl_interrupt_trap_handler *jump_table;
@@ -61,9 +61,8 @@ rvbl_interrupt_trap_handler *rvbl_interrupt_hart_internal_select_trap_handler(
         break;
     }
 
-    if (interrupt_code & mask) {
+    if (interrupt_code & interrupt_mask) {
         jump_table = jump_tables[0];
-        interrupt_code &= ~mask;
     } else {
         jump_table = jump_tables[1];
     }
@@ -71,6 +70,8 @@ rvbl_interrupt_trap_handler *rvbl_interrupt_hart_internal_select_trap_handler(
     if (context != NULL) {
         context->extra = extra;
     }
+
+    interrupt_code = interrupt_code & code_mask;
 
     return &jump_table[interrupt_code];
 }
@@ -85,10 +86,10 @@ rvbl_result_t rvbl_interrupt_hart_current_initialize_traps(
     extra = extra_;
     supervisor_extension_enabled = rvbl_extension_present(misa_extensions_values_SupervisorMode);
     rvbl_mtvec_write((rvbl_uint32_t)&machine_trap_table);
-    rvbl_mideleg_write(0);
-    rvbl_medeleg_write(0);
 
     if (supervisor_extension_enabled) {
+        rvbl_mideleg_write(0);
+        rvbl_medeleg_write(0);
         rvbl_stvec_write((rvbl_uint32_t)&supervisor_trap_table);
     }
 

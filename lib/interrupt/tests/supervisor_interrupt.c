@@ -13,6 +13,7 @@ static privilege expected_privilege = mstatus_mpp_values_machine;
 
 void init_stimecmp()
 {
+#if defined(_RVBL_DEVICE_ACLINT_H_)
     const rvbl_uint64_t time =
         rvbl_aclint_mtime_read(&rvbl_aclint_instance_default) + RVBL_CONFIGURATION_MTIME_FREQUENCY;
 
@@ -21,6 +22,7 @@ void init_stimecmp()
     rvbl_stimecmp_write(time & 0x00000000FFFFFFFF);
     rvbl_stimecmph_write((time & 0xFFFFFFFF00000000) >> 32);
     rvbl_sie_stie_set();
+#endif
 }
 
 void supervisor_timer_handler(volatile rvbl_interrupt_hart_context *context)
@@ -48,7 +50,9 @@ void default_handler(volatile rvbl_interrupt_hart_context *context)
 
 rvbl_bool_t is_stimecmp_supported(void)
 {
-#if defined(_RVBL_DEVICE_QUINTAURIS_DISCOVERY_H_)
+#if !defined(_RVBL_DEVICE_ACLINT_H_)
+    return rvbl_false;
+#elif defined(_RVBL_DEVICE_QUINTAURIS_DISCOVERY_H_)
     ASSERT_EQ(
         rvbl_quintauris_discovery_vendor_id_read(&rvbl_quintauris_discovery_instance_default),
         quintauris_discovery_vendor_id_values_quintauris
