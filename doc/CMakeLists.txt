@@ -15,6 +15,7 @@ rvbl_layer_documentation(
   ${CMAKE_CURRENT_SOURCE_DIR}/../model/aplic/model.json
   ${CMAKE_CURRENT_SOURCE_DIR}/../model/imsic/model.json
   ${CMAKE_CURRENT_SOURCE_DIR}/../model/plic/model.json
+  ${CMAKE_CURRENT_SOURCE_DIR}/../model/clic/model.json
   REGISTER_SET_MODELS
   ${CMAKE_CURRENT_SOURCE_DIR}/../model/privileged/model.json
   ${CMAKE_CURRENT_SOURCE_DIR}/../model/privileged/model_32.json
@@ -23,5 +24,6 @@ rvbl_layer_documentation(
   ${CMAKE_CURRENT_SOURCE_DIR}/../model/privileged/rnmi.json
   ${CMAKE_CURRENT_SOURCE_DIR}/../model/imsic/machine.json
   ${CMAKE_CURRENT_SOURCE_DIR}/../model/imsic/supervisor.json
+  ${CMAKE_CURRENT_SOURCE_DIR}/../model/clic/registers.json
   PARAMETERS
   PAGE_SIZE=4096)

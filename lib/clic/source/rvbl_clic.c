@@ -1,0 +1,207 @@
+#include "rvbl/clic/rvbl_clic.h"
+#include "rvbl/machine/rvbl_configuration.h"
+#include "rvbl/machine/rvbl_flpr.h"
+#include "rvbl/type/rvbl_types.h"
+
+rvbl_result_t rvbl_clic_set_interrupt_priority(
+    const struct rvbl_clic_t *instance,
+    const rvbl_clic_interrupt_input_t input,
+    const rvbl_clic_interrupt_level_t level,
+    const rvbl_clic_interrupt_priority_t priority
+)
+{
+    if ((input >= RVBL_CLIC_MIN_INTERRUPT_INPUT_ID) &&
+        (input <= (instance->interrupt_inputs_parameter - 1)) &&
+        (level >= RVBL_CLIC_MIN_INTERRUPT_LEVEL) && (level <= RVBL_CLIC_MAX_INTERRUPT_LEVEL) &&
+        (priority >= RVBL_CLIC_MIN_INTERRUPT_PRIORITY) &&
+        (priority <= RVBL_CLIC_MAX_INTERRUPT_PRIORITY)) {
+        const rvbl_uint32_t clicintbits = rvbl_clic_info_clicintbits_read(instance);
+        const rvbl_uint32_t level_bits = rvbl_clic_cfg_nlbits_read(instance);
+        const rvbl_uint32_t priority_bits = clicintbits - level_bits;
+        const rvbl_uint32_t mask = (level << (8 - level_bits)) | (priority << clicintbits);
+
+        rvbl_clic_intctl_write(instance, input, mask);
+
+        return rvbl_result_success;
+    } else {
+        return rvbl_result_error_bounds;
+    }
+}
+
+rvbl_result_t rvbl_clic_get_interrupt_priority(
+    const struct rvbl_clic_t *instance,
+    const rvbl_clic_interrupt_input_t input,
+    rvbl_clic_interrupt_level_t *level,
+    rvbl_clic_interrupt_priority_t *priority
+)
+{
+    if ((input >= RVBL_CLIC_MIN_INTERRUPT_INPUT_ID) &&
+        (input <= (instance->interrupt_inputs_parameter - 1))) {
+        const rvbl_uint32_t clicintbits = rvbl_clic_info_clicintbits_read(instance);
+        const rvbl_uint32_t level_bits = rvbl_clic_cfg_nlbits_read(instance);
+        const rvbl_uint32_t priority_bits = clicintbits - level_bits;
+        rvbl_uint32_t value = rvbl_clic_intctl_read(instance, input);
+
+        if (level_bits > 0) {
+            value >>= 8 - clicintbits;
+
+            if (priority_bits > 0) {
+                *level = value >> priority_bits;
+                *priority = value & ((1 << priority_bits) - 1);
+            } else {
+                *level = value;
+            }
+        }
+
+        return rvbl_result_success;
+    } else {
+        return rvbl_result_error_bounds;
+    }
+}
+
+rvbl_result_t rvbl_clic_set_interrupt_pending(
+    const struct rvbl_clic_t *instance,
+    const rvbl_clic_interrupt_input_t input,
+    const rvbl_bool_t pending
+)
+{
+    if ((input >= RVBL_CLIC_MIN_INTERRUPT_INPUT_ID) &&
+        (input <= (instance->interrupt_inputs_parameter - 1))) {
+        rvbl_clic_intip_write(instance, input, pending);
+
+        return rvbl_result_success;
+    } else {
+        return rvbl_result_error_bounds;
+    }
+}
+
+rvbl_result_t rvbl_clic_get_interrupt_pending(
+    const struct rvbl_clic_t *instance,
+    const rvbl_clic_interrupt_input_t input,
+    rvbl_bool_t *pending
+)
+{
+    if ((input >= RVBL_CLIC_MIN_INTERRUPT_INPUT_ID) &&
+        (input <= (instance->interrupt_inputs_parameter - 1))) {
+        *pending = rvbl_clic_intip_read(instance, input) ? rvbl_true : rvbl_false;
+
+        return rvbl_result_success;
+    } else {
+        return rvbl_result_error_bounds;
+    }
+}
+
+rvbl_result_t rvbl_clic_set_interrupt_enable(
+    const struct rvbl_clic_t *instance, const rvbl_clic_interrupt_input_t input, rvbl_bool_t enable
+)
+{
+    if ((input >= RVBL_CLIC_MIN_INTERRUPT_INPUT_ID) &&
+        (input <= (instance->interrupt_inputs_parameter - 1))) {
+        rvbl_clic_intie_write(instance, input, enable);
+
+        return rvbl_result_success;
+    } else {
+        return rvbl_result_error_bounds;
+    }
+}
+
+rvbl_result_t rvbl_clic_get_interrupt_enable(
+    const struct rvbl_clic_t *instance,
+    const rvbl_clic_interrupt_input_t input,
+    rvbl_bool_t *enabled
+)
+{
+    if ((input >= RVBL_CLIC_MIN_INTERRUPT_INPUT_ID) &&
+        (input <= (instance->interrupt_inputs_parameter - 1))) {
+        *enabled = rvbl_clic_intie_read(instance, input) ? rvbl_true : rvbl_false;
+
+        return rvbl_result_success;
+    } else {
+        return rvbl_result_error_bounds;
+    }
+}
+
+rvbl_result_t rvbl_clic_set_interrupt_attributes(
+    const struct rvbl_clic_t *instance,
+    const rvbl_clic_interrupt_input_t input,
+    const rvbl_bool_t shv,
+    const rvbl_clic_trigger_t trigger,
+    const rvbl_clic_mode_t mode
+)
+{
+    if ((input >= RVBL_CLIC_MIN_INTERRUPT_INPUT_ID) &&
+        (input <= (instance->interrupt_inputs_parameter - 1))) {
+        rvbl_clic_intattr_shv_write(instance, input, shv);
+        rvbl_clic_intattr_trig_write(instance, input, (clic_intattr_trig_values)trigger);
+        rvbl_clic_intattr_mode_write(instance, input, (clic_intattr_mode_values)mode);
+
+        return rvbl_result_success;
+    } else {
+        return rvbl_result_error_bounds;
+    }
+}
+
+rvbl_result_t rvbl_clic_get_interrupt_attributes(
+    const struct rvbl_clic_t *instance,
+    const rvbl_clic_interrupt_input_t input,
+    rvbl_bool_t *shv,
+    rvbl_clic_trigger_t *trigger,
+    rvbl_clic_mode_t *mode
+)
+{
+    if ((input >= RVBL_CLIC_MIN_INTERRUPT_INPUT_ID) &&
+        (input <= (instance->interrupt_inputs_parameter - 1))) {
+
+        *shv = rvbl_clic_intattr_shv_read(instance, input) ? rvbl_true : rvbl_false;
+        *trigger = (rvbl_clic_trigger_t)rvbl_clic_intattr_trig_read(instance, input);
+        *mode = (rvbl_clic_mode_t)rvbl_clic_intattr_mode_read(instance, input);
+
+        return rvbl_result_success;
+    } else {
+        return rvbl_result_error_bounds;
+    }
+}
+
+__attribute__((naked)) static void nop(void) { __asm__ volatile("mret"); }
+
+#define RISCV_RESERVED_EXCEPTIONS 16
+#define RISCV_RESERVED_INTERRUPTS 16
+#define CLIC_USER_INTERRUPTS 32
+#define CLIC_TOTAL_INTERRUPTS                                                                      \
+    (RISCV_RESERVED_EXCEPTIONS + RISCV_RESERVED_INTERRUPTS + CLIC_USER_INTERRUPTS)
+
+__attribute__((aligned(64))) static rvbl_clic_direct_interrupt_handler
+    direct_interrupt_table[CLIC_TOTAL_INTERRUPTS * RVBL_CONFIGURATION_HART_COUNT] = {nop};
+
+rvbl_result_t rvbl_clic_initialize(rvbl_clic_direct_interrupt_handler handler)
+{
+    if (handler != NULL) {
+        rvbl_uword_t i = CLIC_TOTAL_INTERRUPTS * rvbl_mhartid_read();
+
+        for (; i < CLIC_TOTAL_INTERRUPTS; ++i) {
+            direct_interrupt_table[i] = handler;
+        }
+    }
+
+    rvbl_mtvt_write((rvbl_uint32_t)direct_interrupt_table);
+
+    return rvbl_result_success;
+}
+
+rvbl_result_t rvbl_clic_set_direct_interrupt_handler(
+    const struct rvbl_clic_t *instance,
+    const rvbl_clic_interrupt_input_t input,
+    const rvbl_clic_direct_interrupt_handler handler
+)
+{
+    if ((input >= RVBL_CLIC_MIN_INTERRUPT_INPUT_ID) &&
+        (input <= (instance->interrupt_inputs_parameter - 1)) && (input <= CLIC_TOTAL_INTERRUPTS)) {
+        const rvbl_uint32_t offset = CLIC_TOTAL_INTERRUPTS * rvbl_mhartid_read();
+
+        direct_interrupt_table[offset + RISCV_RESERVED_EXCEPTIONS + input] = handler;
+
+        return rvbl_result_success;
+    } else {
+        return rvbl_result_error_bounds;
+    }
+}
