@@ -41,7 +41,7 @@ machine_trap_wrapper:
     sw x13, 48(sp)
     sw x14, 52(sp)
     sw x15, 56(sp)
-.ifndef ILP32E
+#ifndef ILP32E
     sw x16, 60(sp)
     sw x17, 64(sp)
     sw x18, 68(sp)
@@ -58,7 +58,7 @@ machine_trap_wrapper:
     sw x29, 112(sp)
     sw x30, 116(sp)
     sw x31, 120(sp)
-.endif
+#endif
 
     ;/* Use a1 as temporary to save mepc, mtval and mcause */
     csrr a1, mepc
@@ -97,7 +97,7 @@ machine_trap_wrapper:
     lw x13, 48(sp)
     lw x14, 52(sp)
     lw x15, 56(sp)
-.ifdef ILP32E
+#ifndef ILP32E
     lw x16, 60(sp)
     lw x17, 64(sp)
     lw x18, 68(sp)
@@ -114,7 +114,7 @@ machine_trap_wrapper:
     lw x29, 112(sp)
     lw x30, 116(sp)
     lw x31, 120(sp)
-.endif
+#endif
     lw x2, 4(sp)
     mret
 
@@ -143,7 +143,7 @@ supervisor_trap_wrapper:
     sw x13, 48(sp)
     sw x14, 52(sp)
     sw x15, 56(sp)
-.ifndef ILP32E
+#ifndef ILP32E
     sw x16, 60(sp)
     sw x17, 64(sp)
     sw x18, 68(sp)
@@ -160,7 +160,7 @@ supervisor_trap_wrapper:
     sw x29, 112(sp)
     sw x30, 116(sp)
     sw x31, 120(sp)
-.endif
+#endif
 
     ;/* Use a1 as temporary to save mepc, mtval and mcause */
     csrr a1, sepc
@@ -199,7 +199,7 @@ supervisor_trap_wrapper:
     lw x13, 48(sp)
     lw x14, 52(sp)
     lw x15, 56(sp)
-.ifndef ILP32E
+#ifndef ILP32E
     lw x16, 60(sp)
     lw x17, 64(sp)
     lw x18, 68(sp)
@@ -216,7 +216,7 @@ supervisor_trap_wrapper:
     lw x29, 112(sp)
     lw x30, 116(sp)
     lw x31, 120(sp)
-.endif
+#endif
     lw x2, 4(sp)
     sret
 

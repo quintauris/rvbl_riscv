@@ -10,4 +10,4 @@ rvbl_static_library(
   machine
   interrupt)
 
-rvbl_test(NAME clic LIBRARIES interrupt clic)
+rvbl_test(NAME clic LIBRARIES abi interrupt clic)
