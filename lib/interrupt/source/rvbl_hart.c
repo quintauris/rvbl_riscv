@@ -1,22 +1,19 @@
 #include "rvbl/interrupt/rvbl_hart.h"
 
 #include "rvbl/abi/rvbl_abi.h"
+#include "rvbl/alloc/rvbl_alloc.h"
 #include "rvbl/boot/rvbl_extension.h"
 #include "rvbl/compiler/rvbl_compiler.h"
 #include "rvbl/machine/rvbl_configuration.h"
 #include "rvbl/type/rvbl_types.h"
 
-#ifndef RVBL_INTERRUPT_HART_COUNT
-#define RVBL_INTERRUPT_HART_COUNT 1
-#endif
-
 typedef struct hart_jump_tables
 {
-    rvbl_interrupt_trap_handler machine_interrupt_jump_table[32];
-    rvbl_interrupt_trap_handler machine_exception_jump_table[32];
+    rvbl_interrupt_trap_handler *machine_interrupt_jump_table;
+    rvbl_interrupt_trap_handler *machine_exception_jump_table;
 
-    rvbl_interrupt_trap_handler supervisor_interrupt_jump_table[32];
-    rvbl_interrupt_trap_handler supervisor_exception_jump_table[32];
+    rvbl_interrupt_trap_handler *supervisor_interrupt_jump_table;
+    rvbl_interrupt_trap_handler *supervisor_exception_jump_table;
 
     rvbl_interrupt_trap_handler *machine_jump_tables[2];
     rvbl_interrupt_trap_handler *supervisor_jump_tables[2];
@@ -26,13 +23,9 @@ extern rvbl_uint32_t machine_trap_table;
 extern rvbl_uint32_t supervisor_trap_table;
 
 static rvbl_bool_t supervisor_extension_enabled;
-static hart_jump_tables harts[RVBL_INTERRUPT_HART_COUNT];
 static rvbl_pointer_t extra;
 
-static void nop(volatile rvbl_interrupt_hart_context *context)
-{
-    context->program_counter += (XLEN / 8);
-}
+static void nop(volatile rvbl_interrupt_hart_context *context) {}
 
 rvbl_interrupt_trap_handler *rvbl_interrupt_hart_internal_select_trap_handler(
     const rvbl_interrupt_hart_privilege privilege,
@@ -41,7 +34,7 @@ rvbl_interrupt_trap_handler *rvbl_interrupt_hart_internal_select_trap_handler(
 )
 {
     const rvbl_uint32_t interrupt_mask = 0x80000000, code_mask = 0x0000003F;
-    hart_jump_tables *hart = &harts[(rvbl_uint32_t)rvbl_global_pointer_register_read()];
+    hart_jump_tables *hart = rvbl_thread_pointer_register_read();
     rvbl_interrupt_trap_handler **jump_tables;
     rvbl_interrupt_trap_handler *jump_table;
 
@@ -77,10 +70,14 @@ rvbl_interrupt_trap_handler *rvbl_interrupt_hart_internal_select_trap_handler(
 }
 
 rvbl_result_t rvbl_interrupt_hart_current_initialize_traps(
-    rvbl_interrupt_trap_handler default_handler, rvbl_pointer_t extra_
+    rvbl_alloc_allocator *allocator,
+    const rvbl_uword_t platform_interrupts,
+    rvbl_interrupt_trap_handler default_handler,
+    const rvbl_pointer_t extra_
 )
 {
-    hart_jump_tables *hart = &harts[rvbl_mhartid_read()];
+    const rvbl_uint32_t max_exceptions = 64, standard_interrupts = 16;
+    hart_jump_tables *hart = rvbl_alloc(allocator, sizeof(hart_jump_tables));
     rvbl_uint32_t i;
 
     extra = extra_;
@@ -97,6 +94,18 @@ rvbl_result_t rvbl_interrupt_hart_current_initialize_traps(
         default_handler = nop;
     }
 
+    hart->machine_interrupt_jump_table = rvbl_alloc(
+        allocator, (standard_interrupts + platform_interrupts) * sizeof(rvbl_interrupt_trap_handler)
+    );
+    hart->machine_exception_jump_table =
+        rvbl_alloc(allocator, max_exceptions * sizeof(rvbl_interrupt_trap_handler));
+
+    hart->supervisor_interrupt_jump_table = rvbl_alloc(
+        allocator, (standard_interrupts + platform_interrupts) * sizeof(rvbl_interrupt_trap_handler)
+    );
+    hart->supervisor_exception_jump_table =
+        rvbl_alloc(allocator, max_exceptions * sizeof(rvbl_interrupt_trap_handler));
+
     hart->machine_jump_tables[0] = hart->machine_interrupt_jump_table;
     hart->machine_jump_tables[1] = hart->machine_exception_jump_table;
 
@@ -110,7 +119,7 @@ rvbl_result_t rvbl_interrupt_hart_current_initialize_traps(
         hart->supervisor_exception_jump_table[i] = default_handler;
     }
 
-    rvbl_global_pointer_register_write((rvbl_pointer_t)rvbl_mhartid_read());
+    rvbl_thread_pointer_register_write(hart);
 
     return rvbl_result_success;
 }

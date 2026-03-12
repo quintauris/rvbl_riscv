@@ -1,6 +1,7 @@
 #ifndef RVBL_HART_H
 #define RVBL_HART_H
 
+#include "rvbl/alloc/rvbl_alloc.h"
 #include "rvbl/machine/rvbl_machine.h"
 #include "rvbl/type/rvbl_types.h"
 
@@ -71,14 +72,18 @@ typedef enum rvbl_interrupt_hart_privilege
 /// Initializes trap-handling structures and registers.
 ///
 /// === Parameters
+/// `rvbl_alloc_allocator*`:: Pointer to allocator for internal structures.
+/// `rvbl_uword_t`:: Number of platform (i.e. non-standard) interrupts to
+///. support.
 /// `rvbl_interrupt_trap_handler`:: Pointer to default trap handler.
 /// `rvbl_pointer_t`:: Extra data to pass trap handlers via
 /// `rvbl_interrupt_hart_context::extra`.
 ///
 /// === Return Value
 /// `rvbl_result_t`:: Always `rvbl_result_success`.
-rvbl_result_t
-    rvbl_interrupt_hart_current_initialize_traps(rvbl_interrupt_trap_handler, rvbl_pointer_t);
+rvbl_result_t rvbl_interrupt_hart_current_initialize_traps(
+    rvbl_alloc_allocator *, rvbl_uword_t, rvbl_interrupt_trap_handler, rvbl_pointer_t
+);
 
 /// == Function `rvbl_interrupt_hart_current_enable_traps`
 ///

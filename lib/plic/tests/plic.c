@@ -22,6 +22,7 @@ int main(void)
 
     rvbl_hart_hang_if_not(0);
     rvbl_test_initialize();
+    ASSERT_EQ(rvbl_alloc_initialize(&rvbl_test_allocator), rvbl_result_success);
 
 #if defined(_RVBL_DEVICE_PLIC_H_)
     source = rvbl_plic_get_maximum_context(&rvbl_plic_instance_default);
@@ -30,7 +31,10 @@ int main(void)
 
     ASSERT_EQ(rvbl_plic_reserved_read(&rvbl_plic_instance_default), 0);
 
-    ASSERT_EQ(rvbl_interrupt_hart_current_initialize_traps(NULL, NULL), rvbl_result_success);
+    ASSERT_EQ(
+        rvbl_interrupt_hart_current_initialize_traps(&rvbl_test_allocator, 0, NULL, NULL),
+        rvbl_result_success
+    );
     ASSERT_EQ(
         rvbl_interrupt_hart_current_set_trap_handler(
             rvbl_interrupt_hart_privilege_m,

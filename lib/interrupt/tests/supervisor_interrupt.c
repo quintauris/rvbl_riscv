@@ -91,10 +91,14 @@ int main(void)
 {
     rvbl_hart_hang_if_not(0);
     rvbl_test_initialize();
+    ASSERT_EQ(rvbl_alloc_initialize(&rvbl_test_allocator), rvbl_result_success);
 
     if (rvbl_extension_present(misa_extensions_values_SupervisorMode) && is_stimecmp_supported()) {
         ASSERT_EQ(
-            rvbl_interrupt_hart_current_initialize_traps(default_handler, NULL), rvbl_result_success
+            rvbl_interrupt_hart_current_initialize_traps(
+                &rvbl_test_allocator, 0, default_handler, NULL
+            ),
+            rvbl_result_success
         );
 
         ASSERT_EQ(

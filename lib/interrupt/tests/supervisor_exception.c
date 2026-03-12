@@ -31,10 +31,13 @@ int main(void)
 {
     rvbl_hart_hang_if_not(0);
     rvbl_test_initialize();
+    ASSERT_EQ(rvbl_alloc_initialize(&rvbl_test_allocator), rvbl_result_success);
 
     if (rvbl_extension_present(misa_extensions_values_SupervisorMode)) {
         ASSERT_EQ(
-            rvbl_interrupt_hart_current_initialize_traps(unsupported_exception_handler, NULL),
+            rvbl_interrupt_hart_current_initialize_traps(
+                &rvbl_test_allocator, 0, unsupported_exception_handler, NULL
+            ),
             rvbl_result_success
         );
         ASSERT_EQ(

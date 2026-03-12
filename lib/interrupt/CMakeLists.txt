@@ -10,7 +10,8 @@ rvbl_hart${rvbl_toolchain_specific_suffix}.s"
   "${CMAKE_CURRENT_LIST_DIR}/include"
   LIBRARIES
   abi
-  machine)
+  machine
+  alloc)
 
 rvbl_test(NAME machine_exception LIBRARIES interrupt)
 rvbl_test(NAME machine_interrupt LIBRARIES interrupt)

@@ -22,9 +22,13 @@ int main(void)
 {
     rvbl_hart_hang_if_not(0);
     rvbl_test_initialize();
+    ASSERT_EQ(rvbl_alloc_initialize(&rvbl_test_allocator), rvbl_result_success);
 
 #if defined(_RVBL_DEVICE_ACLINT_H_)
-    ASSERT_EQ(rvbl_interrupt_hart_current_initialize_traps(NULL, NULL), rvbl_result_success);
+    ASSERT_EQ(
+        rvbl_interrupt_hart_current_initialize_traps(&rvbl_test_allocator, 0, NULL, NULL),
+        rvbl_result_success
+    );
     ASSERT_EQ(
         rvbl_interrupt_hart_current_set_trap_handler(
             rvbl_interrupt_hart_privilege_m,
