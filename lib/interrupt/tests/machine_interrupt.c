@@ -16,6 +16,8 @@ rvbl_bool_t is_sswi_supported(void)
     const rvbl_uint32_t ARCV_RHX_1_0 = 0x00020100;
     const rvbl_uint32_t NORDIC_VPR_IMP_ID = 0xE010502;
     const rvbl_uint32_t NORDIC_VPR_ARCH_ID = 0x8000246E;
+    const rvbl_uint32_t RP2350_IMP_ID = 0x86fc4e3f;
+    const rvbl_uint32_t RP2350_ARCH_ID = 0x0000001b;
     const rvbl_uint32_t arch_id = rvbl_marchid_read();
     const rvbl_uint32_t imp_id = rvbl_mimpid_read();
 
@@ -27,6 +29,8 @@ rvbl_bool_t is_sswi_supported(void)
         // SSWI [3] Indicates supervisor level interrupt device.
         return (arcv_clint_build & (1UL << 3)) ? rvbl_true : rvbl_false;
     } else if ((arch_id == NORDIC_VPR_ARCH_ID) && (imp_id == NORDIC_VPR_IMP_ID)) {
+        return rvbl_false;
+    } else if ((arch_id == RP2350_ARCH_ID) && (imp_id == RP2350_IMP_ID)) {
         return rvbl_false;
     } else {
         return rvbl_true;
