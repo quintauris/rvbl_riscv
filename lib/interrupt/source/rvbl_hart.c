@@ -112,10 +112,13 @@ rvbl_result_t rvbl_interrupt_hart_current_initialize_traps(
     hart->supervisor_jump_tables[0] = hart->supervisor_interrupt_jump_table;
     hart->supervisor_jump_tables[1] = hart->supervisor_exception_jump_table;
 
-    for (i = 0; i < 32; ++i) {
+    for (i = 0; i < (standard_interrupts + platform_interrupts); ++i) {
         hart->machine_interrupt_jump_table[i] = default_handler;
-        hart->machine_exception_jump_table[i] = default_handler;
         hart->supervisor_interrupt_jump_table[i] = default_handler;
+    }
+
+    for (i = 0; i < max_exceptions; ++i) {
+        hart->machine_exception_jump_table[i] = default_handler;
         hart->supervisor_exception_jump_table[i] = default_handler;
     }
 

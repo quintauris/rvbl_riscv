@@ -166,7 +166,7 @@ __attribute__((naked)) static void nop(void) { __asm__ volatile("mret"); }
 
 #define RISCV_RESERVED_EXCEPTIONS 16
 #define RISCV_RESERVED_INTERRUPTS 16
-#define CLIC_USER_INTERRUPTS 32
+#define CLIC_USER_INTERRUPTS 256
 #define CLIC_TOTAL_INTERRUPTS                                                                      \
     (RISCV_RESERVED_EXCEPTIONS + RISCV_RESERVED_INTERRUPTS + CLIC_USER_INTERRUPTS)
 
