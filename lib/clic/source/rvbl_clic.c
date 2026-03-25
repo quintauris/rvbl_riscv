@@ -180,12 +180,20 @@ rvbl_result_t rvbl_clic_allocate(rvbl_alloc_allocator *allocator, rvbl_uword_t p
     machine_trap_vector_table =
         rvbl_alloc_aligned(allocator, total_traps * sizeof(rvbl_pointer_t), 64);
 
+    if (machine_trap_vector_table == NULL) {
+        return rvbl_result_error_out_of_memory;
+    }
+
     for (i = 0; i < total_traps; ++i) {
         machine_trap_vector_table[i] = clic_machine_trap_wrapper;
     }
 
     interrupt_handler_tables =
         rvbl_alloc(allocator, sizeof(rvbl_pointer_t) * RVBL_CONFIGURATION_HART_COUNT);
+
+    if (interrupt_handler_tables == NULL) {
+        return rvbl_result_error_out_of_memory;
+    }
 
     return rvbl_result_success;
 }
@@ -196,6 +204,10 @@ rvbl_result_t rvbl_clic_initialize(rvbl_alloc_allocator *allocator, rvbl_clic_tr
     rvbl_uint32_t i;
 
     interrupt_handler_tables[hart_id] = rvbl_alloc(allocator, total_traps * sizeof(rvbl_pointer_t));
+
+    if (interrupt_handler_tables[hart_id] == NULL) {
+        return rvbl_result_error_out_of_memory;
+    }
 
     if (handler == NULL) {
         handler = nop;
