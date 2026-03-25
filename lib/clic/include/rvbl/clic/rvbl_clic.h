@@ -7,6 +7,7 @@
 ///
 /// Implements access to a CLIC device.
 
+#include "rvbl/alloc/rvbl_alloc.h"
 #include "rvbl/machine/rvbl_clic.h"
 
 /// == Type `rvbl_clic_interrupt_input_t`
@@ -259,12 +260,16 @@ rvbl_result_t rvbl_clic_get_interrupt_attributes(
 ///
 /// === Parameters
 ///
+/// `rvbl_alloc_allocator*`:: Pointer to allocator for internal structures.
+/// `rvbl_uword_t`:: Number of platform (i.e. non-standard) interrupts to
+/// support.
 /// `rvbl_clic_direct_interrupt_handler`:: Pointer to default interrupt handler.
 ///
 /// === Return Value
 ///
 /// `rvbl_result_t`:: Always `rvbl_result_success`.
-rvbl_result_t rvbl_clic_initialize(rvbl_clic_direct_interrupt_handler);
+rvbl_result_t
+rvbl_clic_initialize(rvbl_alloc_allocator *, rvbl_uword_t, rvbl_clic_direct_interrupt_handler);
 
 /// == Function `rvbl_clic_set_direct_interrupt_handler`
 ///

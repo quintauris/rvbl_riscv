@@ -1,10 +1,10 @@
 #include "rvbl/abi/rvbl_abi.h"
+#include "rvbl/alloc/rvbl_alloc_bump.h"
 #include "rvbl/clic/rvbl_clic.h"
 #include "rvbl/interrupt/rvbl_hart.h"
 #include "rvbl/machine/rvbl_clic.h"
 #include "rvbl/machine/rvbl_machine.h"
 #include "rvbl/test/rvbl_test.h"
-#include "rvbl/type/rvbl_types.h"
 
 static const rvbl_clic_interrupt_input_t interrupt_number = 16;
 
@@ -13,6 +13,10 @@ __attribute__((naked)) void direct_interrupt_handler(void)
     __asm__ volatile("addi tp, tp, 1\n\t"
                      "mret\n\t");
 }
+
+static rvbl_uint8_t heap[4096];
+static rvbl_alloc_area area = {heap, sizeof(heap)};
+static rvbl_alloc_allocator allocator = {&rvbl_alloc_bump_allocator, 1, &area};
 
 void unexpected_interrupt_handler(void) { FAIL(); }
 
@@ -32,7 +36,9 @@ int main(void)
     ASSERT((rvbl_clic_cfg_nlbits_read(device) + rvbl_clic_cfg_nmbits_read(device)) > 0);
     ASSERT(rvbl_clic_info_num_interrupt_read(device) > 0);
 
-    ASSERT_EQ(rvbl_clic_initialize(unexpected_interrupt_handler), rvbl_result_success);
+    ASSERT_EQ(
+        rvbl_clic_initialize(&allocator, 32, unexpected_interrupt_handler), rvbl_result_success
+    );
     ASSERT_EQ(
         rvbl_clic_set_direct_interrupt_handler(device, interrupt_number, direct_interrupt_handler),
         rvbl_result_success

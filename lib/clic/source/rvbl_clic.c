@@ -166,21 +166,30 @@ __attribute__((naked)) static void nop(void) { __asm__ volatile("mret"); }
 
 #define RISCV_RESERVED_EXCEPTIONS 16
 #define RISCV_RESERVED_INTERRUPTS 16
-#define CLIC_USER_INTERRUPTS 256
-#define CLIC_TOTAL_INTERRUPTS                                                                      \
-    (RISCV_RESERVED_EXCEPTIONS + RISCV_RESERVED_INTERRUPTS + CLIC_USER_INTERRUPTS)
 
-__attribute__((aligned(64))) static rvbl_clic_direct_interrupt_handler
-    direct_interrupt_table[CLIC_TOTAL_INTERRUPTS * RVBL_CONFIGURATION_HART_COUNT] = {nop};
+static rvbl_clic_direct_interrupt_handler *direct_interrupt_table = NULL;
+static rvbl_uword_t total_traps = RISCV_RESERVED_EXCEPTIONS + RISCV_RESERVED_INTERRUPTS;
 
-rvbl_result_t rvbl_clic_initialize(rvbl_clic_direct_interrupt_handler handler)
+rvbl_result_t rvbl_clic_initialize(
+    rvbl_alloc_allocator *allocator,
+    rvbl_uword_t platform_interrupts,
+    rvbl_clic_direct_interrupt_handler handler
+)
 {
-    if (handler != NULL) {
-        rvbl_uword_t i = CLIC_TOTAL_INTERRUPTS * rvbl_mhartid_read();
+    rvbl_uword_t i;
 
-        for (; i < CLIC_TOTAL_INTERRUPTS; ++i) {
-            direct_interrupt_table[i] = handler;
-        }
+    total_traps = RISCV_RESERVED_EXCEPTIONS + RISCV_RESERVED_INTERRUPTS + platform_interrupts;
+
+    direct_interrupt_table = rvbl_alloc_aligned(
+        allocator, total_traps * sizeof(rvbl_pointer_t) * RVBL_CONFIGURATION_HART_COUNT, 64
+    );
+
+    if (handler == NULL) {
+        handler = nop;
+    }
+
+    for (i = total_traps * rvbl_mhartid_read(); i < total_traps; ++i) {
+        direct_interrupt_table[i] = handler;
     }
 
     rvbl_mtvt_write((rvbl_uint32_t)direct_interrupt_table);
@@ -195,8 +204,8 @@ rvbl_result_t rvbl_clic_set_direct_interrupt_handler(
 )
 {
     if ((input >= RVBL_CLIC_MIN_INTERRUPT_INPUT_ID) &&
-        (input <= (instance->interrupt_inputs_parameter - 1)) && (input <= CLIC_TOTAL_INTERRUPTS)) {
-        const rvbl_uint32_t offset = CLIC_TOTAL_INTERRUPTS * rvbl_mhartid_read();
+        (input <= (instance->interrupt_inputs_parameter - 1)) && (input <= total_traps)) {
+        const rvbl_uint32_t offset = total_traps * rvbl_mhartid_read();
 
         direct_interrupt_table[offset + RISCV_RESERVED_EXCEPTIONS + input] = handler;
 

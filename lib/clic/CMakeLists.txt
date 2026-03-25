@@ -8,6 +8,6 @@ rvbl_static_library(
   "${CMAKE_CURRENT_LIST_DIR}/include"
   LIBRARIES
   machine
-  interrupt)
+  alloc_bump)
 
 rvbl_test(NAME clic LIBRARIES abi interrupt clic)
