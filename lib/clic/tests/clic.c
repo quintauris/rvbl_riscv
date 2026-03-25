@@ -1,24 +1,21 @@
-#include "rvbl/abi/rvbl_abi.h"
 #include "rvbl/alloc/rvbl_alloc_bump.h"
 #include "rvbl/clic/rvbl_clic.h"
 #include "rvbl/interrupt/rvbl_hart.h"
 #include "rvbl/machine/rvbl_clic.h"
 #include "rvbl/machine/rvbl_machine.h"
 #include "rvbl/test/rvbl_test.h"
+#include "rvbl/type/rvbl_types.h"
 
 static const rvbl_clic_interrupt_input_t interrupt_number = 16;
+static volatile rvbl_uword_t counter = 0;
 
-__attribute__((naked)) void direct_interrupt_handler(void)
-{
-    __asm__ volatile("addi tp, tp, 1\n\t"
-                     "mret\n\t");
-}
-
-static rvbl_uint8_t heap[4096];
+static __attribute__((aligned(4))) rvbl_uint8_t heap[4096];
 static rvbl_alloc_area area = {heap, sizeof(heap)};
 static rvbl_alloc_allocator allocator = {&rvbl_alloc_bump_allocator, 1, &area};
 
-void unexpected_interrupt_handler(void) { FAIL(); }
+static void unexpected_interrupt_handler(volatile rvbl_clic_hart_context *context) { FAIL(); }
+
+static void interrupt_handler(volatile rvbl_clic_hart_context *context) { counter = 1; }
 
 int main(void)
 {
@@ -30,17 +27,15 @@ int main(void)
     rvbl_hart_hang_if_not(0);
     rvbl_test_initialize();
 
-    // Used to check interrupt execution count
-    rvbl_thread_pointer_register_write(0);
+    counter = 0;
 
     ASSERT((rvbl_clic_cfg_nlbits_read(device) + rvbl_clic_cfg_nmbits_read(device)) > 0);
     ASSERT(rvbl_clic_info_num_interrupt_read(device) > 0);
 
+    ASSERT_EQ(rvbl_clic_allocate(&allocator, 32), rvbl_result_success);
+    ASSERT_EQ(rvbl_clic_initialize(&allocator, unexpected_interrupt_handler), rvbl_result_success);
     ASSERT_EQ(
-        rvbl_clic_initialize(&allocator, 32, unexpected_interrupt_handler), rvbl_result_success
-    );
-    ASSERT_EQ(
-        rvbl_clic_set_direct_interrupt_handler(device, interrupt_number, direct_interrupt_handler),
+        rvbl_clic_set_interrupt_handler(device, interrupt_number, interrupt_handler),
         rvbl_result_success
     );
 
@@ -62,17 +57,17 @@ int main(void)
     );
 
     ASSERT_EQ(rvbl_interrupt_hart_current_enable_traps(), rvbl_result_success);
-    ASSERT_EQ(rvbl_thread_pointer_register_read(), 0);
+    ASSERT_EQ(counter, 0);
 
     ASSERT_EQ(
         rvbl_clic_set_interrupt_pending(device, interrupt_number, rvbl_true), rvbl_result_success
     );
 
-    while (rvbl_thread_pointer_register_read() == 0) {
-        __asm__ volatile("add zero, zero, zero\n\t");
+    while (counter == 0) {
+        __asm__ volatile("wfi\n\t");
     }
 
-    ASSERT_EQ(rvbl_thread_pointer_register_read(), (void *)1);
+    ASSERT_EQ(counter, 1);
     ASSERT_EQ(rvbl_interrupt_hart_current_disable_traps(), rvbl_result_success);
 
     PASS();

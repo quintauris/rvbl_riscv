@@ -8,6 +8,7 @@
 /// Implements access to a CLIC device.
 
 #include "rvbl/alloc/rvbl_alloc.h"
+#include "rvbl/interrupt/rvbl_hart.h"
 #include "rvbl/machine/rvbl_clic.h"
 
 /// == Type `rvbl_clic_interrupt_input_t`
@@ -48,6 +49,16 @@ typedef enum rvbl_clic_trigger
     /// * `rvbl_clic_trigger_negative_edge` = `3`
     rvbl_clic_trigger_negative_edge = clic_intattr_trig_values_negative_edge,
 } rvbl_clic_trigger_t;
+
+/// == Type `rvbl_clic_hart_context`
+///
+/// Alias for `interrupt`'s `rvbl_interrupt_hart_context`.
+typedef rvbl_interrupt_hart_context rvbl_clic_hart_context;
+
+/// == Type `rvbl_clic_trap_handler`
+///
+/// Alias for `interrupt`'s `rvbl_interrupt_trap_handler`.
+typedef rvbl_interrupt_trap_handler rvbl_clic_trap_handler;
 
 /// == Type `rvbl_clic_direct_interrupt_handler`
 ///
@@ -254,38 +265,50 @@ rvbl_result_t rvbl_clic_get_interrupt_attributes(
     rvbl_clic_mode_t *
 );
 
-/// == Function `rvbl_clic_initialize`
+/// == Function `rvbl_clic_allocate`
 ///
-/// Initializes interrupt-handling structures and registers.
+/// Allocates interrupt-handling structures.
 ///
 /// === Parameters
 ///
 /// `rvbl_alloc_allocator*`:: Pointer to allocator for internal structures.
 /// `rvbl_uword_t`:: Number of platform (i.e. non-standard) interrupts to
 /// support.
-/// `rvbl_clic_direct_interrupt_handler`:: Pointer to default interrupt handler.
 ///
 /// === Return Value
 ///
 /// `rvbl_result_t`:: Always `rvbl_result_success`.
-rvbl_result_t
-rvbl_clic_initialize(rvbl_alloc_allocator *, rvbl_uword_t, rvbl_clic_direct_interrupt_handler);
+rvbl_result_t rvbl_clic_allocate(rvbl_alloc_allocator *, rvbl_uword_t);
 
-/// == Function `rvbl_clic_set_direct_interrupt_handler`
+/// == Function `rvbl_clic_initialize`
+///
+/// Initializes interrupt-handling per-HART structures and registers.
+///
+/// === Parameters
+///
+/// `rvbl_alloc_allocator*`:: Pointer to allocator for internal structures.
+/// `rvbl_clic_trap_handler`:: Pointer to default interrupt handler.
+///
+/// === Return Value
+///
+/// `rvbl_result_t`:: Always `rvbl_result_success`.
+rvbl_result_t rvbl_clic_initialize(rvbl_alloc_allocator *, rvbl_clic_trap_handler);
+
+/// == Function `rvbl_clic_set_interrupt_handler`
 ///
 /// Assigns a direct interrupt hander to an interrupt.
 ///
 /// === Parameters
 /// `const struct rvbl_clic_t*`:: Device instance identification.
 /// `rvbl_clic_interrupt_input_t`:: Interrupt identification (note first 16 interrupt numbers are
-/// reserved). `rvbl_clic_direct_interrupt_handler`:: Pointer to custom interrupt handler.
+/// reserved). `rvbl_clic_trap_handler`:: Pointer to custom interrupt handler.
 ///
 /// === Return Value
 ///
 /// `rvbl_result_success`:: Modification successful.
 /// `rvbl_result_error_bounds`:: Interrupt identification out of bounds.
-rvbl_result_t rvbl_clic_set_direct_interrupt_handler(
-    const struct rvbl_clic_t *, rvbl_clic_interrupt_input_t, rvbl_clic_direct_interrupt_handler
+rvbl_result_t rvbl_clic_set_interrupt_handler(
+    const struct rvbl_clic_t *, rvbl_clic_interrupt_input_t, rvbl_clic_trap_handler
 );
 
 #endif

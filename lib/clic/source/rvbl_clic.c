@@ -162,52 +162,70 @@ rvbl_result_t rvbl_clic_get_interrupt_attributes(
     }
 }
 
-__attribute__((naked)) static void nop(void) { __asm__ volatile("mret"); }
-
 #define RISCV_RESERVED_EXCEPTIONS 16
 #define RISCV_RESERVED_INTERRUPTS 16
 
-static rvbl_clic_direct_interrupt_handler *direct_interrupt_table = NULL;
+static rvbl_clic_direct_interrupt_handler *machine_trap_vector_table = NULL;
+static rvbl_clic_trap_handler **interrupt_handler_tables = NULL;
 static rvbl_uword_t total_traps = RISCV_RESERVED_EXCEPTIONS + RISCV_RESERVED_INTERRUPTS;
 
-rvbl_result_t rvbl_clic_initialize(
-    rvbl_alloc_allocator *allocator,
-    rvbl_uword_t platform_interrupts,
-    rvbl_clic_direct_interrupt_handler handler
-)
+extern void clic_machine_trap_wrapper(void);
+static void nop(volatile rvbl_clic_hart_context *c) {}
+
+rvbl_result_t rvbl_clic_allocate(rvbl_alloc_allocator *allocator, rvbl_uword_t platform_interrupts)
 {
     rvbl_uword_t i;
 
     total_traps = RISCV_RESERVED_EXCEPTIONS + RISCV_RESERVED_INTERRUPTS + platform_interrupts;
+    machine_trap_vector_table =
+        rvbl_alloc_aligned(allocator, total_traps * sizeof(rvbl_pointer_t), 64);
 
-    direct_interrupt_table = rvbl_alloc_aligned(
-        allocator, total_traps * sizeof(rvbl_pointer_t) * RVBL_CONFIGURATION_HART_COUNT, 64
-    );
+    for (i = 0; i < total_traps; ++i) {
+        machine_trap_vector_table[i] = clic_machine_trap_wrapper;
+    }
+
+    interrupt_handler_tables =
+        rvbl_alloc(allocator, sizeof(rvbl_pointer_t) * RVBL_CONFIGURATION_HART_COUNT);
+
+    return rvbl_result_success;
+}
+
+rvbl_result_t rvbl_clic_initialize(rvbl_alloc_allocator *allocator, rvbl_clic_trap_handler handler)
+{
+    const rvbl_uint32_t hart_id = rvbl_mhartid_read();
+    rvbl_uint32_t i;
+
+    interrupt_handler_tables[hart_id] = rvbl_alloc(allocator, total_traps * sizeof(rvbl_pointer_t));
 
     if (handler == NULL) {
         handler = nop;
     }
 
-    for (i = total_traps * rvbl_mhartid_read(); i < total_traps; ++i) {
-        direct_interrupt_table[i] = handler;
+    for (i = 0; i < total_traps; ++i) {
+        interrupt_handler_tables[hart_id][i] = handler;
     }
 
-    rvbl_mtvt_write((rvbl_uint32_t)direct_interrupt_table);
+    rvbl_mtvt_write((rvbl_uint32_t)machine_trap_vector_table);
 
     return rvbl_result_success;
 }
 
-rvbl_result_t rvbl_clic_set_direct_interrupt_handler(
+rvbl_clic_trap_handler *rvbl_clic_internal_select_trap_handler(
+    const rvbl_clic_mode_t privilege, rvbl_uword_t interrupt_code, rvbl_clic_hart_context *context
+)
+{
+    return &interrupt_handler_tables[rvbl_mhartid_read()][interrupt_code & 0xFFFF];
+}
+
+rvbl_result_t rvbl_clic_set_interrupt_handler(
     const struct rvbl_clic_t *instance,
     const rvbl_clic_interrupt_input_t input,
-    const rvbl_clic_direct_interrupt_handler handler
+    const rvbl_clic_trap_handler handler
 )
 {
     if ((input >= RVBL_CLIC_MIN_INTERRUPT_INPUT_ID) &&
         (input <= (instance->interrupt_inputs_parameter - 1)) && (input <= total_traps)) {
-        const rvbl_uint32_t offset = total_traps * rvbl_mhartid_read();
-
-        direct_interrupt_table[offset + RISCV_RESERVED_EXCEPTIONS + input] = handler;
+        interrupt_handler_tables[rvbl_mhartid_read()][RISCV_RESERVED_EXCEPTIONS + input] = handler;
 
         return rvbl_result_success;
     } else {
