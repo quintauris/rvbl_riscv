@@ -1,23 +1,23 @@
-    public clic_machine_trap_table
+    public clic_machine_trap_wrapper
     extern rvbl_clic_internal_select_trap_handler
     extern interrupt_stack_top
     extern supervisor_stack_top
     section `.text`:CODE
 
-save_registers macro to scratch
+save_registers macro address, scratch
     ;/* Save stack pointer (sp, x2) to scratch CSR */
-    csrw \scratch, sp
+    csrw \2, sp
     ;/* Workaround for IAR bug RISCV-4846 */
     .option push
     .option norelax
     ;/* Setup trap stack */
-    la sp, \to
+    la sp, \1
     .option pop
     addi sp, sp, -140
     ;/* Save return address (ra, x1) */
     sw ra, 0(sp)
     ;/* Use return adddress (ra, x1) as temporary to store stack pointer */
-    csrr ra, \scratch
+    csrr ra, \2
     sw ra, 4(sp)
     sw x3, 8(sp)
     sw x4, 12(sp)
@@ -88,8 +88,8 @@ restore_registers macro
     lw sp, 4(sp)
     endm
 
-machine_trap_wrapper:
-    save_registers interrupt_stack_top mscratch
+clic_machine_trap_wrapper:
+    save_registers interrupt_stack_top, mscratch
 
     ;/* Use a1 as temporary to save mepc, mtval and mcause */
     csrr a1, mepc
@@ -116,3 +116,5 @@ machine_trap_wrapper:
 
     restore_registers
     mret
+
+    end
