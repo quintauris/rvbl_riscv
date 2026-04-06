@@ -24,7 +24,6 @@ int main(void)
     rvbl_test_initialize();
     ASSERT_EQ(rvbl_alloc_initialize(&rvbl_test_allocator), rvbl_result_success);
 
-#if defined(_RVBL_DEVICE_PLIC_H_)
     source = rvbl_plic_get_maximum_context(&rvbl_plic_instance_default);
 
     ASSERT(source <= RVBL_PLIC_MAX_CONTEXT_ID);
@@ -88,6 +87,11 @@ int main(void)
     ASSERT_EQ(
         rvbl_plic_set_interrupt_pending(&rvbl_plic_instance_default, source), rvbl_result_success
     );
+
+    while (count == 0) {
+        __asm__ volatile("wfi\n\t");
+    }
+
     ASSERT_EQ(
         rvbl_plic_get_interrupt_pending(&rvbl_plic_instance_default, source, &enabled),
         rvbl_result_success
@@ -101,9 +105,6 @@ int main(void)
     rvbl_mie_meie_clear();
 
     PASS();
-#else
-    SKIP();
-#endif
 
     return 0;
 }

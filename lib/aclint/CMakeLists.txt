@@ -7,6 +7,7 @@ rvbl_static_library(
   INCLUDES
   "${CMAKE_CURRENT_LIST_DIR}/include"
   LIBRARIES
-  machine)
+  machine
+  abi)
 
 rvbl_test(NAME aclint LIBRARIES interrupt aclint)

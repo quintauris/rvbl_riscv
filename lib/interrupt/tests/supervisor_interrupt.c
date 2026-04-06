@@ -1,53 +1,45 @@
 #include "rvbl/abi/rvbl_abi.h"
 #include "rvbl/boot/rvbl_extension.h"
 #include "rvbl/interrupt/rvbl_hart.h"
-#include "rvbl/machine/rvbl_configuration.h"
-#include "rvbl/machine/rvbl_machine.h"
 #include "rvbl/test/rvbl_test.h"
-#include "rvbl/type/rvbl_types.h"
 
 typedef mstatus_mpp_values privilege;
 
-static volatile rvbl_uint32_t count = 0;
 static privilege expected_privilege = mstatus_mpp_values_machine;
 
-void init_stimecmp()
+void interrupt_handler(volatile rvbl_interrupt_hart_context *context)
 {
-#if defined(_RVBL_DEVICE_ACLINT_H_)
-    const rvbl_uint64_t time =
-        rvbl_aclint_mtime_read(&rvbl_aclint_instance_default) + RVBL_CONFIGURATION_MTIME_FREQUENCY;
+    rvbl_uint32_t *count = (rvbl_uint32_t *)context->extra;
 
-    rvbl_menvcfgh_stce_set();
-    rvbl_sie_stie_clear();
-    rvbl_stimecmp_write(time & 0x00000000FFFFFFFF);
-    rvbl_stimecmph_write((time & 0xFFFFFFFF00000000) >> 32);
-    rvbl_sie_stie_set();
-#endif
+    rvbl_test_supervisor_interrupt_control.cleanup_interrupt();
+    ++(*count);
 }
 
-void supervisor_timer_handler(volatile rvbl_interrupt_hart_context *context)
+typedef enum call_index
 {
-    context->program_counter += (XLEN / 8);
-    ++count;
-    rvbl_sie_stie_clear();    // no more interrupts
-    rvbl_sstatus_spp_clear(); // back to use mode (0)
-}
+    call_index_switch_mode = 0,
+} call_index;
 
 void environment_call_handler(volatile rvbl_interrupt_hart_context *context)
 {
-    const privilege parameter = (privilege)context->arguments[0];
+    const call_index index = (call_index)context->arguments[0];
     ASSERT_EQ(rvbl_mstatus_mpp_read(), expected_privilege);
 
-    context->program_counter += (XLEN / 8);
-    rvbl_mstatus_mpp_write(parameter);
+    switch (index) {
+    case call_index_switch_mode:
+        rvbl_mstatus_mpp_write((privilege)context->arguments[1]);
+        context->program_counter += (XLEN / 8);
+        break;
+    }
 }
 
 void default_handler(volatile rvbl_interrupt_hart_context *context)
 {
-    context->program_counter += (XLEN / 8);
+    rvbl_test_log("context mcause 0x%X", context->cause);
     FAIL();
 }
 
+#if 0
 rvbl_bool_t is_stimecmp_supported(void)
 {
 #if !defined(_RVBL_DEVICE_ACLINT_H_)
@@ -86,17 +78,21 @@ rvbl_bool_t is_stimecmp_supported(void)
     }
 #endif
 }
+#endif
 
 int main(void)
 {
+    volatile rvbl_uint32_t count = 0;
+
     rvbl_hart_hang_if_not(0);
     rvbl_test_initialize();
     ASSERT_EQ(rvbl_alloc_initialize(&rvbl_test_allocator), rvbl_result_success);
 
-    if (rvbl_extension_present(misa_extensions_values_SupervisorMode) && is_stimecmp_supported()) {
+    if (rvbl_extension_present(misa_extensions_values_SupervisorMode) &&
+        rvbl_test_supervisor_interrupt_control.can_trigger_interrupt) {
         ASSERT_EQ(
             rvbl_interrupt_hart_current_initialize_traps(
-                &rvbl_test_allocator, 0, default_handler, NULL
+                &rvbl_test_allocator, 0, default_handler, (rvbl_pointer_t)&count
             ),
             rvbl_result_success
         );
@@ -128,36 +124,39 @@ int main(void)
         ASSERT_EQ(
             rvbl_interrupt_hart_current_set_trap_handler(
                 rvbl_interrupt_hart_privilege_s,
-                RVBL_INTERRUPT(scause_code_values_Interrupt_SupervisorTimer),
-                supervisor_timer_handler
+                RVBL_INTERRUPT(rvbl_test_supervisor_interrupt_control.interrupt_code),
+                interrupt_handler
             ),
             rvbl_result_success
         );
 
         ASSERT_EQ(
             rvbl_interrupt_hart_current_set_delegation(
-                RVBL_INTERRUPT(scause_code_values_Interrupt_SupervisorTimer), rvbl_true
+                RVBL_INTERRUPT(rvbl_test_supervisor_interrupt_control.interrupt_code), rvbl_true
             ),
             rvbl_result_success
         );
-        init_stimecmp();
-        ASSERT_EQ(rvbl_interrupt_hart_current_enable_traps(), rvbl_result_success);
-
+        rvbl_test_supervisor_interrupt_control.prepare_interrupt();
         expected_privilege = mstatus_mpp_values_machine;
-        rvbl_system_call_1(mstatus_mpp_values_user, 0);
+
+        ASSERT_EQ(rvbl_interrupt_hart_current_enable_traps(), rvbl_result_success);
+        rvbl_system_call_1(call_index_switch_mode, mstatus_mpp_values_supervisor);
+        expected_privilege = mstatus_mpp_values_supervisor;
 
         ASSERT_EQ(count, 0);
 
+        rvbl_test_supervisor_interrupt_control.trigger_interrupt();
+
         while (count == 0) {
-            __asm__ volatile("add zero, zero, zero\n\t");
+            __asm__ volatile("wfi\n\t");
         }
 
         ASSERT_EQ(count, 1);
 
-        expected_privilege = mstatus_mpp_values_user;
-        rvbl_system_call_1(mstatus_mpp_values_machine, 0);
-
+        expected_privilege = mstatus_mpp_values_supervisor;
+        rvbl_system_call_1(call_index_switch_mode, mstatus_mpp_values_machine);
         ASSERT_EQ(rvbl_interrupt_hart_current_disable_traps(), rvbl_result_success);
+
         PASS();
     } else {
         SKIP();

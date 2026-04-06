@@ -24,7 +24,6 @@ int main(void)
     rvbl_test_initialize();
     ASSERT_EQ(rvbl_alloc_initialize(&rvbl_test_allocator), rvbl_result_success);
 
-#if defined(_RVBL_DEVICE_ACLINT_H_)
     ASSERT_EQ(
         rvbl_interrupt_hart_current_initialize_traps(&rvbl_test_allocator, 0, NULL, NULL),
         rvbl_result_success
@@ -58,9 +57,6 @@ int main(void)
     rvbl_mie_mtie_clear();
 
     PASS();
-#else
-    SKIP();
-#endif
 
     return 0;
 }
