@@ -33,6 +33,11 @@ int main(void)
     rvbl_test_initialize();
     ASSERT_EQ(rvbl_alloc_initialize(&rvbl_test_allocator), rvbl_result_success);
 
+    // RT-Europa Mg can't seem to be able to return from a supervisor trap, as in,
+    // it can't execute an SRET instruction properly. Thus, this test is disabled.
+    //
+    // See https://quintauris.atlassian.net/browse/RTE-67.
+#ifndef _RT_EUROPA_MG_H_
     if (rvbl_extension_present(misa_extensions_values_SupervisorMode)) {
         ASSERT_EQ(
             rvbl_interrupt_hart_current_initialize_traps(
@@ -111,7 +116,9 @@ int main(void)
 
         ASSERT_EQ(rvbl_interrupt_hart_current_disable_traps(), rvbl_result_success);
         PASS();
-    } else {
+    } else
+#endif
+    {
         SKIP();
     }
 

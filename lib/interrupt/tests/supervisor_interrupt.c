@@ -39,47 +39,6 @@ void default_handler(volatile rvbl_interrupt_hart_context *context)
     FAIL();
 }
 
-#if 0
-rvbl_bool_t is_stimecmp_supported(void)
-{
-#if !defined(_RVBL_DEVICE_ACLINT_H_)
-    return rvbl_false;
-#elif defined(_RVBL_DEVICE_QUINTAURIS_DISCOVERY_H_)
-    ASSERT_EQ(
-        rvbl_quintauris_discovery_vendor_id_read(&rvbl_quintauris_discovery_instance_default),
-        quintauris_discovery_vendor_id_values_quintauris
-    );
-    ASSERT_EQ(
-        rvbl_quintauris_discovery_implementation_id_platform_read(
-            &rvbl_quintauris_discovery_instance_default
-        ),
-        quintauris_discovery_implementation_id_platform_values_rt_europa
-    );
-
-    switch (rvbl_quintauris_discovery_implementation_id_variant_read(
-        &rvbl_quintauris_discovery_instance_default
-    )) {
-    // RT-Europa Na implementation is based off Andes D45-SE processor, which has no stimecmp CSR
-    case quintauris_discovery_implementation_id_variant_values_na_fpga:
-    case quintauris_discovery_implementation_id_variant_values_na_qemu:
-        return rvbl_false;
-    default:
-        return rvbl_true;
-    }
-#else
-#define HPMICRO_VENDOR_ID 0x0000031E
-#define HPMICRO_HPM6280_CPU_ID 0x80000045
-
-    if ((rvbl_mvendorid_read() == HPMICRO_VENDOR_ID) &&
-        (rvbl_marchid_read() == HPMICRO_HPM6280_CPU_ID)) {
-        return rvbl_false;
-    } else {
-        return rvbl_true;
-    }
-#endif
-}
-#endif
-
 int main(void)
 {
     volatile rvbl_uint32_t count = 0;

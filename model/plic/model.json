@@ -78,6 +78,12 @@
             "stage": "compile",
             "class": "uint32",
             "value": "$CONTEXTS - 1"
+        },
+        {
+            "name": "interrupt_pending_writable",
+            "stage": "compile",
+            "class": "uint32",
+            "value": "$INTERRUPT_PENDING_WRITABLE"
         }
     ]
 }

@@ -84,22 +84,26 @@ int main(void)
         rvbl_result_success
     );
     ASSERT_EQ(enabled, rvbl_false);
-    ASSERT_EQ(
-        rvbl_plic_set_interrupt_pending(&rvbl_plic_instance_default, source), rvbl_result_success
-    );
 
-    while (count == 0) {
-        __asm__ volatile("wfi\n\t");
+    if (rvbl_plic_instance_default.interrupt_pending_writable_parameter) {
+        ASSERT_EQ(
+            rvbl_plic_set_interrupt_pending(&rvbl_plic_instance_default, source),
+            rvbl_result_success
+        );
+
+        while (count == 0) {
+            __asm__ volatile("wfi\n\t");
+        }
+
+        ASSERT_EQ(
+            rvbl_plic_get_interrupt_pending(&rvbl_plic_instance_default, source, &enabled),
+            rvbl_result_success
+        );
+        ASSERT_EQ(
+            enabled, rvbl_false
+        ); // handler above has claimed/completed it, so interrupt shall no longer be pending
+        ASSERT_EQ(count, 1);
     }
-
-    ASSERT_EQ(
-        rvbl_plic_get_interrupt_pending(&rvbl_plic_instance_default, source, &enabled),
-        rvbl_result_success
-    );
-    ASSERT_EQ(
-        enabled, rvbl_false
-    ); // handler above has claimed/completed it, so interrupt shall no longer be pending
-    ASSERT_EQ(count, 1);
 
     ASSERT_EQ(rvbl_interrupt_hart_current_disable_traps(), rvbl_result_success);
     rvbl_mie_meie_clear();
