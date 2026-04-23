@@ -9,7 +9,7 @@ rvbl_semihost${rvbl_toolchain_specific_suffix}.s"
   INCLUDES
   "${CMAKE_CURRENT_LIST_DIR}/include"
   LIBRARIES
-  core
+  type
   c)
 
 rvbl_test(NAME semihost LIBRARIES semihost)
