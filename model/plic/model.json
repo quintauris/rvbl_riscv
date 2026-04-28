@@ -1,5 +1,5 @@
 {
-    "$schema": "../../../quintauris/meta/device.schema.json",
+    "$schema": "../../../core/meta/device.schema.json",
     "name": "plic",
     "instance": "$INSTANCE",
     "description": "Platform-Local Interrrupt Controller (PLIC) Device Model.\nSee https://github.com/riscv/riscv-plic-spec.",

@@ -1,5 +1,5 @@
 {
-    "$schema": "../../../quintauris/meta/device.schema.json",
+    "$schema": "../../../core/meta/device.schema.json",
     "name": "clic",
     "instance": "$INSTANCE",
     "description": "Core-Local Interrrupt Controller (CLIC) Device Model.\nSee https://riscv.atlassian.net/wiki/spaces/HOME/pages/16154646/Fast+Interrupts+TG.",
