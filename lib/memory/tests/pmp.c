@@ -33,8 +33,8 @@ typedef enum rvbl_memory_pmp_configuration_locking
 
 int main(void)
 {
-    static rvbl_memory_pmp_region_configuration_register configurations[8];
-    static rvbl_memory_pmp_region_address_register addresses[8];
+    rvbl_memory_pmp_region_configuration_register configurations[8];
+    rvbl_memory_pmp_region_address_register addresses[8];
 
     rvbl_hart_hang_if_not(0);
     rvbl_test_initialize();
