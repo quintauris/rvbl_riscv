@@ -1,7 +1,11 @@
 .global clic_machine_trap_wrapper
 .extern rvbl_clic_internal_select_trap_handler
-.extern interrupt_stack_top
-.extern supervisor_stack_top
+
+;/* The following lines are commented because they produce inescrutable "locate" */
+;/* errors on the Tasking linker. Apparently linking agains "interrupt", which */
+;/* actually has these declarations is sufficient. */
+;/* .extern interrupt_stack_top */
+;/* .extern supervisor_stack_top */
 
 .section .text
 
