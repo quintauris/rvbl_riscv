@@ -296,12 +296,13 @@ rvbl_result_t rvbl_clic_initialize(rvbl_alloc_allocator *, rvbl_clic_trap_handle
 
 /// == Function `rvbl_clic_set_interrupt_handler`
 ///
-/// Assigns a direct interrupt hander to an interrupt.
+/// Assigns an interrupt handler to an interrupt.
 ///
 /// === Parameters
 /// `const struct rvbl_clic_t*`:: Device instance identification.
-/// `rvbl_clic_interrupt_input_t`:: Interrupt identification (note first 16 interrupt numbers are
-/// reserved). `rvbl_clic_trap_handler`:: Pointer to custom interrupt handler.
+/// `rvbl_clic_interrupt_input_t`:: Interrupt identification (note first 16
+/// interrupt numbers are reserved).
+/// `rvbl_clic_trap_handler`:: Pointer to custom interrupt handler.
 ///
 /// === Return Value
 ///
@@ -309,6 +310,26 @@ rvbl_result_t rvbl_clic_initialize(rvbl_alloc_allocator *, rvbl_clic_trap_handle
 /// `rvbl_result_error_bounds`:: Interrupt identification out of bounds.
 rvbl_result_t rvbl_clic_set_interrupt_handler(
     const struct rvbl_clic_t *, rvbl_clic_interrupt_input_t, rvbl_clic_trap_handler
+);
+
+/// == Function `rvbl_clic_set_interrupt_handler`
+///
+/// Assigns a direct interrupt handler to an interrupt.
+///
+/// === Parameters
+/// `const struct rvbl_clic_t*`:: Device instance identification.
+/// `rvbl_clic_interrupt_input_t`:: Interrupt identification (note first 16
+/// interrupt numbers are reserved).
+/// `rvbl_clic_direct_interrupt_handler`:: Pointer to custom interrupt handler.
+///
+/// === Return Value
+///
+/// `rvbl_result_success`:: Modification successful.
+/// `rvbl_result_error_bounds`:: Interrupt identification out of bounds.
+rvbl_result_t rvbl_clic_set_interrupt_handler_direct(
+    const struct rvbl_clic_t *instance,
+    const rvbl_clic_interrupt_input_t input,
+    const rvbl_clic_direct_interrupt_handler handler
 );
 
 #endif

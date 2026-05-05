@@ -13,4 +13,4 @@ rvbl_clic${rvbl_toolchain_specific_suffix}.s"
   interrupt
   alloc_bump)
 
-rvbl_test(NAME clic LIBRARIES interrupt clic)
+rvbl_test(NAME clic LIBRARIES abi interrupt clic)

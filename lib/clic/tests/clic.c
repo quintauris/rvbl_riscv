@@ -1,7 +1,7 @@
+#include "rvbl/abi/rvbl_abi.h"
 #include "rvbl/alloc/rvbl_alloc_bump.h"
 #include "rvbl/clic/rvbl_clic.h"
 #include "rvbl/interrupt/rvbl_hart.h"
-#include "rvbl/machine/rvbl_clic.h"
 #include "rvbl/machine/rvbl_machine.h"
 #include "rvbl/test/rvbl_test.h"
 #include "rvbl/type/rvbl_types.h"
@@ -16,6 +16,12 @@ static rvbl_alloc_allocator allocator = {&rvbl_alloc_bump_allocator, 1, &area};
 static void unexpected_interrupt_handler(volatile rvbl_clic_hart_context *context) { FAIL(); }
 
 static void interrupt_handler(volatile rvbl_clic_hart_context *context) { counter = 1; }
+
+static __attribute__((naked)) void direct_interrupt_handler(void)
+{
+    __asm__ volatile("addi gp, zero, 1");
+    __asm__ volatile("mret");
+}
 
 int main(void)
 {
@@ -68,6 +74,23 @@ int main(void)
     }
 
     ASSERT_EQ(counter, 1);
+
+    ASSERT_EQ(
+        rvbl_clic_set_interrupt_handler_direct(device, interrupt_number, direct_interrupt_handler),
+        rvbl_result_success
+    );
+
+    rvbl_global_pointer_register_write(0);
+    ASSERT_EQ(
+        rvbl_clic_set_interrupt_pending(device, interrupt_number, rvbl_true), rvbl_result_success
+    );
+
+    while (counter == 0) {
+        __asm__ volatile("wfi\n\t");
+    }
+
+    ASSERT_EQ(rvbl_global_pointer_register_read(), (void *)1);
+
     ASSERT_EQ(rvbl_interrupt_hart_current_disable_traps(), rvbl_result_success);
 
     PASS();

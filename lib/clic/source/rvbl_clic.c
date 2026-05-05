@@ -244,3 +244,19 @@ rvbl_result_t rvbl_clic_set_interrupt_handler(
         return rvbl_result_error_bounds;
     }
 }
+
+rvbl_result_t rvbl_clic_set_interrupt_handler_direct(
+    const struct rvbl_clic_t *instance,
+    const rvbl_clic_interrupt_input_t input,
+    const rvbl_clic_direct_interrupt_handler handler
+)
+{
+    if ((input >= RVBL_CLIC_MIN_INTERRUPT_INPUT_ID) &&
+        (input <= (instance->interrupt_inputs_parameter - 1)) && (input <= total_traps)) {
+        machine_trap_vector_table[RISCV_RESERVED_EXCEPTIONS + input] = handler;
+
+        return rvbl_result_success;
+    } else {
+        return rvbl_result_error_bounds;
+    }
+}
