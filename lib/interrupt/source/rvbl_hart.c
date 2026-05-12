@@ -87,7 +87,10 @@ rvbl_result_t rvbl_interrupt_hart_current_initialize_traps(
     if (supervisor_extension_enabled) {
         rvbl_mideleg_write(0);
         rvbl_medeleg_write(0);
+
+#if defined(RVBL_CONFIGURATION_HAS_MODE_SUPERVISOR)
         rvbl_stvec_write((rvbl_uint32_t)&supervisor_trap_table);
+#endif
     }
 
     if (default_handler == NULL) {
