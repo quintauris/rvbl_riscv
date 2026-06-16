@@ -12,7 +12,9 @@ void interrupt_handler(volatile rvbl_interrupt_hart_context *context)
 
 int main(void)
 {
+#ifndef _RT_EUROPA_MG_H_
     rvbl_uint32_t count = 0;
+#endif
 
     rvbl_hart_hang_if_not(0);
     rvbl_test_initialize();

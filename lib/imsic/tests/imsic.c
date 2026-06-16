@@ -6,6 +6,7 @@
 #include "rvbl/test/rvbl_test.h"
 #include "rvbl/type/rvbl_types.h"
 
+#if 0
 static const rvbl_imsic_interrupt_source_t kEEID = 5, kIrq = 5;
 static volatile rvbl_uint32_t count = 0;
 
@@ -13,17 +14,22 @@ void machine_irq_handler(volatile rvbl_interrupt_hart_context *context)
 {
     rvbl_imsic_interrupt_source_t source;
 
+    (void)context;
+
     rvbl_imsic_hart_get_top_interrupt(rvbl_imsic_mode_machine, &source);
     source &= 0x7FF;
     rvbl_imsic_hart_set_interrupt_pending(rvbl_imsic_mode_machine, source, rvbl_false);
     ASSERT_EQ(source, kIrq);
     ++count;
 }
+#endif
 
 int main(void)
 {
+#if 0
     const rvbl_uint32_t PRORIETARY_SINGLECORE_RHX = 0x80000402;
     const rvbl_uint32_t ARCV_RHX_1_0 = 0x00020100;
+#endif
 
     rvbl_hart_hang_if_not(0);
     rvbl_test_initialize();

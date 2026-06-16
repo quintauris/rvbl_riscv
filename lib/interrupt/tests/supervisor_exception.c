@@ -7,9 +7,12 @@
 
 typedef mstatus_mpp_values privilege;
 
+#ifndef _RT_EUROPA_MG_H_
 static rvbl_uint32_t supervisor_count = 0;
 static privilege expected_privilege = mstatus_mpp_values_machine;
+#endif
 
+#ifndef _RT_EUROPA_MG_H_
 static void machine_environment_call_handler(volatile rvbl_interrupt_hart_context *context)
 {
     const privilege parameter = (privilege)context->arguments[0];
@@ -30,6 +33,7 @@ static void unsupported_exception_handler(volatile rvbl_interrupt_hart_context *
     (void)context;
     FAIL();
 }
+#endif
 
 int main(void)
 {

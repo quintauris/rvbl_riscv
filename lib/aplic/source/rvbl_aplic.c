@@ -124,9 +124,13 @@ rvbl_result_t rvbl_aplic_set_interrupt_enable(
     if ((source >= RVBL_APLIC_MIN_INTERRUPT_SOURCE_ID) &&
         (source <= RVBL_APLIC_MAX_INTERRUPT_SOURCE_ID)) {
         const rvbl_uint32_t word = source / XLEN;
-        const rvbl_uint32_t mask = 1U << (source % XLEN);
+        const rvbl_uint32_t mask = 1 << (source % XLEN);
 
-        rvbl_aplic_setie_write(device, word, mask);
+        if (enable) {
+            rvbl_aplic_setie_write(device, word, mask);
+        } else {
+            rvbl_aplic_clrie_write(device, word, mask);
+        }
 
         return rvbl_result_success;
     } else {
@@ -184,7 +188,7 @@ rvbl_result_t rvbl_aplic_set_target_configuration_direct(
             rvbl_aplic_target_hart_index_write(device, source, configuration->hart);
             rvbl_aplic_target_iprio_write(device, source, configuration->priority);
             return rvbl_result_success;
-        case aplic_domaincfg_dm_values_msi:
+        default:
             return rvbl_result_error_state;
         }
     } else {
@@ -205,7 +209,7 @@ rvbl_result_t rvbl_aplic_get_target_configuration_direct(
             configuration->hart = rvbl_aplic_target_hart_index_read(device, source);
             configuration->priority = rvbl_aplic_target_iprio_read(device, source);
             return rvbl_result_success;
-        case aplic_domaincfg_dm_values_msi:
+        default:
             return rvbl_result_error_state;
         }
     } else {
@@ -222,13 +226,13 @@ rvbl_result_t rvbl_aplic_set_target_configuration_msi(
     if ((source >= RVBL_APLIC_MIN_INTERRUPT_SOURCE_ID) &&
         (source <= RVBL_APLIC_MAX_INTERRUPT_SOURCE_ID)) {
         switch (rvbl_aplic_domaincfg_dm_read(device)) {
-        case aplic_domaincfg_dm_values_direct:
-            return rvbl_result_error_state;
         case aplic_domaincfg_dm_values_msi:
             rvbl_aplic_target_hart_index_write(device, source, configuration->hart);
             rvbl_aplic_target_guest_index_write(device, source, configuration->guest);
             rvbl_aplic_target_eeid_write(device, source, configuration->id);
             return rvbl_result_success;
+        default:
+            return rvbl_result_error_state;
         }
     } else {
         return rvbl_result_error_bounds;
@@ -244,13 +248,13 @@ rvbl_result_t rvbl_aplic_get_target_configuration_msi(
     if ((source >= RVBL_APLIC_MIN_INTERRUPT_SOURCE_ID) &&
         (source <= RVBL_APLIC_MAX_INTERRUPT_SOURCE_ID)) {
         switch (rvbl_aplic_domaincfg_dm_read(device)) {
-        case aplic_domaincfg_dm_values_direct:
-            return rvbl_result_error_state;
         case aplic_domaincfg_dm_values_msi:
             configuration->hart = rvbl_aplic_target_hart_index_read(device, source);
             configuration->guest = rvbl_aplic_target_guest_index_read(device, source);
             configuration->id = rvbl_aplic_target_eeid_read(device, source);
             return rvbl_result_success;
+        default:
+            return rvbl_result_error_state;
         }
     } else {
         return rvbl_result_error_bounds;

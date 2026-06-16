@@ -37,7 +37,7 @@ rvbl_result_t rvbl_memory_pmp_generate(
         const rvbl_memory_pmp_region *current = ranges, *previous = &top;
         rvbl_uword_t i = 0;
 
-        for (i = 0; ((current - ranges) < region_count) && (i < register_count);
+        for (i = 0; (((rvbl_uword_t)(current - ranges)) < region_count) && (i < register_count);
              ++i, previous = current, ++current) {
             rvbl_memory_pmp_region_configuration_register configuration = 0;
             rvbl_memory_pmp_region_address_register address = 0;

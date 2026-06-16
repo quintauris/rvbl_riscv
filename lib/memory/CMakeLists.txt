@@ -13,3 +13,7 @@ rvbl_static_library(
 rvbl_test(NAME pmp LIBRARIES memory)
 rvbl_test(NAME coherence LIBRARIES memory)
 rvbl_test(NAME cache LIBRARIES memory)
+
+if((CMAKE_C_COMPILER_ID MATCHES "GNU") OR (CMAKE_C_COMPILER_ID MATCHES "Clang"))
+  target_compile_options(test_cache PRIVATE -Wno-pedantic)
+endif()

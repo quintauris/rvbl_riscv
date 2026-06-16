@@ -8,6 +8,7 @@ static rvbl_plic_interrupt_source_t source = 0;
 
 void machine_software_interrupt_handler(volatile rvbl_interrupt_hart_context *context)
 {
+    (void)context;
     rvbl_plic_interrupt_source_t claimed = 0;
     ++count;
     rvbl_plic_claim_interrupt(&rvbl_plic_instance_default, 0, &claimed);
