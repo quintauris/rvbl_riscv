@@ -26,7 +26,7 @@ int main(void)
         if (rvbl_mhartid_read() == 0) {
             rvbl_word_t timeout = RVBL_CONFIGURATION_MTIME_FREQUENCY;
 
-            while ((finished_count < workers) && (timeout != 0)) {
+            while ((finished_count < ((rvbl_word_t)workers)) && (timeout != 0)) {
                 --timeout;
             }
 

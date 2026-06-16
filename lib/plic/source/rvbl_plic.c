@@ -80,7 +80,6 @@ rvbl_result_t rvbl_plic_set_interrupt_enable(
         (source <= RVBL_PLIC_MAX_INTERRUPT_SOURCE_ID) && (context <= RVBL_PLIC_MAX_CONTEXT_ID) &&
         (context <= instance->maximum_context_parameter)) {
         const rvbl_uword_t word = source / 32, bit = source % 32;
-        const rvbl_uword_t target = context * 32 + word;
         const rvbl_uint32_t mask = ((rvbl_uint32_t)1) << bit;
         const rvbl_uint32_t value = rvbl_plic_enable_read(instance, word);
 

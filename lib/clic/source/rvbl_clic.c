@@ -170,7 +170,7 @@ static rvbl_clic_trap_handler **interrupt_handler_tables = NULL;
 static rvbl_uword_t total_traps = RISCV_RESERVED_EXCEPTIONS + RISCV_RESERVED_INTERRUPTS;
 
 extern void clic_machine_trap_wrapper(void);
-static void nop(volatile rvbl_clic_hart_context *c) {}
+static void nop(volatile rvbl_clic_hart_context *c) { (void)c; }
 
 rvbl_result_t rvbl_clic_allocate(rvbl_alloc_allocator *allocator, rvbl_uword_t platform_interrupts)
 {
@@ -226,6 +226,8 @@ rvbl_clic_trap_handler *rvbl_clic_internal_select_trap_handler(
     const rvbl_clic_mode_t privilege, rvbl_uword_t interrupt_code, rvbl_clic_hart_context *context
 )
 {
+    (void)privilege;
+    (void)context;
     return &interrupt_handler_tables[rvbl_mhartid_read()][interrupt_code & 0xFFFF];
 }
 

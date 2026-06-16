@@ -24,7 +24,7 @@ int main(void)
         rvbl_extension_present(misa_extensions_values_Atomic)) {
 #if !defined(__IAR_SYSTEMS_ICC__)
         if (rvbl_mhartid_read() == 0) {
-            while (completion_count < (RVBL_CONFIGURATION_HART_COUNT - 1)) {
+            while (completion_count < (((rvbl_word_t)RVBL_CONFIGURATION_HART_COUNT) - 1)) {
             }
 
             ASSERT_EQ(counter, iterations * (RVBL_CONFIGURATION_HART_COUNT - 1));

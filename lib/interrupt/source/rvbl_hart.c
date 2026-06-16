@@ -25,7 +25,7 @@ extern rvbl_uint32_t supervisor_trap_table;
 static rvbl_bool_t supervisor_extension_enabled;
 static rvbl_pointer_t extra;
 
-static void nop(volatile rvbl_interrupt_hart_context *context) {}
+static void nop(volatile rvbl_interrupt_hart_context *context) { (void)context; }
 
 rvbl_interrupt_trap_handler *rvbl_interrupt_hart_internal_select_trap_handler(
     const rvbl_interrupt_hart_privilege privilege,

@@ -5,7 +5,7 @@
 
 int main(void)
 {
-    const register rvbl_pointer_t current = rvbl_stack_pointer_register_read();
+    register const rvbl_pointer_t current = rvbl_stack_pointer_register_read();
 
     rvbl_hart_hang_if_not(0);
     rvbl_test_initialize();

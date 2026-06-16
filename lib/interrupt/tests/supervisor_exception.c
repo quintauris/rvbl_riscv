@@ -25,7 +25,11 @@ static void supervisor_store_fault_handler(volatile rvbl_interrupt_hart_context 
     ++supervisor_count;
 }
 
-static void unsupported_exception_handler(volatile rvbl_interrupt_hart_context *context) { FAIL(); }
+static void unsupported_exception_handler(volatile rvbl_interrupt_hart_context *context)
+{
+    (void)context;
+    FAIL();
+}
 
 int main(void)
 {

@@ -51,7 +51,7 @@ void rvbl_semihost_initialize(void)
     parameters[2] = strlen(features_path);
     handle = rvbl_semihost_interface(rvbl_semihost_operation_open, parameters);
 
-    if (handle == -1) {
+    if (((rvbl_word_t)handle) == -1) {
         return;
     }
 
