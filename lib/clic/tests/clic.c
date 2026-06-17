@@ -13,9 +13,17 @@ static __attribute__((aligned(4))) rvbl_uint8_t heap[4096];
 static rvbl_alloc_area area = {heap, sizeof(heap)};
 static rvbl_alloc_allocator allocator = {&rvbl_alloc_bump_allocator, 1, &area};
 
-static void unexpected_interrupt_handler(volatile rvbl_clic_hart_context *context) { FAIL(); }
+static void unexpected_interrupt_handler(volatile rvbl_clic_hart_context *context)
+{
+    (void)context;
+    FAIL();
+}
 
-static void interrupt_handler(volatile rvbl_clic_hart_context *context) { counter = 1; }
+static void interrupt_handler(volatile rvbl_clic_hart_context *context)
+{
+    (void)context;
+    counter = 1;
+}
 
 static __attribute__((naked)) void direct_interrupt_handler(void)
 {

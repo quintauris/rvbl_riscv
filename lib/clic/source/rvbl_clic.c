@@ -17,7 +17,6 @@ rvbl_result_t rvbl_clic_set_interrupt_priority(
         (priority <= RVBL_CLIC_MAX_INTERRUPT_PRIORITY)) {
         const rvbl_uint32_t clicintbits = rvbl_clic_info_clicintbits_read(instance);
         const rvbl_uint32_t level_bits = rvbl_clic_cfg_nlbits_read(instance);
-        const rvbl_uint32_t priority_bits = clicintbits - level_bits;
         const rvbl_uint32_t mask = (level << (8 - level_bits)) | (priority << clicintbits);
 
         rvbl_clic_intctl_write(instance, input, mask);
