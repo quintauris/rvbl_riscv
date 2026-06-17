@@ -1,3 +1,9 @@
+/*
+ * Copyright 2026 Quintauris GmbH
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * https://www.apache.org/licenses/LICENSE-2.0
+ */
+
 #include "rvbl/memory/rvbl_pmp.h"
 
 #define PMP_REGION_COUNT 64

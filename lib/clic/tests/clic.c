@@ -1,3 +1,9 @@
+/*
+ * Copyright 2026 Quintauris GmbH
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * https://www.apache.org/licenses/LICENSE-2.0
+ */
+
 #include "rvbl/abi/rvbl_abi.h"
 #include "rvbl/alloc/rvbl_alloc_bump.h"
 #include "rvbl/clic/rvbl_clic.h"

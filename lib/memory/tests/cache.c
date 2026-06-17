@@ -1,3 +1,9 @@
+/*
+ * Copyright 2026 Quintauris GmbH
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * https://www.apache.org/licenses/LICENSE-2.0
+ */
+
 #include "rvbl/machine/rvbl_configuration.h"
 #include "rvbl/memory/rvbl_cache.h"
 #include "rvbl/test/rvbl_test.h"
