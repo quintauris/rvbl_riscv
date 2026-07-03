@@ -1,0 +1,357 @@
+{
+    "$schema": "../../meta/device.schema.json",
+    "name": "aplic",
+    "instance": "$INSTANCE",
+    "$comment": "Copyright 2026 Quintauris GmbH. Licensed under the Apache License, Version 2.0 (the \"License\", https://www.apache.org/licenses/LICENSE-2.0)",
+    "description": "Advanced Platform-Local Interrrupt Controller (APLIC) Device Model.\nSee https://riscv.atlassian.net/wiki/spaces/HOME/pages/806289428/RISC-V+Advanced+Interrupt+Architecture.",
+    "memory_regions": [
+        {
+            "name": "registers",
+            "base": "$BASE",
+            "size": "16K",
+            "registers": [
+                {
+                    "name": "domaincfg",
+                    "class": "memory_mapped",
+                    "offset": "0x0",
+                    "width": 32,
+                    "fields": [
+                        {
+                            "name": "be",
+                            "position": 0,
+                            "length": 1
+                        },
+                        {
+                            "name": "dm",
+                            "position": 2,
+                            "length": 1,
+                            "values": [
+                                {
+                                    "name": "direct",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "msi",
+                                    "value": "1"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "ie",
+                            "position": 8,
+                            "length": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "sourcecfg",
+                    "class": "memory_mapped",
+                    "offset": "0x0",
+                    "width": 32,
+                    "fields": [
+                        {
+                            "name": "delegate",
+                            "position": 10,
+                            "length": 1
+                        },
+                        {
+                            "name": "child_index",
+                            "position": 0,
+                            "length": 10
+                        },
+                        {
+                            "name": "source_mode",
+                            "position": 0,
+                            "length": 3,
+                            "values": [
+                                {
+                                    "name": "inactive",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "detached",
+                                    "value": "1"
+                                },
+                                {
+                                    "name": "edge1",
+                                    "value": "4"
+                                },
+                                {
+                                    "name": "edge0",
+                                    "value": "5"
+                                },
+                                {
+                                    "name": "level1",
+                                    "value": "6"
+                                },
+                                {
+                                    "name": "level0",
+                                    "value": "7"
+                                }
+                            ]
+                        }
+                    ],
+                    "indexing": {
+                        "lower_bound": "1",
+                        "upper_bound": "1023"
+                    }
+                },
+                {
+                    "name": "mmsiaddrcfg",
+                    "class": "memory_mapped",
+                    "offset": "0x1BC0",
+                    "width": 32,
+                    "fields": [
+                        {
+                            "name": "low_base_ppn",
+                            "position": 0,
+                            "length": 32
+                        }
+                    ]
+                },
+                {
+                    "name": "mmsiaddrcfgh",
+                    "class": "memory_mapped",
+                    "offset": "0x1BC4",
+                    "width": 32,
+                    "fields": [
+                        {
+                            "name": "l",
+                            "position": 31,
+                            "length": 1
+                        },
+                        {
+                            "name": "hhxs",
+                            "position": 24,
+                            "length": 5
+                        },
+                        {
+                            "name": "lhxs",
+                            "position": 20,
+                            "length": 3
+                        },
+                        {
+                            "name": "hhxw",
+                            "position": 16,
+                            "length": 3
+                        },
+                        {
+                            "name": "lhxw",
+                            "position": 12,
+                            "length": 4
+                        },
+                        {
+                            "name": "high_base_ppn",
+                            "position": 0,
+                            "length": 12
+                        }
+                    ]
+                },
+                {
+                    "name": "smsiaddrcfg",
+                    "class": "memory_mapped",
+                    "offset": "0x1BC8",
+                    "width": 32,
+                    "fields": [
+                        {
+                            "name": "low_base_ppn",
+                            "position": 0,
+                            "length": 32
+                        }
+                    ]
+                },
+                {
+                    "name": "smsiaddrcfgh",
+                    "class": "memory_mapped",
+                    "offset": "0x1BCC",
+                    "width": 32,
+                    "fields": [
+                        {
+                            "name": "lhxs",
+                            "position": 20,
+                            "length": 3
+                        },
+                        {
+                            "name": "high_base_ppn",
+                            "position": 0,
+                            "length": 12
+                        }
+                    ]
+                },
+                {
+                    "name": "setip",
+                    "class": "memory_mapped",
+                    "offset": "0x1C00",
+                    "width": 32,
+                    "indexing": {
+                        "upper_bound": "31"
+                    }
+                },
+                {
+                    "name": "setipnum",
+                    "class": "memory_mapped",
+                    "offset": "0x1CDC",
+                    "width": 32
+                },
+                {
+                    "name": "in_clrip",
+                    "class": "memory_mapped",
+                    "offset": "0x1D00",
+                    "width": 32,
+                    "indexing": {
+                        "upper_bound": "31"
+                    }
+                },
+                {
+                    "name": "clripnum",
+                    "class": "memory_mapped",
+                    "offset": "0x1DDC",
+                    "width": 32
+                },
+                {
+                    "name": "setie",
+                    "class": "memory_mapped",
+                    "offset": "0x1E00",
+                    "width": 32,
+                    "indexing": {
+                        "upper_bound": "31"
+                    }
+                },
+                {
+                    "name": "setienum",
+                    "class": "memory_mapped",
+                    "offset": "0x1EDC",
+                    "width": 32
+                },
+                {
+                    "name": "clrie",
+                    "class": "memory_mapped",
+                    "offset": "0x1F00",
+                    "width": 32,
+                    "indexing": {
+                        "upper_bound": "31"
+                    }
+                },
+                {
+                    "name": "clrienum",
+                    "class": "memory_mapped",
+                    "offset": "0x1FDC",
+                    "width": 32
+                },
+                {
+                    "name": "setipnum_le",
+                    "class": "memory_mapped",
+                    "offset": "0x2000",
+                    "width": 32
+                },
+                {
+                    "name": "setipnum_be",
+                    "class": "memory_mapped",
+                    "offset": "0x2004",
+                    "width": 32
+                },
+                {
+                    "name": "genmsi",
+                    "class": "memory_mapped",
+                    "offset": "0x3000",
+                    "width": 32,
+                    "fields": [
+                        {
+                            "name": "busy",
+                            "position": 12,
+                            "length": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "target",
+                    "class": "memory_mapped",
+                    "offset": "0x3000",
+                    "width": 32,
+                    "fields": [
+                        {
+                            "name": "iprio",
+                            "position": 0,
+                            "length": 8
+                        },
+                        {
+                            "name": "eeid",
+                            "position": 0,
+                            "length": 11
+                        },
+                        {
+                            "name": "guest_index",
+                            "position": 12,
+                            "length": 6
+                        },
+                        {
+                            "name": "hart_index",
+                            "position": 18
+                        }
+                    ],
+                    "indexing": {
+                        "lower_bound": "1",
+                        "upper_bound": "1023"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "interrupt_delivery_control",
+            "base": "$BASE + 16K",
+            "size": "$HART_COUNT * 32",
+            "registers": [
+                {
+                    "name": "idelivery",
+                    "class": "memory_mapped",
+                    "offset": "0x0",
+                    "width": 32,
+                    "indexing": {
+                        "stride": "32",
+                        "upper_bound": "$HART_COUNT - 1"
+                    }
+                },
+                {
+                    "name": "iforce",
+                    "class": "memory_mapped",
+                    "offset": "0x0004",
+                    "width": 32,
+                    "indexing": {
+                        "stride": "32",
+                        "upper_bound": "$HART_COUNT - 1"
+                    }
+                },
+                {
+                    "name": "ithreshold",
+                    "class": "memory_mapped",
+                    "offset": "0x0008",
+                    "width": 32,
+                    "indexing": {
+                        "stride": "32",
+                        "upper_bound": "$HART_COUNT - 1"
+                    }
+                },
+                {
+                    "name": "topi",
+                    "class": "memory_mapped",
+                    "offset": "0x0018",
+                    "width": 32,
+                    "indexing": {
+                        "stride": "32",
+                        "upper_bound": "$HART_COUNT - 1"
+                    }
+                },
+                {
+                    "name": "claimi",
+                    "class": "memory_mapped",
+                    "offset": "0x001C",
+                    "width": 32,
+                    "indexing": {
+                        "stride": "32",
+                        "upper_bound": "$HART_COUNT - 1"
+                    }
+                }
+            ]
+        }
+    ]
+}

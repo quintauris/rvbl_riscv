@@ -1,0 +1,78 @@
+{
+    "$schema": "../../meta/device.schema.json",
+    "name": "aclint",
+    "instance": "$INSTANCE",
+    "$comment": "Copyright 2026 Quintauris GmbH. Licensed under the Apache License, Version 2.0 (the \"License\", https://www.apache.org/licenses/LICENSE-2.0)",
+    "description": "Advanced Core-Local Interrruptor (ACLINT) Device Model.\nSee https://github.com/riscvarchive/riscv-aclint.",
+    "memory_regions": [
+        {
+            "name": "mtimer_time",
+            "base": "$BASE + $MTIMER_TIME_OFFSET",
+            "size": "8",
+            "registers": [
+                {
+                    "name": "mtime",
+                    "class": "memory_mapped",
+                    "offset": "0x0",
+                    "width": 64
+                }
+            ]
+        },
+        {
+            "name": "mtimer_compare",
+            "base": "$BASE + $MTIMER_COMPARE_OFFSET",
+            "size": "8 * $HART_COUNT",
+            "registers": [
+                {
+                    "name": "mtimecmp",
+                    "class": "memory_mapped",
+                    "offset": "0x0",
+                    "width": 64,
+                    "indexing": {
+                        "upper_bound": "$HART_COUNT - 1"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "machine_interrupt",
+            "base": "$BASE + $MSWI_MSIP_OFFSET",
+            "size": "4 * ${HART_COUNT}",
+            "registers": [
+                {
+                    "name": "msip",
+                    "class": "memory_mapped",
+                    "offset": "0x0",
+                    "width": 32,
+                    "indexing": {
+                        "upper_bound": "$HART_COUNT - 1"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "supervisor_interrupt",
+            "base": "$BASE + $SSWI_SETSSIP_OFFSET",
+            "size": "4 * ${HART_COUNT}",
+            "registers": [
+                {
+                    "name": "setssip",
+                    "class": "memory_mapped",
+                    "offset": "0x0",
+                    "width": 32,
+                    "indexing": {
+                        "upper_bound": "$HART_COUNT - 1"
+                    }
+                }
+            ]
+        }
+    ],
+    "parameters": [
+        {
+            "name": "hart_count",
+            "stage": "compile",
+            "class": "uint32",
+            "value": "$HART_COUNT"
+        }
+    ]
+}

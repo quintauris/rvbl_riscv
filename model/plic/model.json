@@ -1,0 +1,90 @@
+{
+    "$schema": "../../../core/meta/device.schema.json",
+    "name": "plic",
+    "instance": "$INSTANCE",
+    "$comment": "Copyright 2026 Quintauris GmbH. Licensed under the Apache License, Version 2.0 (the \"License\", https://www.apache.org/licenses/LICENSE-2.0)",
+    "description": "Platform-Local Interrrupt Controller (PLIC) Device Model.\nSee https://github.com/riscv/riscv-plic-spec.",
+    "memory_regions": [
+        {
+            "name": "registers",
+            "base": "$BASE",
+            "size": "64M",
+            "registers": [
+                {
+                    "name": "reserved",
+                    "class": "memory_mapped",
+                    "offset": "0x0",
+                    "width": 32
+                },
+                {
+                    "name": "priority",
+                    "class": "memory_mapped",
+                    "offset": "0x0",
+                    "width": 32,
+                    "indexing": {
+                        "lower_bound": "1",
+                        "upper_bound": "$INTERRUPT_SOURCES - 1"
+                    }
+                },
+                {
+                    "name": "pending",
+                    "class": "memory_mapped",
+                    "offset": "0x1000",
+                    "width": 32,
+                    "indexing": {
+                        "upper_bound": "($INTERRUPT_SOURCES / 32) - 1"
+                    }
+                },
+                {
+                    "name": "enable",
+                    "class": "memory_mapped",
+                    "offset": "0x2000",
+                    "width": 32,
+                    "indexing": {
+                        "upper_bound": "($HART_COUNT * ($INTERRUPT_SOURCES / 32)) - 1"
+                    }
+                },
+                {
+                    "name": "threshold",
+                    "class": "memory_mapped",
+                    "offset": "0x200000",
+                    "width": 32,
+                    "indexing": {
+                        "upper_bound": "$CONTEXTS - 1",
+                        "stride": "4K"
+                    }
+                },
+                {
+                    "name": "claim_complete",
+                    "class": "memory_mapped",
+                    "offset": "0x200004",
+                    "width": 32,
+                    "indexing": {
+                        "upper_bound": "$CONTEXTS - 1",
+                        "stride": "4K"
+                    }
+                }
+            ]
+        }
+    ],
+    "parameters": [
+        {
+            "name": "maximum_priority",
+            "stage": "compile",
+            "class": "uint32",
+            "value": "$MAXIMUM_PRIORITY"
+        },
+        {
+            "name": "maximum_context",
+            "stage": "compile",
+            "class": "uint32",
+            "value": "$CONTEXTS - 1"
+        },
+        {
+            "name": "interrupt_pending_writable",
+            "stage": "compile",
+            "class": "uint32",
+            "value": "$INTERRUPT_PENDING_WRITABLE"
+        }
+    ]
+}

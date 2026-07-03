@@ -1,0 +1,780 @@
+[
+    {
+        "name": "mstatus",
+        "class": "control_status",
+        "width": 32,
+        "offset": "0x300",
+        "fields": [
+            {
+                "name": "sie",
+                "position": 1,
+                "length": 1
+            },
+            {
+                "name": "mie",
+                "position": 3,
+                "length": 1
+            },
+            {
+                "name": "spie",
+                "position": 5,
+                "length": 1
+            },
+            {
+                "name": "ube",
+                "position": 6,
+                "length": 1
+            },
+            {
+                "name": "mpie",
+                "position": 7,
+                "length": 1
+            },
+            {
+                "name": "spp",
+                "position": 8,
+                "length": 1
+            },
+            {
+                "name": "vs",
+                "position": 9,
+                "length": 2
+            },
+            {
+                "name": "mpp",
+                "position": 11,
+                "length": 2,
+                "values": [
+                    {
+                        "name": "user",
+                        "value": "0"
+                    },
+                    {
+                        "name": "supervisor",
+                        "value": "1"
+                    },
+                    {
+                        "name": "machine",
+                        "value": "3"
+                    }
+                ]
+            },
+            {
+                "name": "fs",
+                "position": 13,
+                "length": 2
+            },
+            {
+                "name": "xs",
+                "position": 15,
+                "length": 2
+            },
+            {
+                "name": "mprv",
+                "position": 17,
+                "length": 1
+            },
+            {
+                "name": "sum",
+                "position": 18,
+                "length": 1
+            },
+            {
+                "name": "mxr",
+                "position": 19,
+                "length": 1
+            },
+            {
+                "name": "tvm",
+                "position": 20,
+                "length": 1
+            },
+            {
+                "name": "tw",
+                "position": 21,
+                "length": 1
+            },
+            {
+                "name": "tsr",
+                "position": 22,
+                "length": 1
+            },
+            {
+                "name": "sd",
+                "position": 31,
+                "length": 1
+            }
+        ]
+    },
+    {
+        "name": "mstatush",
+        "class": "control_status",
+        "width": 32,
+        "offset": "0x310",
+        "fields": [
+            {
+                "name": "sbe",
+                "position": 4,
+                "length": 1
+            },
+            {
+                "name": "mbe",
+                "position": 5,
+                "length": 1
+            },
+            {
+                "name": "mdt",
+                "position": 10,
+                "length": 1
+            }
+        ]
+    },
+    {
+        "name": "mcycle",
+        "class": "control_status",
+        "width": 32,
+        "offset": "0xB00"
+    },
+    {
+        "name": "mcycleh",
+        "class": "control_status",
+        "width": 32,
+        "offset": "0xB80"
+    },
+    {
+        "name": "minstret",
+        "class": "control_status",
+        "width": 32,
+        "offset": "0xB02"
+    },
+    {
+        "name": "minstreth",
+        "class": "control_status",
+        "width": 32,
+        "offset": "0xB82"
+    },
+    {
+        "name": "mhpmcounter3",
+        "class": "control_status",
+        "width": 32,
+        "offset": "0xB03"
+    },
+    {
+        "name": "mhpmcounter3h",
+        "class": "control_status",
+        "width": 32,
+        "offset": "0xB83"
+    },
+    {
+        "name": "mhpmcounter4",
+        "class": "control_status",
+        "width": 32,
+        "offset": "0xB04"
+    },
+    {
+        "name": "mhpmcounter4h",
+        "class": "control_status",
+        "width": 32,
+        "offset": "0xB84"
+    },
+    {
+        "name": "menvcfg",
+        "class": "control_status",
+        "offset": "0x30A",
+        "fields": [
+            {
+                "name": "fiom",
+                "position": 0,
+                "length": 1
+            },
+            {
+                "name": "cbie",
+                "position": 4,
+                "length": 2
+            },
+            {
+                "name": "cbcfe",
+                "position": 6,
+                "length": 1
+            },
+            {
+                "name": "cbze",
+                "position": 7,
+                "length": 1
+            },
+            {
+                "name": "pmm",
+                "position": 31,
+                "length": 1
+            }
+        ]
+    },
+    {
+        "name": "menvcfgh",
+        "class": "control_status",
+        "offset": "0x31A",
+        "fields": [
+            {
+                "name": "pmm",
+                "position": 0,
+                "length": 1
+            },
+            {
+                "name": "cdd",
+                "position": 28,
+                "length": 1
+            },
+            {
+                "name": "adue",
+                "position": 29,
+                "length": 1
+            },
+            {
+                "name": "pbmte",
+                "position": 30,
+                "length": 1
+            },
+            {
+                "name": "stce",
+                "position": 31,
+                "length": 1
+            }
+        ]
+    },
+    {
+        "name": "mseccfg",
+        "class": "control_status",
+        "offset": "0x747",
+        "fields": [
+            {
+                "name": "mml",
+                "position": 0,
+                "length": 1
+            },
+            {
+                "name": "mmwp",
+                "position": 1,
+                "length": 1
+            },
+            {
+                "name": "rlb",
+                "position": 2,
+                "length": 1
+            },
+            {
+                "name": "useed",
+                "position": 8,
+                "length": 1
+            },
+            {
+                "name": "sseed",
+                "position": 9,
+                "length": 1
+            }
+        ]
+    },
+    {
+        "name": "mseccfgh",
+        "class": "control_status",
+        "offset": "0x757",
+        "fields": [
+            {
+                "name": "pmm",
+                "position": 0,
+                "length": 2
+            }
+        ]
+    },
+    {
+        "name": "medeleg",
+        "class": "control_status",
+        "offset": "0x302",
+        "width": 32
+    },
+    {
+        "name": "medelegh",
+        "class": "control_status",
+        "offset": "0x312",
+        "width": 32
+    },
+    {
+        "name": "pmpcfg0",
+        "class": "control_status",
+        "offset": "0x3A0",
+        "width": 32
+    },
+    {
+        "name": "pmpcfg1",
+        "class": "control_status",
+        "offset": "0x3A1",
+        "width": 32
+    },
+    {
+        "name": "pmpcfg2",
+        "class": "control_status",
+        "offset": "0x3A2",
+        "width": 32
+    },
+    {
+        "name": "pmpcfg3",
+        "class": "control_status",
+        "offset": "0x3A3",
+        "width": 32
+    },
+    {
+        "name": "pmpcfg4",
+        "class": "control_status",
+        "offset": "0x3A4",
+        "width": 32
+    },
+    {
+        "name": "pmpcfg5",
+        "class": "control_status",
+        "offset": "0x3A5",
+        "width": 32
+    },
+    {
+        "name": "pmpcfg6",
+        "class": "control_status",
+        "offset": "0x3A6",
+        "width": 32
+    },
+    {
+        "name": "pmpcfg7",
+        "class": "control_status",
+        "offset": "0x3A7",
+        "width": 32
+    },
+    {
+        "name": "pmpcfg8",
+        "class": "control_status",
+        "offset": "0x3A8",
+        "width": 32
+    },
+    {
+        "name": "pmpcfg9",
+        "class": "control_status",
+        "offset": "0x3A9",
+        "width": 32
+    },
+    {
+        "name": "pmpcfg10",
+        "class": "control_status",
+        "offset": "0x3AA",
+        "width": 32
+    },
+    {
+        "name": "pmpcfg11",
+        "class": "control_status",
+        "offset": "0x3AB",
+        "width": 32
+    },
+    {
+        "name": "pmpcfg12",
+        "class": "control_status",
+        "offset": "0x3AC",
+        "width": 32
+    },
+    {
+        "name": "pmpcfg13",
+        "class": "control_status",
+        "offset": "0x3AD",
+        "width": 32
+    },
+    {
+        "name": "pmpcfg14",
+        "class": "control_status",
+        "offset": "0x3AE",
+        "width": 32
+    },
+    {
+        "name": "pmpcfg15",
+        "class": "control_status",
+        "offset": "0x3AF",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr0",
+        "class": "control_status",
+        "offset": "0x3B0",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr1",
+        "class": "control_status",
+        "offset": "0x3B1",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr2",
+        "class": "control_status",
+        "offset": "0x3B2",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr3",
+        "class": "control_status",
+        "offset": "0x3B3",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr4",
+        "class": "control_status",
+        "offset": "0x3B4",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr5",
+        "class": "control_status",
+        "offset": "0x3B5",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr6",
+        "class": "control_status",
+        "offset": "0x3B6",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr7",
+        "class": "control_status",
+        "offset": "0x3B7",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr8",
+        "class": "control_status",
+        "offset": "0x3B8",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr9",
+        "class": "control_status",
+        "offset": "0x3B9",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr10",
+        "class": "control_status",
+        "offset": "0x3BA",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr11",
+        "class": "control_status",
+        "offset": "0x3BB",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr12",
+        "class": "control_status",
+        "offset": "0x3BC",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr13",
+        "class": "control_status",
+        "offset": "0x3BD",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr14",
+        "class": "control_status",
+        "offset": "0x3BE",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr15",
+        "class": "control_status",
+        "offset": "0x3BF",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr16",
+        "class": "control_status",
+        "offset": "0x3C0",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr17",
+        "class": "control_status",
+        "offset": "0x3C1",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr18",
+        "class": "control_status",
+        "offset": "0x3C2",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr19",
+        "class": "control_status",
+        "offset": "0x3C3",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr20",
+        "class": "control_status",
+        "offset": "0x3C4",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr21",
+        "class": "control_status",
+        "offset": "0x3C5",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr22",
+        "class": "control_status",
+        "offset": "0x3C6",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr23",
+        "class": "control_status",
+        "offset": "0x3C7",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr24",
+        "class": "control_status",
+        "offset": "0x3C8",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr25",
+        "class": "control_status",
+        "offset": "0x3C9",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr26",
+        "class": "control_status",
+        "offset": "0x3CA",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr27",
+        "class": "control_status",
+        "offset": "0x3CB",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr28",
+        "class": "control_status",
+        "offset": "0x3CC",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr29",
+        "class": "control_status",
+        "offset": "0x3CD",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr30",
+        "class": "control_status",
+        "offset": "0x3CE",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr31",
+        "class": "control_status",
+        "offset": "0x3CF",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr32",
+        "class": "control_status",
+        "offset": "0x3D0",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr33",
+        "class": "control_status",
+        "offset": "0x3D1",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr34",
+        "class": "control_status",
+        "offset": "0x3D2",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr35",
+        "class": "control_status",
+        "offset": "0x3D3",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr36",
+        "class": "control_status",
+        "offset": "0x3D4",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr37",
+        "class": "control_status",
+        "offset": "0x3D5",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr38",
+        "class": "control_status",
+        "offset": "0x3D6",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr39",
+        "class": "control_status",
+        "offset": "0x3D7",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr40",
+        "class": "control_status",
+        "offset": "0x3D8",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr41",
+        "class": "control_status",
+        "offset": "0x3D9",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr42",
+        "class": "control_status",
+        "offset": "0x3DA",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr43",
+        "class": "control_status",
+        "offset": "0x3DB",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr44",
+        "class": "control_status",
+        "offset": "0x3DC",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr45",
+        "class": "control_status",
+        "offset": "0x3DD",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr46",
+        "class": "control_status",
+        "offset": "0x3DE",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr47",
+        "class": "control_status",
+        "offset": "0x3DF",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr48",
+        "class": "control_status",
+        "offset": "0x3E0",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr49",
+        "class": "control_status",
+        "offset": "0x3E1",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr50",
+        "class": "control_status",
+        "offset": "0x3E2",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr51",
+        "class": "control_status",
+        "offset": "0x3E3",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr52",
+        "class": "control_status",
+        "offset": "0x3E4",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr53",
+        "class": "control_status",
+        "offset": "0x3E5",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr54",
+        "class": "control_status",
+        "offset": "0x3E6",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr55",
+        "class": "control_status",
+        "offset": "0x3E7",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr56",
+        "class": "control_status",
+        "offset": "0x3E8",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr57",
+        "class": "control_status",
+        "offset": "0x3E9",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr58",
+        "class": "control_status",
+        "offset": "0x3EA",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr59",
+        "class": "control_status",
+        "offset": "0x3EB",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr60",
+        "class": "control_status",
+        "offset": "0x3EC",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr61",
+        "class": "control_status",
+        "offset": "0x3ED",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr62",
+        "class": "control_status",
+        "offset": "0x3EE",
+        "width": 32
+    },
+    {
+        "name": "pmpaddr63",
+        "class": "control_status",
+        "offset": "0x3EF",
+        "width": 32
+    }
+]

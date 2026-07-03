@@ -1,0 +1,26 @@
+////
+  Copyright 2026 Quintauris GmbH
+  Licensed under the Apache License, Version 2.0 (the "License").
+  https://www.apache.org/licenses/LICENSE-2.0
+////
+
+include::common.adoc[]
+
+= Models
+:toclevels: 4
+Quintauris <www.quintauris.com> (generated {localdatetime})
+
+== Privileged CSRs
+include::generated/privileged_model.adoc[leveloffset=+2]
+include::generated/privileged_model_32.adoc[leveloffset=+2]
+include::generated/privileged_supervisor.adoc[leveloffset=+2]
+include::generated/privileged_supervisor_32.adoc[leveloffset=+2]
+include::generated/privileged_rnmi.adoc[leveloffset=+2]
+include::generated/plic_model.adoc[leveloffset=0]
+include::generated/aclint_model.adoc[leveloffset=0]
+include::generated/aplic_model.adoc[leveloffset=0]
+include::generated/imsic_model.adoc[leveloffset=0]
+include::generated/imsic_machine.adoc[leveloffset=+2]
+include::generated/imsic_supervisor.adoc[leveloffset=+2]
+include::generated/clic_model.adoc[leveloffset=0]
+include::generated/clic_registers.adoc[leveloffset=+2]

@@ -1,0 +1,29 @@
+////
+  Copyright 2026 Quintauris GmbH
+  Licensed under the Apache License, Version 2.0 (the "License").
+  https://www.apache.org/licenses/LICENSE-2.0
+////
+
+include::common.adoc[]
+
+= The RISC-V Layer
+Quintauris <www.quintauris.com> (generated {localdatetime})
+
+== Overview
+
+This layer extends the {project} "core" layer with models and libraries for basic elements of the RISC-V architecture:
+
+* Unprivileged ISA
+* Privileged ISA
+* HART-local Interrupts
+* Platform-local Interrupt Controller (PLIC)
+* Advanced Platform-local Interrupt Controller (APLIC)
+* Incoming Message-Signaled Interrupt Controller (IMSIC)
+* Memory Protection, Caching and Coherence
+* Semihosting
+
+== Index
+
+* 📦 `riscv` layer
+** 🧩 xref:models.adoc[Models]
+** 🧑🏽‍💻 xref:apis.adoc[Library APIs]

@@ -1,0 +1,173 @@
+{
+    "$schema": "../../../core/meta/device.schema.json",
+    "name": "clic",
+    "instance": "$INSTANCE",
+    "$comment": "Copyright 2026 Quintauris GmbH. Licensed under the Apache License, Version 2.0 (the \"License\", https://www.apache.org/licenses/LICENSE-2.0)",
+    "description": "Core-Local Interrrupt Controller (CLIC) Device Model.\nSee https://riscv.atlassian.net/wiki/spaces/HOME/pages/16154646/Fast+Interrupts+TG.",
+    "memory_regions": [
+        {
+            "name": "registers",
+            "base": "$BASE",
+            "size": "64M",
+            "registers": [
+                {
+                    "name": "cfg",
+                    "class": "memory_mapped",
+                    "offset": "0x0000",
+                    "width": 8,
+                    "fields": [
+                        {
+                            "name": "nvbits",
+                            "length": 1,
+                            "position": 0
+                        },
+                        {
+                            "name": "nlbits",
+                            "length": 4,
+                            "position": 1
+                        },
+                        {
+                            "name": "nmbits",
+                            "length": 2,
+                            "position": 5
+                        }
+                    ]
+                },
+                {
+                    "name": "info",
+                    "class": "memory_mapped",
+                    "offset": "0x0004",
+                    "width": 32,
+                    "fields": [
+                        {
+                            "name": "num_interrupt",
+                            "length": 13,
+                            "position": 0
+                        },
+                        {
+                            "name": "clicintctlbits",
+                            "length": 4,
+                            "position": 21
+                        },
+                        {
+                            "name": "version_implementation",
+                            "length": 4,
+                            "position": 13
+                        },
+                        {
+                            "name": "version_architecture",
+                            "length": 4,
+                            "position": 17
+                        },
+                        {
+                            "name": "clicintbits",
+                            "length": 4,
+                            "position": 21
+                        }
+                    ]
+                },
+                {
+                    "name": "intip",
+                    "class": "memory_mapped",
+                    "offset": "0x1000",
+                    "width": 8,
+                    "indexing": {
+                        "lower_bound": "0",
+                        "upper_bound": "$INTERRUPT_INPUTS - 1",
+                        "stride": "4"
+                    }
+                },
+                {
+                    "name": "intie",
+                    "class": "memory_mapped",
+                    "offset": "0x1001",
+                    "width": 8,
+                    "indexing": {
+                        "lower_bound": "0",
+                        "upper_bound": "$INTERRUPT_INPUTS - 1",
+                        "stride": "4"
+                    }
+                },
+                {
+                    "name": "intattr",
+                    "class": "memory_mapped",
+                    "offset": "0x1002",
+                    "width": 8,
+                    "indexing": {
+                        "lower_bound": "0",
+                        "upper_bound": "$INTERRUPT_INPUTS - 1",
+                        "stride": "4"
+                    },
+                    "fields": [
+                        {
+                            "name": "shv",
+                            "length": 1,
+                            "position": 0
+                        },
+                        {
+                            "name": "trig",
+                            "length": 2,
+                            "position": 1,
+                            "values": [
+                                {
+                                    "name": "positive_level",
+                                    "value": "0"
+                                },
+                                {
+                                    "name": "positive_edge",
+                                    "value": "1"
+                                },
+                                {
+                                    "name": "negative_level",
+                                    "value": "2"
+                                },
+                                {
+                                    "name": "negative_edge",
+                                    "value": "3"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "mode",
+                            "length": 2,
+                            "position": 6,
+                            "values": [
+                                {
+                                    "name": "machine",
+                                    "value": "3"
+                                },
+                                {
+                                    "name": "supervisor",
+                                    "value": "1"
+                                },
+                                {
+                                    "name": "user",
+                                    "value": "0"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "intctl",
+                    "class": "memory_mapped",
+                    "offset": "0x1003",
+                    "width": 8,
+                    "indexing": {
+                        "lower_bound": "0",
+                        "upper_bound": "$INTERRUPT_INPUTS - 1",
+                        "stride": "4"
+                    }
+                }
+            ]
+        }
+    ],
+    "parameters": [
+        {
+            "name": "interrupt_inputs",
+            "stage": "compile",
+            "class": "uint32",
+            "value": "$INTERRUPT_INPUTS"
+        }
+    ]
+}

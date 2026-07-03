@@ -1,0 +1,77 @@
+[
+    {
+        "name": "sstatus",
+        "class": "control_status",
+        "width": 32,
+        "offset": "0x100",
+        "fields": [
+            {
+                "name": "sie",
+                "position": 1,
+                "length": 1
+            },
+            {
+                "name": "spie",
+                "position": 5,
+                "length": 1
+            },
+            {
+                "name": "ube",
+                "position": 6,
+                "length": 1
+            },
+            {
+                "name": "spp",
+                "position": 8,
+                "length": 1
+            },
+            {
+                "name": "vs",
+                "position": 9,
+                "length": 2
+            },
+            {
+                "name": "fs",
+                "position": 13,
+                "length": 2
+            },
+            {
+                "name": "xs",
+                "position": 15,
+                "length": 2
+            },
+            {
+                "name": "sum",
+                "position": 18,
+                "length": 1
+            },
+            {
+                "name": "mxr",
+                "position": 19,
+                "length": 1
+            },
+            {
+                "name": "sdt",
+                "position": 24,
+                "length": 1
+            },
+            {
+                "name": "sd",
+                "position": 31,
+                "length": 1
+            }
+        ]
+    },
+    {
+        "name": "stimecmp",
+        "class": "control_status",
+        "width": 32,
+        "offset": "0x14D"
+    },
+    {
+        "name": "stimecmph",
+        "class": "control_status",
+        "width": 32,
+        "offset": "0x15D"
+    }
+]
