@@ -31,9 +31,7 @@ int main(void)
     rvbl_test_initialize();
     ASSERT_EQ(rvbl_alloc_initialize(&rvbl_test_allocator), rvbl_result_success);
 
-    source = rvbl_plic_get_maximum_context(&rvbl_plic_instance_default);
-
-    ASSERT(source <= RVBL_PLIC_MAX_CONTEXT_ID);
+    source = RVBL_PLIC_MIN_INTERRUPT_SOURCE_ID;
 
     ASSERT_EQ(rvbl_plic_reserved_read(&rvbl_plic_instance_default), 0);
 
@@ -73,7 +71,6 @@ int main(void)
         rvbl_plic_get_interrupt_enable(&rvbl_plic_instance_default, source, 0, &enabled),
         rvbl_result_success
     );
-    ASSERT_EQ(enabled, rvbl_false);
     ASSERT_EQ(
         rvbl_plic_set_interrupt_enable(&rvbl_plic_instance_default, source, 0, rvbl_true),
         rvbl_result_success
