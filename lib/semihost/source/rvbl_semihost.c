@@ -16,6 +16,7 @@ typedef enum rvbl_semihost_operation
     rvbl_semihost_operation_write = 0x05,
     rvbl_semihost_operation_read = 0x06,
     rvbl_semihost_operation_flen = 0x0C,
+    rvbl_semihost_operation_clock = 0x10,
     rvbl_semihost_operation_exit = 0x18,
     rvbl_semihost_operation_exit_extended = 0x20
 } rvbl_semihost_operation;
@@ -25,32 +26,21 @@ static rvbl_bool_t semihost_supported = rvbl_false;
 static rvbl_bool_t semihost_exit_extended_supported = rvbl_false;
 static rvbl_bool_t semihost_file_access_supported = rvbl_false;
 
-RVBL_BEGIN_DISABLE_OPTIMIZATION()
-rvbl_uword_t __attribute__((noinline))
-SEGGER_SEMIHOST_DebugHalt(rvbl_semihost_operation r0, const rvbl_uword_t *r1)
-{
-    (void)r1;
-    return r0;
-}
-RVBL_BEGIN_DISABLE_OPTIMIZATION()
-
 void rvbl_semihost_initialize(void)
 {
-    const char *stdout_path = ":tt";
     const char *features_path = ":semihosting-features";
-    rvbl_uword_t parameters[3];
+    rvbl_uword_t parameters[3], clock;
     rvbl_semihost_file_handle handle = -1;
     size_t size = 0;
     rvbl_uint8_t bytes[8];
 
-    parameters[0] = (rvbl_uword_t)stdout_path;
-    parameters[1] = rvbl_semihost_file_mode_write_plus;
-    parameters[2] = strlen(stdout_path);
-    handle = SEGGER_SEMIHOST_DebugHalt(rvbl_semihost_operation_open, parameters);
+    clock = rvbl_semihost_interface(rvbl_semihost_operation_clock, 0);
 
-    if (handle != rvbl_semihost_operation_open) {
+    if (clock == 0) {
         return;
     }
+
+    semihost_supported = rvbl_true;
 
     parameters[0] = (rvbl_uword_t)features_path;
     parameters[1] = rvbl_semihost_file_mode_read_binary;
@@ -60,6 +50,8 @@ void rvbl_semihost_initialize(void)
     if (((rvbl_word_t)handle) == -1) {
         return;
     }
+
+    semihost_file_access_supported = rvbl_true;
 
     parameters[0] = handle;
     size = rvbl_semihost_interface(rvbl_semihost_operation_flen, parameters);
@@ -80,9 +72,6 @@ void rvbl_semihost_initialize(void)
     if ((bytes[0] != 0x53) || (bytes[1] != 0x48) || (bytes[2] != 0x46) || (bytes[3] != 0x42)) {
         return;
     }
-
-    semihost_supported = rvbl_true;
-    semihost_file_access_supported = rvbl_true;
 
     if ((size >= 5) && (bytes[4] & 1)) {
         semihost_exit_extended_supported = rvbl_true;
@@ -106,8 +95,6 @@ void rvbl_semihost_exit(const rvbl_semihost_exit_code code)
         } else {
             rvbl_semihost_interface(rvbl_semihost_operation_exit, (const rvbl_uword_t *)code);
         }
-    } else {
-        SEGGER_SEMIHOST_DebugHalt(rvbl_semihost_operation_exit, (const rvbl_uword_t *)codes);
     }
 }
 
@@ -123,7 +110,7 @@ rvbl_semihost_output_stream_open(const char *path, const rvbl_semihost_file_mode
             return 0;
         }
     } else {
-        return SEGGER_SEMIHOST_DebugHalt(rvbl_semihost_operation_open, parameters);
+        return -1;
     }
 }
 
@@ -145,8 +132,6 @@ void rvbl_semihost_output_stream_write(
                 );
             }
         }
-    } else {
-        SEGGER_SEMIHOST_DebugHalt(rvbl_semihost_operation_write, parameters);
     }
 }
 
@@ -156,7 +141,5 @@ void rvbl_semihost_output_stream_close(const rvbl_semihost_file_handle handle)
         if (semihost_file_access_supported) {
             rvbl_semihost_interface(rvbl_semihost_operation_close, (const rvbl_uword_t *)handle);
         }
-    } else {
-        SEGGER_SEMIHOST_DebugHalt(rvbl_semihost_operation_close, (const rvbl_uword_t *)handle);
     }
 }
