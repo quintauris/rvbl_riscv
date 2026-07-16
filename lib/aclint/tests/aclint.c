@@ -15,7 +15,8 @@ static volatile rvbl_uint32_t count = 0;
 
 void machine_timer_handler(volatile rvbl_interrupt_hart_context *context)
 {
-    context->program_counter += (XLEN / 8);
+    (void)context;
+
     ++count;
     rvbl_aclint_set_compare(
         &rvbl_aclint_instance_default,
