@@ -4,7 +4,7 @@
     "instance": "$INSTANCE",
     "$comment": "Copyright 2026 Quintauris GmbH. Licensed under the Apache License, Version 2.0 (the \"License\", https://www.apache.org/licenses/LICENSE-2.0)",
     "description": "Advanced Platform-Local Interrrupt Controller (APLIC) Device Model.\nSee https://riscv.atlassian.net/wiki/spaces/HOME/pages/806289428/RISC-V+Advanced+Interrupt+Architecture.",
-    "memory_regions": [
+    "addressables": [
         {
             "name": "registers",
             "base": "$BASE",
