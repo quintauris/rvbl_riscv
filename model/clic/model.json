@@ -6,6 +6,18 @@
     "description": "Core-Local Interrrupt Controller (CLIC) Device Model.\nSee https://riscv.atlassian.net/wiki/spaces/HOME/pages/16154646/Fast+Interrupts+TG.",
     "addressables": [
         {
+            "name": "control_status_registers",
+            "base": "0",
+            "size": "64K",
+            "registers": [
+                {
+                    "name": "mtvt",
+                    "class": "control_status",
+                    "offset": "0x307"
+                }
+            ]
+        },
+        {
             "name": "registers",
             "base": "$BASE",
             "size": "64M",
