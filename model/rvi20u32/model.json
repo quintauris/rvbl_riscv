@@ -1,10 +1,11 @@
 {
-    "$schema": "../../../core/meta/cpu.schema.json",
+    "$schema": "../../../core/meta/peripheral.schema.json",
     "name": "rvi20u32",
+    "instance": "$INSTANCE",
     "$comment": "Copyright 2026 Quintauris GmbH. Licensed under the Apache License, Version 2.0 (the \"License\", https://www.apache.org/licenses/LICENSE-2.0)",
     "description": "Models a RISC-V RVI20U32 CPU plus M-Mode CSRs.",
-    "xlen": 32,
-    "register_sets": [
+    "word_size": 32,
+    "addressables": [
         {
             "include": "riscv/model/privileged/model.json"
         },

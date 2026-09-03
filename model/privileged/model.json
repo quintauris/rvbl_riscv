@@ -1,440 +1,448 @@
-[
-    {
-        "name": "misa",
-        "class": "control_status",
-        "offset": "0x301",
-        "fields": [
-            {
-                "name": "extensions",
-                "position": 0,
-                "length": 26,
-                "values": [
-                    {
-                        "name": "Atomic",
-                        "value": "0"
-                    },
-                    {
-                        "name": "BitManipulation",
-                        "value": "1"
-                    },
-                    {
-                        "name": "Compressed",
-                        "value": "2"
-                    },
-                    {
-                        "name": "DoublePrecisionFloatingPoint",
-                        "value": "3"
-                    },
-                    {
-                        "name": "RVE",
-                        "value": "4"
-                    },
-                    {
-                        "name": "SinglePrecisionFloatingPoint",
-                        "value": "5"
-                    },
-                    {
-                        "name": "Hypervisor",
-                        "value": "7"
-                    },
-                    {
-                        "name": "RVI",
-                        "value": "8"
-                    },
-                    {
-                        "name": "MultiplyDivide",
-                        "value": "12"
-                    },
-                    {
-                        "name": "QuadPrecisionFloatingPoint",
-                        "value": "16"
-                    },
-                    {
-                        "name": "SupervisorMode",
-                        "value": "18"
-                    },
-                    {
-                        "name": "UserMode",
-                        "value": "20"
-                    },
-                    {
-                        "name": "Vector",
-                        "value": "21"
-                    },
-                    {
-                        "name": "NonStandard",
-                        "value": "23"
-                    }
-                ]
-            },
-            {
-                "name": "machine_xlen",
-                "position": -2,
-                "values": [
-                    {
-                        "name": "_32",
-                        "value": "1"
-                    },
-                    {
-                        "name": "_64",
-                        "value": "2"
-                    },
-                    {
-                        "name": "_128",
-                        "value": "3"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "mvendorid",
-        "class": "control_status",
-        "width": 32,
-        "offset": "0xF11",
-        "fields": [
-            {
-                "name": "offset",
-                "position": 0,
-                "length": 7
-            },
-            {
-                "name": "bank",
-                "position": 7,
-                "length": 25
-            }
-        ]
-    },
-    {
-        "name": "marchid",
-        "class": "control_status",
-        "offset": "0xF12"
-    },
-    {
-        "name": "mimpid",
-        "class": "control_status",
-        "offset": "0xF13"
-    },
-    {
-        "name": "mhartid",
-        "class": "control_status",
-        "offset": "0xF14"
-    },
-    {
-        "name": "mtvec",
-        "class": "control_status",
-        "offset": "0x305",
-        "fields": [
-            {
-                "name": "mode",
-                "position": 0,
-                "length": 2,
-                "values": [
-                    {
-                        "name": "Direct",
-                        "value": "0"
-                    },
-                    {
-                        "name": "Vectored",
-                        "value": "1"
-                    }
-                ]
-            },
-            {
-                "name": "base",
-                "position": 2
-            }
-        ]
-    },
-    {
-        "name": "mideleg",
-        "class": "control_status",
-        "offset": "0x303"
-    },
-    {
-        "name": "mip",
-        "class": "control_status",
-        "offset": "0x344",
-        "fields": [
-            {
-                "name": "ssip",
-                "position": 1,
-                "length": 1
-            },
-            {
-                "name": "msip",
-                "position": 3,
-                "length": 1
-            },
-            {
-                "name": "stip",
-                "position": 5,
-                "length": 1
-            },
-            {
-                "name": "mtip",
-                "position": 7,
-                "length": 1
-            },
-            {
-                "name": "seip",
-                "position": 9,
-                "length": 1
-            },
-            {
-                "name": "meip",
-                "position": 11,
-                "length": 1
-            },
-            {
-                "name": "lcofip",
-                "position": 13,
-                "length": 1
-            }
-        ]
-    },
-    {
-        "name": "mie",
-        "class": "control_status",
-        "offset": "0x304",
-        "fields": [
-            {
-                "name": "ssie",
-                "position": 1,
-                "length": 1
-            },
-            {
-                "name": "msie",
-                "position": 3,
-                "length": 1
-            },
-            {
-                "name": "stie",
-                "position": 5,
-                "length": 1
-            },
-            {
-                "name": "mtie",
-                "position": 7,
-                "length": 1
-            },
-            {
-                "name": "seie",
-                "position": 9,
-                "length": 1
-            },
-            {
-                "name": "meie",
-                "position": 11,
-                "length": 1
-            },
-            {
-                "name": "lcofie",
-                "position": 13,
-                "length": 1
-            }
-        ]
-    },
-    {
-        "name": "mcounteren",
-        "class": "control_status",
-        "width": 32,
-        "offset": "0x306",
-        "fields": [
-            {
-                "name": "cy",
-                "position": 0,
-                "length": 1
-            },
-            {
-                "name": "tm",
-                "position": 1,
-                "length": 1
-            },
-            {
-                "name": "ir",
-                "position": 2,
-                "length": 1
-            },
-            {
-                "name": "hpm3",
-                "position": 3,
-                "length": 1
-            },
-            {
-                "name": "hpm4",
-                "position": 4,
-                "length": 1
-            }
-        ]
-    },
-    {
-        "name": "mcountinhibit",
-        "class": "control_status",
-        "width": 32,
-        "offset": "0x320",
-        "fields": [
-            {
-                "name": "cy",
-                "position": 0,
-                "length": 1
-            },
-            {
-                "name": "ir",
-                "position": 2,
-                "length": 1
-            },
-            {
-                "name": "hpm3",
-                "position": 3,
-                "length": 1
-            },
-            {
-                "name": "hpm4",
-                "position": 4,
-                "length": 1
-            }
-        ]
-    },
-    {
-        "name": "mscratch",
-        "class": "control_status",
-        "offset": "0x340"
-    },
-    {
-        "name": "mepc",
-        "class": "control_status",
-        "offset": "0x341"
-    },
-    {
-        "name": "mcause",
-        "class": "control_status",
-        "offset": "0x342",
-        "fields": [
-            {
-                "name": "code",
-                "position": 0,
-                "length": 31,
-                "values": [
-                    {
-                        "name": "Interrupt_SupervisorSoftware",
-                        "value": "1"
-                    },
-                    {
-                        "name": "Interrupt_MachineSoftware",
-                        "value": "3"
-                    },
-                    {
-                        "name": "Interrupt_SupervisorTimer",
-                        "value": "5"
-                    },
-                    {
-                        "name": "Interrupt_MachineTimer",
-                        "value": "7"
-                    },
-                    {
-                        "name": "Interrupt_SupervisorExternal",
-                        "value": "9"
-                    },
-                    {
-                        "name": "Interrupt_MachineExternal",
-                        "value": "11"
-                    },
-                    {
-                        "name": "Interrupt_CounterOverflow",
-                        "value": "13"
-                    },
-                    {
-                        "name": "Exception_InstructionAddressMisaligned",
-                        "value": "0"
-                    },
-                    {
-                        "name": "Exception_InstructionAccessFault",
-                        "value": "1"
-                    },
-                    {
-                        "name": "Exception_IllegalInstruction",
-                        "value": "2"
-                    },
-                    {
-                        "name": "Exception_Breakpoint",
-                        "value": "3"
-                    },
-                    {
-                        "name": "Exception_LoadAddressMisaligned",
-                        "value": "4"
-                    },
-                    {
-                        "name": "Exception_LoadAccessFault",
-                        "value": "5"
-                    },
-                    {
-                        "name": "Exception_StoreAddressMisaligned",
-                        "value": "6"
-                    },
-                    {
-                        "name": "Exception_StoreAccessFault",
-                        "value": "7"
-                    },
-                    {
-                        "name": "Exception_EnvironmentCallFromUMode",
-                        "value": "8"
-                    },
-                    {
-                        "name": "Exception_EnvironmentCallFromSMode",
-                        "value": "9"
-                    },
-                    {
-                        "name": "Exception_EnvironmentCallFromMMode",
-                        "value": "11"
-                    },
-                    {
-                        "name": "Exception_InstructionPageFault",
-                        "value": "12"
-                    },
-                    {
-                        "name": "Exception_LoadPageFault",
-                        "value": "13"
-                    },
-                    {
-                        "name": "Exception_StorePageFault",
-                        "value": "15"
-                    },
-                    {
-                        "name": "Exception_SofwareCheck",
-                        "value": "18"
-                    },
-                    {
-                        "name": "Exception_HardwareError",
-                        "value": "19"
-                    }
-                ]
-            },
-            {
-                "name": "interrupt",
-                "position": 31,
-                "length": 1,
-                "values": [
-                    {
-                        "name": "Exception",
-                        "value": "0"
-                    },
-                    {
-                        "name": "Interrupt",
-                        "value": "1"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "mtval",
-        "class": "control_status",
-        "offset": "0x343"
-    },
-    {
-        "name": "mconfigptr",
-        "class": "control_status",
-        "offset": "0xF15"
-    }
-]
+{
+    "$schema": "../../../core/meta/addressable.schema.json",
+    "name": "privileged",
+    "$comment": "Copyright 2026 Quintauris GmbH. Licensed under the Apache License, Version 2.0 (the \"License\", https://www.apache.org/licenses/LICENSE-2.0)",
+    "description": "Models RISC-V Privileged ISA CSRs.",
+    "size": "64K",
+    "base": "0",
+    "registers": [
+        {
+            "name": "misa",
+            "class": "control_status",
+            "offset": "0x301",
+            "fields": [
+                {
+                    "name": "extensions",
+                    "position": 0,
+                    "length": 26,
+                    "values": [
+                        {
+                            "name": "Atomic",
+                            "value": "0"
+                        },
+                        {
+                            "name": "BitManipulation",
+                            "value": "1"
+                        },
+                        {
+                            "name": "Compressed",
+                            "value": "2"
+                        },
+                        {
+                            "name": "DoublePrecisionFloatingPoint",
+                            "value": "3"
+                        },
+                        {
+                            "name": "RVE",
+                            "value": "4"
+                        },
+                        {
+                            "name": "SinglePrecisionFloatingPoint",
+                            "value": "5"
+                        },
+                        {
+                            "name": "Hypervisor",
+                            "value": "7"
+                        },
+                        {
+                            "name": "RVI",
+                            "value": "8"
+                        },
+                        {
+                            "name": "MultiplyDivide",
+                            "value": "12"
+                        },
+                        {
+                            "name": "QuadPrecisionFloatingPoint",
+                            "value": "16"
+                        },
+                        {
+                            "name": "SupervisorMode",
+                            "value": "18"
+                        },
+                        {
+                            "name": "UserMode",
+                            "value": "20"
+                        },
+                        {
+                            "name": "Vector",
+                            "value": "21"
+                        },
+                        {
+                            "name": "NonStandard",
+                            "value": "23"
+                        }
+                    ]
+                },
+                {
+                    "name": "machine_xlen",
+                    "position": -2,
+                    "values": [
+                        {
+                            "name": "_32",
+                            "value": "1"
+                        },
+                        {
+                            "name": "_64",
+                            "value": "2"
+                        },
+                        {
+                            "name": "_128",
+                            "value": "3"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "mvendorid",
+            "class": "control_status",
+            "width": 32,
+            "offset": "0xF11",
+            "fields": [
+                {
+                    "name": "offset",
+                    "position": 0,
+                    "length": 7
+                },
+                {
+                    "name": "bank",
+                    "position": 7,
+                    "length": 25
+                }
+            ]
+        },
+        {
+            "name": "marchid",
+            "class": "control_status",
+            "offset": "0xF12"
+        },
+        {
+            "name": "mimpid",
+            "class": "control_status",
+            "offset": "0xF13"
+        },
+        {
+            "name": "mhartid",
+            "class": "control_status",
+            "offset": "0xF14"
+        },
+        {
+            "name": "mtvec",
+            "class": "control_status",
+            "offset": "0x305",
+            "fields": [
+                {
+                    "name": "mode",
+                    "position": 0,
+                    "length": 2,
+                    "values": [
+                        {
+                            "name": "Direct",
+                            "value": "0"
+                        },
+                        {
+                            "name": "Vectored",
+                            "value": "1"
+                        }
+                    ]
+                },
+                {
+                    "name": "base",
+                    "position": 2
+                }
+            ]
+        },
+        {
+            "name": "mideleg",
+            "class": "control_status",
+            "offset": "0x303"
+        },
+        {
+            "name": "mip",
+            "class": "control_status",
+            "offset": "0x344",
+            "fields": [
+                {
+                    "name": "ssip",
+                    "position": 1,
+                    "length": 1
+                },
+                {
+                    "name": "msip",
+                    "position": 3,
+                    "length": 1
+                },
+                {
+                    "name": "stip",
+                    "position": 5,
+                    "length": 1
+                },
+                {
+                    "name": "mtip",
+                    "position": 7,
+                    "length": 1
+                },
+                {
+                    "name": "seip",
+                    "position": 9,
+                    "length": 1
+                },
+                {
+                    "name": "meip",
+                    "position": 11,
+                    "length": 1
+                },
+                {
+                    "name": "lcofip",
+                    "position": 13,
+                    "length": 1
+                }
+            ]
+        },
+        {
+            "name": "mie",
+            "class": "control_status",
+            "offset": "0x304",
+            "fields": [
+                {
+                    "name": "ssie",
+                    "position": 1,
+                    "length": 1
+                },
+                {
+                    "name": "msie",
+                    "position": 3,
+                    "length": 1
+                },
+                {
+                    "name": "stie",
+                    "position": 5,
+                    "length": 1
+                },
+                {
+                    "name": "mtie",
+                    "position": 7,
+                    "length": 1
+                },
+                {
+                    "name": "seie",
+                    "position": 9,
+                    "length": 1
+                },
+                {
+                    "name": "meie",
+                    "position": 11,
+                    "length": 1
+                },
+                {
+                    "name": "lcofie",
+                    "position": 13,
+                    "length": 1
+                }
+            ]
+        },
+        {
+            "name": "mcounteren",
+            "class": "control_status",
+            "width": 32,
+            "offset": "0x306",
+            "fields": [
+                {
+                    "name": "cy",
+                    "position": 0,
+                    "length": 1
+                },
+                {
+                    "name": "tm",
+                    "position": 1,
+                    "length": 1
+                },
+                {
+                    "name": "ir",
+                    "position": 2,
+                    "length": 1
+                },
+                {
+                    "name": "hpm3",
+                    "position": 3,
+                    "length": 1
+                },
+                {
+                    "name": "hpm4",
+                    "position": 4,
+                    "length": 1
+                }
+            ]
+        },
+        {
+            "name": "mcountinhibit",
+            "class": "control_status",
+            "width": 32,
+            "offset": "0x320",
+            "fields": [
+                {
+                    "name": "cy",
+                    "position": 0,
+                    "length": 1
+                },
+                {
+                    "name": "ir",
+                    "position": 2,
+                    "length": 1
+                },
+                {
+                    "name": "hpm3",
+                    "position": 3,
+                    "length": 1
+                },
+                {
+                    "name": "hpm4",
+                    "position": 4,
+                    "length": 1
+                }
+            ]
+        },
+        {
+            "name": "mscratch",
+            "class": "control_status",
+            "offset": "0x340"
+        },
+        {
+            "name": "mepc",
+            "class": "control_status",
+            "offset": "0x341"
+        },
+        {
+            "name": "mcause",
+            "class": "control_status",
+            "offset": "0x342",
+            "fields": [
+                {
+                    "name": "code",
+                    "position": 0,
+                    "length": 31,
+                    "values": [
+                        {
+                            "name": "Interrupt_SupervisorSoftware",
+                            "value": "1"
+                        },
+                        {
+                            "name": "Interrupt_MachineSoftware",
+                            "value": "3"
+                        },
+                        {
+                            "name": "Interrupt_SupervisorTimer",
+                            "value": "5"
+                        },
+                        {
+                            "name": "Interrupt_MachineTimer",
+                            "value": "7"
+                        },
+                        {
+                            "name": "Interrupt_SupervisorExternal",
+                            "value": "9"
+                        },
+                        {
+                            "name": "Interrupt_MachineExternal",
+                            "value": "11"
+                        },
+                        {
+                            "name": "Interrupt_CounterOverflow",
+                            "value": "13"
+                        },
+                        {
+                            "name": "Exception_InstructionAddressMisaligned",
+                            "value": "0"
+                        },
+                        {
+                            "name": "Exception_InstructionAccessFault",
+                            "value": "1"
+                        },
+                        {
+                            "name": "Exception_IllegalInstruction",
+                            "value": "2"
+                        },
+                        {
+                            "name": "Exception_Breakpoint",
+                            "value": "3"
+                        },
+                        {
+                            "name": "Exception_LoadAddressMisaligned",
+                            "value": "4"
+                        },
+                        {
+                            "name": "Exception_LoadAccessFault",
+                            "value": "5"
+                        },
+                        {
+                            "name": "Exception_StoreAddressMisaligned",
+                            "value": "6"
+                        },
+                        {
+                            "name": "Exception_StoreAccessFault",
+                            "value": "7"
+                        },
+                        {
+                            "name": "Exception_EnvironmentCallFromUMode",
+                            "value": "8"
+                        },
+                        {
+                            "name": "Exception_EnvironmentCallFromSMode",
+                            "value": "9"
+                        },
+                        {
+                            "name": "Exception_EnvironmentCallFromMMode",
+                            "value": "11"
+                        },
+                        {
+                            "name": "Exception_InstructionPageFault",
+                            "value": "12"
+                        },
+                        {
+                            "name": "Exception_LoadPageFault",
+                            "value": "13"
+                        },
+                        {
+                            "name": "Exception_StorePageFault",
+                            "value": "15"
+                        },
+                        {
+                            "name": "Exception_SofwareCheck",
+                            "value": "18"
+                        },
+                        {
+                            "name": "Exception_HardwareError",
+                            "value": "19"
+                        }
+                    ]
+                },
+                {
+                    "name": "interrupt",
+                    "position": 31,
+                    "length": 1,
+                    "values": [
+                        {
+                            "name": "Exception",
+                            "value": "0"
+                        },
+                        {
+                            "name": "Interrupt",
+                            "value": "1"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "mtval",
+            "class": "control_status",
+            "offset": "0x343"
+        },
+        {
+            "name": "mconfigptr",
+            "class": "control_status",
+            "offset": "0xF15"
+        }
+    ]
+}
