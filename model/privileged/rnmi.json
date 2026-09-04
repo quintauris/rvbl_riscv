@@ -5,22 +5,20 @@
     "description": "Models RISC-V Smrnmi extension CSRs.",
     "size": "64K",
     "base": "0",
+    "default_register_class": "control_status",
     "registers": [
         {
             "name": "mnscratch",
-            "class": "control_status",
             "offset": "0x740",
             "width": 32
         },
         {
             "name": "mnepc",
-            "class": "control_status",
             "offset": "0x741",
             "width": 32
         },
         {
             "name": "mncause",
-            "class": "control_status",
             "offset": "0x742",
             "fields": [
                 {
@@ -141,7 +139,6 @@
         },
         {
             "name": "mnstatus",
-            "class": "control_status",
             "width": 32,
             "offset": "0x744",
             "fields": [

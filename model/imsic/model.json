@@ -9,10 +9,10 @@
             "name": "machine_files",
             "base": "$MACHINE_FILES_BASE",
             "size": "$HART_COUNT * $PAGE_SIZE",
+            "default_register_class": "memory_mapped",
             "registers": [
                 {
                     "name": "mseteipnum_le",
-                    "class": "memory_mapped",
                     "width": 32,
                     "offset": "0x0",
                     "indexing": {
@@ -22,7 +22,6 @@
                 },
                 {
                     "name": "mseteipnum_be",
-                    "class": "memory_mapped",
                     "width": 32,
                     "offset": "0x0004",
                     "indexing": {
@@ -36,10 +35,10 @@
             "name": "supervisor_files",
             "base": "$SUPERVISOR_FILES_BASE",
             "size": "$HART_COUNT * $PAGE_SIZE",
+            "default_register_class": "memory_mapped",
             "registers": [
                 {
                     "name": "sseteipnum_le",
-                    "class": "memory_mapped",
                     "width": 32,
                     "offset": "0x0",
                     "indexing": {
@@ -49,7 +48,6 @@
                 },
                 {
                     "name": "sseteipnum_be",
-                    "class": "memory_mapped",
                     "width": 32,
                     "offset": "0x0004",
                     "indexing": {

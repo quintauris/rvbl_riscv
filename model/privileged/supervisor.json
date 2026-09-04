@@ -5,10 +5,10 @@
     "description": "Models RISC-V Supervisor (S) mode CSRs.",
     "size": "64K",
     "base": "0",
+    "default_register_class": "control_status",
     "registers": [
         {
             "name": "stvec",
-            "class": "control_status",
             "offset": "0x105",
             "fields": [
                 {
@@ -34,7 +34,6 @@
         },
         {
             "name": "sip",
-            "class": "control_status",
             "offset": "0x144",
             "fields": [
                 {
@@ -61,7 +60,6 @@
         },
         {
             "name": "sie",
-            "class": "control_status",
             "offset": "0x104",
             "fields": [
                 {
@@ -88,7 +86,6 @@
         },
         {
             "name": "scounteren",
-            "class": "control_status",
             "offset": "0x106",
             "fields": [
                 {
@@ -120,17 +117,14 @@
         },
         {
             "name": "sscratch",
-            "class": "control_status",
             "offset": "0x140"
         },
         {
             "name": "sepc",
-            "class": "control_status",
             "offset": "0x141"
         },
         {
             "name": "scause",
-            "class": "control_status",
             "offset": "0x142",
             "fields": [
                 {
@@ -251,7 +245,6 @@
         },
         {
             "name": "stval",
-            "class": "control_status",
             "offset": "0x143"
         }
     ]

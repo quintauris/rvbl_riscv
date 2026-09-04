@@ -9,10 +9,10 @@
             "name": "registers",
             "base": "$BASE",
             "size": "16K",
+            "default_register_class": "memory_mapped",
             "registers": [
                 {
                     "name": "domaincfg",
-                    "class": "memory_mapped",
                     "offset": "0x0",
                     "width": 32,
                     "fields": [
@@ -45,7 +45,6 @@
                 },
                 {
                     "name": "sourcecfg",
-                    "class": "memory_mapped",
                     "offset": "0x0",
                     "width": 32,
                     "fields": [
@@ -98,7 +97,6 @@
                 },
                 {
                     "name": "mmsiaddrcfg",
-                    "class": "memory_mapped",
                     "offset": "0x1BC0",
                     "width": 32,
                     "fields": [
@@ -111,7 +109,6 @@
                 },
                 {
                     "name": "mmsiaddrcfgh",
-                    "class": "memory_mapped",
                     "offset": "0x1BC4",
                     "width": 32,
                     "fields": [
@@ -149,7 +146,6 @@
                 },
                 {
                     "name": "smsiaddrcfg",
-                    "class": "memory_mapped",
                     "offset": "0x1BC8",
                     "width": 32,
                     "fields": [
@@ -162,7 +158,6 @@
                 },
                 {
                     "name": "smsiaddrcfgh",
-                    "class": "memory_mapped",
                     "offset": "0x1BCC",
                     "width": 32,
                     "fields": [
@@ -180,7 +175,6 @@
                 },
                 {
                     "name": "setip",
-                    "class": "memory_mapped",
                     "offset": "0x1C00",
                     "width": 32,
                     "indexing": {
@@ -189,13 +183,11 @@
                 },
                 {
                     "name": "setipnum",
-                    "class": "memory_mapped",
                     "offset": "0x1CDC",
                     "width": 32
                 },
                 {
                     "name": "in_clrip",
-                    "class": "memory_mapped",
                     "offset": "0x1D00",
                     "width": 32,
                     "indexing": {
@@ -204,13 +196,11 @@
                 },
                 {
                     "name": "clripnum",
-                    "class": "memory_mapped",
                     "offset": "0x1DDC",
                     "width": 32
                 },
                 {
                     "name": "setie",
-                    "class": "memory_mapped",
                     "offset": "0x1E00",
                     "width": 32,
                     "indexing": {
@@ -219,13 +209,11 @@
                 },
                 {
                     "name": "setienum",
-                    "class": "memory_mapped",
                     "offset": "0x1EDC",
                     "width": 32
                 },
                 {
                     "name": "clrie",
-                    "class": "memory_mapped",
                     "offset": "0x1F00",
                     "width": 32,
                     "indexing": {
@@ -234,25 +222,21 @@
                 },
                 {
                     "name": "clrienum",
-                    "class": "memory_mapped",
                     "offset": "0x1FDC",
                     "width": 32
                 },
                 {
                     "name": "setipnum_le",
-                    "class": "memory_mapped",
                     "offset": "0x2000",
                     "width": 32
                 },
                 {
                     "name": "setipnum_be",
-                    "class": "memory_mapped",
                     "offset": "0x2004",
                     "width": 32
                 },
                 {
                     "name": "genmsi",
-                    "class": "memory_mapped",
                     "offset": "0x3000",
                     "width": 32,
                     "fields": [
@@ -265,7 +249,6 @@
                 },
                 {
                     "name": "target",
-                    "class": "memory_mapped",
                     "offset": "0x3000",
                     "width": 32,
                     "fields": [
@@ -300,10 +283,10 @@
             "name": "interrupt_delivery_control",
             "base": "$BASE + 16K",
             "size": "$HART_COUNT * 32",
+            "default_register_class": "memory_mapped",
             "registers": [
                 {
                     "name": "idelivery",
-                    "class": "memory_mapped",
                     "offset": "0x0",
                     "width": 32,
                     "indexing": {
@@ -313,7 +296,6 @@
                 },
                 {
                     "name": "iforce",
-                    "class": "memory_mapped",
                     "offset": "0x0004",
                     "width": 32,
                     "indexing": {
@@ -323,7 +305,6 @@
                 },
                 {
                     "name": "ithreshold",
-                    "class": "memory_mapped",
                     "offset": "0x0008",
                     "width": 32,
                     "indexing": {
@@ -333,7 +314,6 @@
                 },
                 {
                     "name": "topi",
-                    "class": "memory_mapped",
                     "offset": "0x0018",
                     "width": 32,
                     "indexing": {
@@ -343,7 +323,6 @@
                 },
                 {
                     "name": "claimi",
-                    "class": "memory_mapped",
                     "offset": "0x001C",
                     "width": 32,
                     "indexing": {

@@ -9,16 +9,15 @@
             "name": "registers",
             "base": "$BASE",
             "size": "64M",
+            "default_register_class": "memory_mapped",
             "registers": [
                 {
                     "name": "reserved",
-                    "class": "memory_mapped",
                     "offset": "0x0",
                     "width": 32
                 },
                 {
                     "name": "priority",
-                    "class": "memory_mapped",
                     "offset": "0x0",
                     "width": 32,
                     "indexing": {
@@ -28,7 +27,6 @@
                 },
                 {
                     "name": "pending",
-                    "class": "memory_mapped",
                     "offset": "0x1000",
                     "width": 32,
                     "indexing": {
@@ -37,7 +35,6 @@
                 },
                 {
                     "name": "enable",
-                    "class": "memory_mapped",
                     "offset": "0x2000",
                     "width": 32,
                     "indexing": {
@@ -46,7 +43,6 @@
                 },
                 {
                     "name": "threshold",
-                    "class": "memory_mapped",
                     "offset": "0x200000",
                     "width": 32,
                     "indexing": {
@@ -56,7 +52,6 @@
                 },
                 {
                     "name": "claim_complete",
-                    "class": "memory_mapped",
                     "offset": "0x200004",
                     "width": 32,
                     "indexing": {
