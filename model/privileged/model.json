@@ -5,10 +5,10 @@
     "description": "Models RISC-V Privileged ISA CSRs.",
     "size": "64K",
     "base": "0",
+    "default_register_class": "control_status",
     "registers": [
         {
             "name": "misa",
-            "class": "control_status",
             "offset": "0x301",
             "fields": [
                 {
@@ -96,7 +96,6 @@
         },
         {
             "name": "mvendorid",
-            "class": "control_status",
             "width": 32,
             "offset": "0xF11",
             "fields": [
@@ -114,22 +113,18 @@
         },
         {
             "name": "marchid",
-            "class": "control_status",
             "offset": "0xF12"
         },
         {
             "name": "mimpid",
-            "class": "control_status",
             "offset": "0xF13"
         },
         {
             "name": "mhartid",
-            "class": "control_status",
             "offset": "0xF14"
         },
         {
             "name": "mtvec",
-            "class": "control_status",
             "offset": "0x305",
             "fields": [
                 {
@@ -155,12 +150,10 @@
         },
         {
             "name": "mideleg",
-            "class": "control_status",
             "offset": "0x303"
         },
         {
             "name": "mip",
-            "class": "control_status",
             "offset": "0x344",
             "fields": [
                 {
@@ -202,7 +195,6 @@
         },
         {
             "name": "mie",
-            "class": "control_status",
             "offset": "0x304",
             "fields": [
                 {
@@ -244,7 +236,6 @@
         },
         {
             "name": "mcounteren",
-            "class": "control_status",
             "width": 32,
             "offset": "0x306",
             "fields": [
@@ -277,7 +268,6 @@
         },
         {
             "name": "mcountinhibit",
-            "class": "control_status",
             "width": 32,
             "offset": "0x320",
             "fields": [
@@ -305,17 +295,14 @@
         },
         {
             "name": "mscratch",
-            "class": "control_status",
             "offset": "0x340"
         },
         {
             "name": "mepc",
-            "class": "control_status",
             "offset": "0x341"
         },
         {
             "name": "mcause",
-            "class": "control_status",
             "offset": "0x342",
             "fields": [
                 {
@@ -436,12 +423,10 @@
         },
         {
             "name": "mtval",
-            "class": "control_status",
             "offset": "0x343"
         },
         {
             "name": "mconfigptr",
-            "class": "control_status",
             "offset": "0xF15"
         }
     ]

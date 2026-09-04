@@ -5,10 +5,10 @@
     "description": "Models RISC-V 32-bit Supervisor (S) mode CSRs.",
     "size": "64K",
     "base": "0",
+    "default_register_class": "control_status",
     "registers": [
         {
             "name": "sstatus",
-            "class": "control_status",
             "width": 32,
             "offset": "0x100",
             "fields": [
@@ -71,13 +71,11 @@
         },
         {
             "name": "stimecmp",
-            "class": "control_status",
             "width": 32,
             "offset": "0x14D"
         },
         {
             "name": "stimecmph",
-            "class": "control_status",
             "width": 32,
             "offset": "0x15D"
         }

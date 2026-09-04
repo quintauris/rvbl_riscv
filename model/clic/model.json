@@ -9,10 +9,10 @@
             "name": "control_status_registers",
             "base": "0",
             "size": "64K",
+            "default_register_class": "control_status",
             "registers": [
                 {
                     "name": "mtvt",
-                    "class": "control_status",
                     "offset": "0x307"
                 }
             ]
@@ -21,10 +21,10 @@
             "name": "registers",
             "base": "$BASE",
             "size": "64M",
+            "default_register_class": "memory_mapped",
             "registers": [
                 {
                     "name": "cfg",
-                    "class": "memory_mapped",
                     "offset": "0x0000",
                     "width": 8,
                     "fields": [
@@ -47,7 +47,6 @@
                 },
                 {
                     "name": "info",
-                    "class": "memory_mapped",
                     "offset": "0x0004",
                     "width": 32,
                     "fields": [
@@ -80,7 +79,6 @@
                 },
                 {
                     "name": "intip",
-                    "class": "memory_mapped",
                     "offset": "0x1000",
                     "width": 8,
                     "indexing": {
@@ -91,7 +89,6 @@
                 },
                 {
                     "name": "intie",
-                    "class": "memory_mapped",
                     "offset": "0x1001",
                     "width": 8,
                     "indexing": {
@@ -102,7 +99,6 @@
                 },
                 {
                     "name": "intattr",
-                    "class": "memory_mapped",
                     "offset": "0x1002",
                     "width": 8,
                     "indexing": {
@@ -162,7 +158,6 @@
                 },
                 {
                     "name": "intctl",
-                    "class": "memory_mapped",
                     "offset": "0x1003",
                     "width": 8,
                     "indexing": {
