@@ -66,11 +66,11 @@ typedef void (*rvbl_interrupt_trap_handler)(volatile rvbl_interrupt_hart_context
 typedef enum rvbl_interrupt_hart_privilege
 {
     /// * `rvbl_interrupt_hart_privilege_u` = `0`
-    rvbl_interrupt_hart_privilege_u = mstatus_mpp_values_user,
+    rvbl_interrupt_hart_privilege_u = rvbl_riscv_hart_privileged_32_mstatus_mpp_values_user,
     /// * `rvbl_interrupt_hart_privilege_s` = `1`
-    rvbl_interrupt_hart_privilege_s = mstatus_mpp_values_supervisor,
+    rvbl_interrupt_hart_privilege_s = rvbl_riscv_hart_privileged_32_mstatus_mpp_values_supervisor,
     /// * `rvbl_interrupt_hart_privilege_m` = `3`
-    rvbl_interrupt_hart_privilege_m = mstatus_mpp_values_machine
+    rvbl_interrupt_hart_privilege_m = rvbl_riscv_hart_privileged_32_mstatus_mpp_values_machine
 } rvbl_interrupt_hart_privilege;
 
 /// == Function `rvbl_interrupt_hart_current_initialize_traps`

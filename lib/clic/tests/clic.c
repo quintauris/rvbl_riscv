@@ -49,8 +49,13 @@ int main(void)
 
     counter = 0;
 
-    ASSERT((rvbl_clic_cfg_nlbits_read(device) + rvbl_clic_cfg_nmbits_read(device)) > 0);
-    ASSERT(rvbl_clic_info_num_interrupt_read(device) > 0);
+    rvbl_test_log("start");
+
+    ASSERT(
+        (RVBL_REGISTER_FIELD_READ(clic, registers, device, cfg, nlbits) +
+         RVBL_REGISTER_FIELD_READ(clic, registers, device, cfg, nmbits)) > 0
+    );
+    ASSERT(RVBL_REGISTER_FIELD_READ(clic, registers, device, info, num_interrupt) > 0);
 
     ASSERT_EQ(rvbl_clic_allocate(&allocator, 32), rvbl_result_success);
     ASSERT_EQ(rvbl_clic_initialize(&allocator, unexpected_interrupt_handler), rvbl_result_success);
@@ -71,17 +76,26 @@ int main(void)
     );
     ASSERT(enable);
 
+    rvbl_test_log("1");
+    rvbl_test_log("1a");
+
     ASSERT_EQ(
         rvbl_clic_get_interrupt_attributes(device, interrupt_number, &vectored, &trigger, &mode),
         rvbl_result_success
     );
 
+    rvbl_test_log("2");
+
     ASSERT_EQ(rvbl_interrupt_hart_current_enable_traps(), rvbl_result_success);
     ASSERT_EQ(counter, 0);
+
+    rvbl_test_log("3");
 
     ASSERT_EQ(
         rvbl_clic_set_interrupt_pending(device, interrupt_number, rvbl_true), rvbl_result_success
     );
+
+    rvbl_test_log("a");
 
     while (counter == 0) {
         __asm__ volatile("wfi\n\t");
@@ -99,9 +113,13 @@ int main(void)
         rvbl_clic_set_interrupt_pending(device, interrupt_number, rvbl_true), rvbl_result_success
     );
 
+    rvbl_test_log("b");
+
     while (counter == 0) {
         __asm__ volatile("wfi\n\t");
     }
+
+    rvbl_test_log("c");
 
     ASSERT_EQ(rvbl_global_pointer_register_read(), (void *)1);
 

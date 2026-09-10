@@ -21,7 +21,8 @@ void machine_timer_handler(volatile rvbl_interrupt_hart_context *context)
     rvbl_aclint_set_compare(
         &rvbl_aclint_instance_default,
         0,
-        rvbl_aclint_mtime_read(&rvbl_aclint_instance_default) + RVBL_CONFIGURATION_MTIME_FREQUENCY
+        RVBL_REGISTER_READ(aclint, mtimer_time, &rvbl_aclint_instance_default, mtime) +
+            RVBL_CONFIGURATION_MTIME_FREQUENCY
     );
 }
 
@@ -38,7 +39,7 @@ int main(void)
     ASSERT_EQ(
         rvbl_interrupt_hart_current_set_trap_handler(
             rvbl_interrupt_hart_privilege_m,
-            RVBL_INTERRUPT(mcause_code_values_Interrupt_MachineTimer),
+            RVBL_INTERRUPT(rvbl_riscv_hart_privileged_mcause_code_values_Interrupt_MachineTimer),
             machine_timer_handler
         ),
         rvbl_result_success
@@ -48,10 +49,11 @@ int main(void)
     rvbl_aclint_set_compare(
         &rvbl_aclint_instance_default,
         0,
-        rvbl_aclint_mtime_read(&rvbl_aclint_instance_default) + RVBL_CONFIGURATION_MTIME_FREQUENCY
+        RVBL_REGISTER_READ(aclint, mtimer_time, &rvbl_aclint_instance_default, mtime) +
+            RVBL_CONFIGURATION_MTIME_FREQUENCY
     );
     count = 0;
-    rvbl_mie_mtie_set();
+    RVBL_REGISTER_FIELD_SET(riscv_hart, privileged, &rvbl_riscv_hart_instance_0, mie, mtie);
     ASSERT_EQ(rvbl_interrupt_hart_current_enable_traps(), rvbl_result_success);
     ASSERT_EQ(count, 0);
 
@@ -61,7 +63,7 @@ int main(void)
 
     ASSERT_EQ(count, 1);
     ASSERT_EQ(rvbl_interrupt_hart_current_disable_traps(), rvbl_result_success);
-    rvbl_mie_mtie_clear();
+    RVBL_REGISTER_FIELD_CLEAR(riscv_hart, privileged, &rvbl_riscv_hart_instance_0, mie, mtie);
 
     PASS();
 

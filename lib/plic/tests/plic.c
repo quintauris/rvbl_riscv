@@ -4,13 +4,14 @@
  * https://www.apache.org/licenses/LICENSE-2.0
  */
 
+#include "rvbl/hardware/rvbl_hardware.h"
 #include "rvbl/interrupt/rvbl_hart.h"
 #include "rvbl/machine/rvbl_machine.h"
 #include "rvbl/plic/rvbl_plic.h"
 #include "rvbl/test/rvbl_test.h"
 
 static volatile rvbl_uint32_t count = 0;
-static rvbl_plic_interrupt_source_t source = 0;
+static rvbl_plic_interrupt_source_t source = 1;
 
 void machine_software_interrupt_handler(volatile rvbl_interrupt_hart_context *context)
 {
@@ -33,7 +34,7 @@ int main(void)
 
     source = RVBL_PLIC_MIN_INTERRUPT_SOURCE_ID;
 
-    ASSERT_EQ(rvbl_plic_reserved_read(&rvbl_plic_instance_default), 0);
+    ASSERT_EQ(RVBL_REGISTER_READ(plic, registers, &rvbl_plic_instance_default, reserved), 0);
 
     ASSERT_EQ(
         rvbl_interrupt_hart_current_initialize_traps(&rvbl_test_allocator, 0, NULL, NULL),
@@ -42,13 +43,13 @@ int main(void)
     ASSERT_EQ(
         rvbl_interrupt_hart_current_set_trap_handler(
             rvbl_interrupt_hart_privilege_m,
-            RVBL_INTERRUPT(mcause_code_values_Interrupt_MachineExternal),
+            RVBL_INTERRUPT(rvbl_riscv_hart_privileged_mcause_code_values_Interrupt_MachineExternal),
             machine_software_interrupt_handler
         ),
         rvbl_result_success
     );
 
-    rvbl_mie_meie_set();
+    RVBL_REGISTER_FIELD_SET(riscv_hart, privileged, &rvbl_riscv_hart_instance_0, mie, meie);
     ASSERT_EQ(rvbl_interrupt_hart_current_enable_traps(), rvbl_result_success);
     ASSERT_EQ(count, 0);
 
@@ -110,7 +111,7 @@ int main(void)
     }
 
     ASSERT_EQ(rvbl_interrupt_hart_current_disable_traps(), rvbl_result_success);
-    rvbl_mie_meie_clear();
+    RVBL_REGISTER_FIELD_CLEAR(riscv_hart, privileged, &rvbl_riscv_hart_instance_0, mie, meie);
 
     PASS();
 

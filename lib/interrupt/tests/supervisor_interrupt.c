@@ -9,9 +9,9 @@
 #include "rvbl/interrupt/rvbl_hart.h"
 #include "rvbl/test/rvbl_test.h"
 
-typedef mstatus_mpp_values privilege;
+typedef enum rvbl_riscv_hart_privileged_32_mstatus_mpp_t privilege;
 
-static privilege expected_privilege = mstatus_mpp_values_machine;
+static privilege expected_privilege = rvbl_riscv_hart_privileged_32_mstatus_mpp_values_machine;
 
 void interrupt_handler(volatile rvbl_interrupt_hart_context *context)
 {
@@ -29,11 +29,23 @@ typedef enum call_index
 void environment_call_handler(volatile rvbl_interrupt_hart_context *context)
 {
     const call_index index = (call_index)context->arguments[0];
-    ASSERT_EQ(rvbl_mstatus_mpp_read(), expected_privilege);
+    ASSERT_EQ(
+        RVBL_REGISTER_FIELD_READ(
+            riscv_hart, privileged_32, &rvbl_riscv_hart_instance_0, mstatus, mpp
+        ),
+        expected_privilege
+    );
 
     switch (index) {
     case call_index_switch_mode:
-        rvbl_mstatus_mpp_write((privilege)context->arguments[1]);
+        RVBL_REGISTER_FIELD_WRITE(
+            riscv_hart,
+            privileged_32,
+            &rvbl_riscv_hart_instance_0,
+            mstatus,
+            mpp,
+            (privilege)context->arguments[1]
+        )
         context->program_counter += (XLEN / 8);
         break;
     }
@@ -53,7 +65,7 @@ int main(void)
     rvbl_test_initialize();
     ASSERT_EQ(rvbl_alloc_initialize(&rvbl_test_allocator), rvbl_result_success);
 
-    if (rvbl_extension_present(misa_extensions_values_SupervisorMode) &&
+    if (rvbl_extension_present(rvbl_riscv_hart_privileged_misa_extensions_values_SupervisorMode) &&
         rvbl_test_supervisor_interrupt_control.can_trigger_interrupt) {
         ASSERT_EQ(
             rvbl_interrupt_hart_current_initialize_traps(
@@ -65,7 +77,9 @@ int main(void)
         ASSERT_EQ(
             rvbl_interrupt_hart_current_set_trap_handler(
                 rvbl_interrupt_hart_privilege_m,
-                RVBL_EXCEPTION(mcause_code_values_Exception_EnvironmentCallFromMMode),
+                RVBL_EXCEPTION(
+                    rvbl_riscv_hart_privileged_mcause_code_values_Exception_EnvironmentCallFromMMode
+                ),
                 environment_call_handler
             ),
             rvbl_result_success
@@ -73,7 +87,9 @@ int main(void)
         ASSERT_EQ(
             rvbl_interrupt_hart_current_set_trap_handler(
                 rvbl_interrupt_hart_privilege_m,
-                RVBL_EXCEPTION(mcause_code_values_Exception_EnvironmentCallFromSMode),
+                RVBL_EXCEPTION(
+                    rvbl_riscv_hart_privileged_mcause_code_values_Exception_EnvironmentCallFromSMode
+                ),
                 environment_call_handler
             ),
             rvbl_result_success
@@ -81,7 +97,9 @@ int main(void)
         ASSERT_EQ(
             rvbl_interrupt_hart_current_set_trap_handler(
                 rvbl_interrupt_hart_privilege_m,
-                RVBL_EXCEPTION(mcause_code_values_Exception_EnvironmentCallFromUMode),
+                RVBL_EXCEPTION(
+                    rvbl_riscv_hart_privileged_mcause_code_values_Exception_EnvironmentCallFromUMode
+                ),
                 environment_call_handler
             ),
             rvbl_result_success
@@ -102,11 +120,13 @@ int main(void)
             rvbl_result_success
         );
         rvbl_test_supervisor_interrupt_control.prepare_interrupt();
-        expected_privilege = mstatus_mpp_values_machine;
+        expected_privilege = rvbl_riscv_hart_privileged_32_mstatus_mpp_values_machine;
 
         ASSERT_EQ(rvbl_interrupt_hart_current_enable_traps(), rvbl_result_success);
-        rvbl_system_call_1(call_index_switch_mode, mstatus_mpp_values_supervisor);
-        expected_privilege = mstatus_mpp_values_supervisor;
+        rvbl_system_call_1(
+            call_index_switch_mode, rvbl_riscv_hart_privileged_32_mstatus_mpp_values_supervisor
+        );
+        expected_privilege = rvbl_riscv_hart_privileged_32_mstatus_mpp_values_supervisor;
 
         ASSERT_EQ(count, 0);
 
@@ -118,8 +138,10 @@ int main(void)
 
         ASSERT_EQ(count, 1);
 
-        expected_privilege = mstatus_mpp_values_supervisor;
-        rvbl_system_call_1(call_index_switch_mode, mstatus_mpp_values_machine);
+        expected_privilege = rvbl_riscv_hart_privileged_32_mstatus_mpp_values_supervisor;
+        rvbl_system_call_1(
+            call_index_switch_mode, rvbl_riscv_hart_privileged_32_mstatus_mpp_values_machine
+        );
         ASSERT_EQ(rvbl_interrupt_hart_current_disable_traps(), rvbl_result_success);
 
         PASS();

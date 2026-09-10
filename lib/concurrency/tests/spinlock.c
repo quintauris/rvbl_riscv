@@ -19,7 +19,7 @@ volatile rvbl_bool_t ready = rvbl_false;
 
 int main(void)
 {
-    if (rvbl_mhartid_read() == 0) {
+    if (RVBL_REGISTER_READ(riscv_hart, privileged, &rvbl_riscv_hart_instance_0, mhartid) == 0) {
         rvbl_test_initialize();
         ready = rvbl_true;
     } else {
@@ -27,9 +27,10 @@ int main(void)
         }
     }
 
-    if ((workers >= 1) && rvbl_extension_present(misa_extensions_values_Atomic)) {
+    if ((workers >= 1) &&
+        rvbl_extension_present(rvbl_riscv_hart_privileged_misa_extensions_values_Atomic)) {
 #if !defined(__IAR_SYSTEMS_ICC__)
-        if (rvbl_mhartid_read() == 0) {
+        if (RVBL_REGISTER_READ(riscv_hart, privileged, &rvbl_riscv_hart_instance_0, mhartid) == 0) {
             rvbl_word_t timeout = RVBL_CONFIGURATION_MTIME_FREQUENCY;
 
             while ((finished_count < ((rvbl_word_t)workers)) && (timeout != 0)) {

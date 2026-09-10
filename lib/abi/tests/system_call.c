@@ -5,6 +5,7 @@
  */
 
 #include "rvbl/abi/rvbl_abi.h"
+#include "rvbl/hardware/rvbl_hardware.h"
 #include "rvbl/machine/rvbl_machine.h"
 #include "rvbl/test/rvbl_test.h"
 #include "rvbl/type/rvbl_types.h"
@@ -26,7 +27,22 @@ int main(void)
 {
     rvbl_hart_hang_if_not(0);
     rvbl_test_initialize();
-    rvbl_mtvec_write((rvbl_uint32_t)&global_interrupt_handler);
+    RVBL_REGISTER_FIELD_WRITE(
+        riscv_hart,
+        privileged,
+        &rvbl_riscv_hart_instance_0,
+        mtvec,
+        mode,
+        rvbl_riscv_hart_privileged_mtvec_mode_values_Direct
+    );
+    RVBL_REGISTER_FIELD_WRITE(
+        riscv_hart,
+        privileged,
+        &rvbl_riscv_hart_instance_0,
+        mtvec,
+        base,
+        ((rvbl_uword_t)&global_interrupt_handler) >> 2
+    );
     ASSERT_EQ(rvbl_system_call_3(23, 1, 2, 3), 29);
     PASS();
 

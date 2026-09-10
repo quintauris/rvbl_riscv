@@ -13,8 +13,10 @@ rvbl_bool_t is_bus_atomic_compatible(void)
     const rvbl_uint32_t PRORIETARY_SINGLECORE_RHX = 0x80000402;
     const rvbl_uint32_t ARCV_RHX_1_0 = 0x00020100;
 
-    if ((rvbl_marchid_read() == PRORIETARY_SINGLECORE_RHX) &&
-        (rvbl_mimpid_read() == ARCV_RHX_1_0)) {
+    if ((RVBL_REGISTER_READ(riscv_hart, privileged, &rvbl_riscv_hart_instance_0, marchid) ==
+         PRORIETARY_SINGLECORE_RHX) &&
+        (RVBL_REGISTER_READ(riscv_hart, privileged, &rvbl_riscv_hart_instance_0, mimpid) ==
+         ARCV_RHX_1_0)) {
         return rvbl_false;
     } else {
         return rvbl_true;
@@ -26,7 +28,8 @@ int main(void)
     rvbl_hart_hang_if_not(0);
     rvbl_test_initialize();
 
-    if (rvbl_extension_present(misa_extensions_values_Atomic) && is_bus_atomic_compatible()) {
+    if (rvbl_extension_present(rvbl_riscv_hart_privileged_misa_extensions_values_Atomic) &&
+        is_bus_atomic_compatible()) {
 #if !defined(__IAR_SYSTEMS_ICC__)
         volatile rvbl_word_t a_signed = 0xDEADFACE, b_signed = 0xFACEBEEF, c_signed;
         volatile rvbl_uword_t a_unsigned = 0xDEADFACE, b_unsigned = 0xFACEBEEF, c_unsigned;
