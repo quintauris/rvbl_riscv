@@ -18,7 +18,7 @@ extern void hang(void);
 
 int main(void)
 {
-    if (rvbl_mhartid_read() == 0) {
+    if (RVBL_REGISTER_READ(riscv_hart, privileged, &rvbl_riscv_hart_instance_0, mhartid) == 0) {
         rvbl_test_initialize();
         ready = rvbl_true;
     } else {
@@ -27,9 +27,9 @@ int main(void)
     }
 
     if ((RVBL_CONFIGURATION_HART_COUNT > 1) &&
-        rvbl_extension_present(misa_extensions_values_Atomic)) {
+        rvbl_extension_present(rvbl_riscv_hart_privileged_misa_extensions_values_Atomic)) {
 #if !defined(__IAR_SYSTEMS_ICC__)
-        if (rvbl_mhartid_read() == 0) {
+        if (RVBL_REGISTER_READ(riscv_hart, privileged, &rvbl_riscv_hart_instance_0, mhartid) == 0) {
             while (completion_count < (((rvbl_word_t)RVBL_CONFIGURATION_HART_COUNT) - 1)) {
             }
 

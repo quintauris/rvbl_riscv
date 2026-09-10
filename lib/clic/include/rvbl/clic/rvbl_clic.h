@@ -15,7 +15,6 @@
 
 #include "rvbl/alloc/rvbl_alloc.h"
 #include "rvbl/interrupt/rvbl_hart.h"
-#include "rvbl/machine/rvbl_clic.h"
 
 /// == Type `rvbl_clic_interrupt_input_t`
 ///
@@ -36,24 +35,24 @@ typedef rvbl_uint32_t rvbl_clic_interrupt_priority_t;
 typedef enum rvbl_clic_mode
 {
     /// * `rvbl_clic_mode_user` = `0`
-    rvbl_clic_mode_user = clic_intattr_mode_values_user,
+    rvbl_clic_mode_user = rvbl_clic_registers__int_attr_mode_values_user,
     /// * `rvbl_clic_mode_supervisor` = `1`
-    rvbl_clic_mode_supervisor = clic_intattr_mode_values_supervisor,
+    rvbl_clic_mode_supervisor = rvbl_clic_registers__int_attr_mode_values_supervisor,
     /// * `rvbl_clic_mode_machine` = `3`
-    rvbl_clic_mode_machine = clic_intattr_mode_values_machine,
+    rvbl_clic_mode_machine = rvbl_clic_registers__int_attr_mode_values_machine,
 } rvbl_clic_mode_t;
 
 /// == Enumeration `rvbl_clic_trigger`
 typedef enum rvbl_clic_trigger
 {
     /// * `rvbl_clic_trigger_positive_level` = `0`
-    rvbl_clic_trigger_positive_level = clic_intattr_trig_values_positive_level,
+    rvbl_clic_trigger_positive_level = rvbl_clic_registers__int_attr_trig_values_positive_level,
     /// * `rvbl_clic_trigger_positive_edge` = `1`
-    rvbl_clic_trigger_positive_edge = clic_intattr_trig_values_positive_edge,
+    rvbl_clic_trigger_positive_edge = rvbl_clic_registers__int_attr_trig_values_positive_edge,
     /// * `rvbl_clic_trigger_negative_level` = `2`
-    rvbl_clic_trigger_negative_level = clic_intattr_trig_values_negative_level,
+    rvbl_clic_trigger_negative_level = rvbl_clic_registers__int_attr_trig_values_negative_level,
     /// * `rvbl_clic_trigger_negative_edge` = `3`
-    rvbl_clic_trigger_negative_edge = clic_intattr_trig_values_negative_edge,
+    rvbl_clic_trigger_negative_edge = rvbl_clic_registers__int_attr_trig_values_negative_edge,
 } rvbl_clic_trigger_t;
 
 /// == Type `rvbl_clic_hart_context`

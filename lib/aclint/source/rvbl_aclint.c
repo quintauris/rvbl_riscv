@@ -6,6 +6,7 @@
 
 #include "rvbl/aclint/rvbl_aclint.h"
 
+#include "rvbl/hardware/rvbl_hardware.h"
 #include "rvbl/machine/rvbl_aclint.h"
 #include "rvbl/type/rvbl_types.h"
 
@@ -16,7 +17,7 @@ rvbl_result_t rvbl_aclint_set_compare(
 )
 {
     if ((hart <= RVBL_ACLINT_MAX_HART_ID) && (hart < instance->hart_count_parameter)) {
-        rvbl_aclint_mtimecmp_write(instance, hart, time);
+        RVBL_INDEXED_REGISTER_WRITE(aclint, mtimer_compare, instance, mtimecmp, hart, time);
 
         return rvbl_result_success;
     } else {
@@ -31,7 +32,7 @@ rvbl_result_t rvbl_aclint_get_compare(
 )
 {
     if ((hart <= RVBL_ACLINT_MAX_HART_ID) && (hart < instance->hart_count_parameter)) {
-        *time = rvbl_aclint_mtimecmp_read(instance, hart);
+        *time = RVBL_INDEXED_REGISTER_READ(aclint, mtimer_compare, instance, mtimecmp, hart);
 
         return rvbl_result_success;
     } else {
@@ -46,7 +47,9 @@ rvbl_result_t rvbl_aclint_machine_set_pending(
 )
 {
     if ((hart <= RVBL_ACLINT_MAX_HART_ID) && (hart < instance->hart_count_parameter)) {
-        rvbl_aclint_msip_write(instance, hart, pending ? 1 : 0);
+        RVBL_INDEXED_REGISTER_WRITE(
+            aclint, machine_interrupt, instance, msip, hart, pending ? 1 : 0
+        );
 
         return rvbl_result_success;
     } else {
@@ -61,7 +64,9 @@ rvbl_result_t rvbl_aclint_supervisor_pending(
 )
 {
     if ((hart <= RVBL_ACLINT_MAX_HART_ID) && (hart < instance->hart_count_parameter)) {
-        rvbl_aclint_setssip_write(instance, hart, pending ? 1 : 0);
+        RVBL_INDEXED_REGISTER_WRITE(
+            aclint, supervisor_interrupt, instance, setssip, hart, pending ? 1 : 0
+        );
 
         return rvbl_result_success;
     } else {

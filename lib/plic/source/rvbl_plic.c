@@ -6,6 +6,8 @@
 
 #include "rvbl/plic/rvbl_plic.h"
 
+#include "rvbl/hardware/rvbl_hardware.h"
+
 typedef rvbl_plic_interrupt_priority_t priority_t;
 
 rvbl_result_t rvbl_plic_set_interrupt_priority(
@@ -17,7 +19,7 @@ rvbl_result_t rvbl_plic_set_interrupt_priority(
     if ((source >= RVBL_PLIC_MIN_INTERRUPT_SOURCE_ID) &&
         (source <= RVBL_PLIC_MAX_INTERRUPT_SOURCE_ID) &&
         (new_priority <= instance->maximum_priority_parameter)) {
-        rvbl_plic_priority_write(instance, source, new_priority);
+        RVBL_INDEXED_REGISTER_WRITE(plic, registers, instance, priority, source, new_priority);
 
         return rvbl_result_success;
     } else {
@@ -33,7 +35,7 @@ rvbl_result_t rvbl_plic_get_interrupt_priority(
 {
     if ((source >= RVBL_PLIC_MIN_INTERRUPT_SOURCE_ID) &&
         (source <= RVBL_PLIC_MAX_INTERRUPT_SOURCE_ID) && (target_priority != NULL)) {
-        *target_priority = rvbl_plic_priority_read(instance, source);
+        *target_priority = RVBL_INDEXED_REGISTER_READ(plic, registers, instance, priority, source);
 
         return rvbl_result_success;
     } else {
@@ -49,7 +51,14 @@ rvbl_result_t rvbl_plic_set_interrupt_pending(
         (source <= RVBL_PLIC_MAX_INTERRUPT_SOURCE_ID)) {
         const rvbl_uword_t word = source / 32, bit = source % 32, mask = (1 << bit);
 
-        rvbl_plic_pending_write(instance, word, rvbl_plic_pending_read(instance, word) | mask);
+        RVBL_INDEXED_REGISTER_WRITE(
+            plic,
+            registers,
+            instance,
+            pending,
+            word,
+            (RVBL_INDEXED_REGISTER_READ(plic, registers, instance, pending, word) | mask)
+        );
 
         return rvbl_result_success;
     } else {
@@ -67,7 +76,10 @@ rvbl_result_t rvbl_plic_get_interrupt_pending(
         (source <= RVBL_PLIC_MAX_INTERRUPT_SOURCE_ID) && (target_pending != NULL)) {
         const rvbl_uword_t word = source / 32, bit = source % 32, mask = (1 << bit);
 
-        *target_pending = (rvbl_plic_pending_read(instance, word) & mask) ? rvbl_true : rvbl_false;
+        *target_pending =
+            (RVBL_INDEXED_REGISTER_READ(plic, registers, instance, pending, word) & mask)
+                ? rvbl_true
+                : rvbl_false;
 
         return rvbl_result_success;
     } else {
@@ -87,12 +99,13 @@ rvbl_result_t rvbl_plic_set_interrupt_enable(
         (context <= instance->maximum_context_parameter)) {
         const rvbl_uword_t word = source / 32, bit = source % 32;
         const rvbl_uint32_t mask = ((rvbl_uint32_t)1) << bit;
-        const rvbl_uint32_t value = rvbl_plic_enable_read(instance, word);
+        const rvbl_uint32_t value =
+            RVBL_INDEXED_REGISTER_READ(plic, registers, instance, enable, word);
 
         if (new_enable) {
-            rvbl_plic_enable_write(instance, word, value | mask);
+            RVBL_INDEXED_REGISTER_WRITE(plic, registers, instance, enable, word, value | mask);
         } else {
-            rvbl_plic_enable_write(instance, word, value & ~mask);
+            RVBL_INDEXED_REGISTER_WRITE(plic, registers, instance, enable, word, value & ~mask);
         }
 
         return rvbl_result_success;
@@ -115,7 +128,10 @@ rvbl_result_t rvbl_plic_get_interrupt_enable(
         const rvbl_uword_t target = context * 32 + word;
         const rvbl_uint32_t mask = ((rvbl_uint32_t)1) << bit;
 
-        *target_enable = (rvbl_plic_enable_read(instance, target) & mask) ? rvbl_true : rvbl_false;
+        *target_enable =
+            (RVBL_INDEXED_REGISTER_READ(plic, registers, instance, enable, target) & mask)
+                ? rvbl_true
+                : rvbl_false;
 
         return rvbl_result_success;
     } else {
@@ -131,7 +147,7 @@ rvbl_result_t rvbl_plic_set_context_threshold(
 {
     if ((context <= RVBL_PLIC_MAX_CONTEXT_ID) && (context <= instance->maximum_context_parameter) &&
         (new_threshold <= instance->maximum_priority_parameter)) {
-        rvbl_plic_threshold_write(instance, context, new_threshold);
+        RVBL_INDEXED_REGISTER_WRITE(plic, registers, instance, enable, context, new_threshold);
 
         return rvbl_result_success;
     } else {
@@ -147,7 +163,8 @@ rvbl_result_t rvbl_plic_get_context_threshold(
 {
     if ((context <= RVBL_PLIC_MAX_CONTEXT_ID) && (context <= instance->maximum_context_parameter) &&
         (target_threshold != NULL)) {
-        *target_threshold = rvbl_plic_threshold_read(instance, context);
+        *target_threshold =
+            RVBL_INDEXED_REGISTER_READ(plic, registers, instance, threshold, context);
 
         return rvbl_result_success;
     } else {
@@ -163,7 +180,8 @@ rvbl_result_t rvbl_plic_claim_interrupt(
 {
     if ((context <= RVBL_PLIC_MAX_CONTEXT_ID) && (context <= instance->maximum_context_parameter) &&
         (claimed_source != NULL)) {
-        *claimed_source = rvbl_plic_claim_complete_read(instance, context);
+        *claimed_source =
+            RVBL_INDEXED_REGISTER_READ(plic, registers, instance, claim_complete, context);
 
         return rvbl_result_success;
     } else {
@@ -180,7 +198,7 @@ rvbl_result_t rvbl_plic_complete_interrupt(
     if ((source >= RVBL_PLIC_MIN_INTERRUPT_SOURCE_ID) &&
         (source <= RVBL_PLIC_MAX_INTERRUPT_SOURCE_ID) && (context <= RVBL_PLIC_MAX_CONTEXT_ID) &&
         (context <= instance->maximum_context_parameter)) {
-        rvbl_plic_claim_complete_write(instance, context, source);
+        RVBL_INDEXED_REGISTER_WRITE(plic, registers, instance, claim_complete, context, source);
 
         return rvbl_result_success;
     } else {

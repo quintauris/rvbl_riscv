@@ -32,7 +32,9 @@ int main(void)
     ASSERT_EQ(
         rvbl_interrupt_hart_current_set_trap_handler(
             rvbl_interrupt_hart_privilege_m,
-            RVBL_EXCEPTION(mcause_code_values_Exception_EnvironmentCallFromMMode),
+            RVBL_EXCEPTION(
+                rvbl_riscv_hart_privileged_mcause_code_values_Exception_EnvironmentCallFromMMode
+            ),
             machine_ecall_handler
         ),
         rvbl_result_success

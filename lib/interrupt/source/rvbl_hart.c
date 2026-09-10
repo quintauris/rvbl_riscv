@@ -10,7 +10,7 @@
 #include "rvbl/alloc/rvbl_alloc.h"
 #include "rvbl/boot/rvbl_extension.h"
 #include "rvbl/compiler/rvbl_compiler.h"
-#include "rvbl/machine/rvbl_configuration.h"
+#include "rvbl/hardware/rvbl_hardware.h"
 #include "rvbl/type/rvbl_types.h"
 
 typedef struct hart_jump_tables
@@ -87,15 +87,30 @@ rvbl_result_t rvbl_interrupt_hart_current_initialize_traps(
     rvbl_uint32_t i;
 
     extra = extra_;
-    supervisor_extension_enabled = rvbl_extension_present(misa_extensions_values_SupervisorMode);
-    rvbl_mtvec_write((rvbl_uint32_t)&machine_trap_table);
+    supervisor_extension_enabled =
+        rvbl_extension_present(rvbl_riscv_hart_privileged_misa_extensions_values_SupervisorMode);
+    RVBL_REGISTER_FIELD_WRITE(
+        riscv_hart,
+        privileged,
+        &rvbl_riscv_hart_instance_0,
+        mtvec,
+        base,
+        ((rvbl_uword_t)&machine_trap_table) >> 2
+    );
 
     if (supervisor_extension_enabled) {
-        rvbl_mideleg_write(0);
-        rvbl_medeleg_write(0);
+        RVBL_REGISTER_WRITE(riscv_hart, privileged, &rvbl_riscv_hart_instance_0, mideleg, 0);
+        RVBL_REGISTER_WRITE(riscv_hart, privileged_32, &rvbl_riscv_hart_instance_0, medeleg, 0);
 
 #if defined(RVBL_CONFIGURATION_HAS_MODE_SUPERVISOR)
-        rvbl_stvec_write((rvbl_uint32_t)&supervisor_trap_table);
+        RVBL_REGISTER_FIELD_WRITE(
+            riscv_hart,
+            privileged,
+            &rvbl_riscv_hart_instance_0,
+            stvec,
+            base,
+            ((rvbl_uword_t)&supervisor_trap_table) >> 2
+        );
 #endif
     }
 
@@ -138,10 +153,12 @@ rvbl_result_t rvbl_interrupt_hart_current_initialize_traps(
 
 rvbl_result_t rvbl_interrupt_hart_current_enable_traps(void)
 {
-    rvbl_mstatus_mie_set();
+    RVBL_REGISTER_FIELD_SET(riscv_hart, privileged_32, &rvbl_riscv_hart_instance_0, mstatus, mie);
 
     if (supervisor_extension_enabled) {
-        rvbl_mstatus_sie_set();
+        RVBL_REGISTER_FIELD_SET(
+            riscv_hart, privileged_32, &rvbl_riscv_hart_instance_0, mstatus, sie
+        );
     }
 
     return rvbl_result_success;
@@ -149,10 +166,12 @@ rvbl_result_t rvbl_interrupt_hart_current_enable_traps(void)
 
 rvbl_result_t rvbl_interrupt_hart_current_disable_traps(void)
 {
-    rvbl_mstatus_mie_clear();
+    RVBL_REGISTER_FIELD_CLEAR(riscv_hart, privileged_32, &rvbl_riscv_hart_instance_0, mstatus, mie);
 
     if (supervisor_extension_enabled) {
-        rvbl_mstatus_sie_clear();
+        RVBL_REGISTER_FIELD_CLEAR(
+            riscv_hart, privileged_32, &rvbl_riscv_hart_instance_0, mstatus, sie
+        );
     }
 
     return rvbl_result_success;
@@ -182,19 +201,33 @@ rvbl_interrupt_hart_current_set_delegation(rvbl_uword_t interrupt_code, const rv
         const rvbl_uint32_t mask = 0x80000000;
 
         if (interrupt_code & mask) {
+            rvbl_riscv_hart_privileged_mideleg_t delegation =
+                RVBL_REGISTER_READ(riscv_hart, privileged, &rvbl_riscv_hart_instance_0, mideleg);
+
             interrupt_code &= ~mask;
 
             if (delegate) {
-                rvbl_mideleg_write(rvbl_mideleg_read() | (1 << interrupt_code));
+                delegation |= (1 << interrupt_code);
             } else {
-                rvbl_mideleg_write(rvbl_mideleg_read() & ~(1 << interrupt_code));
+                delegation &= ~(1 << interrupt_code);
             }
+
+            RVBL_REGISTER_WRITE(
+                riscv_hart, privileged, &rvbl_riscv_hart_instance_0, mideleg, delegation
+            );
         } else {
+            rvbl_riscv_hart_privileged_32_medeleg_t delegation =
+                RVBL_REGISTER_READ(riscv_hart, privileged_32, &rvbl_riscv_hart_instance_0, medeleg);
+
             if (delegate) {
-                rvbl_medeleg_write(rvbl_medeleg_read() | (1 << interrupt_code));
+                delegation |= (1 << interrupt_code);
             } else {
-                rvbl_medeleg_write(rvbl_medeleg_read() & ~(1 << interrupt_code));
+                delegation &= ~(1 << interrupt_code);
             }
+
+            RVBL_REGISTER_WRITE(
+                riscv_hart, privileged_32, &rvbl_riscv_hart_instance_0, medeleg, delegation
+            );
         }
 
         return rvbl_result_success;
