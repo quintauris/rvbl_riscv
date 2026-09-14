@@ -5,7 +5,7 @@
 ]]
 
 cmake_minimum_required(VERSION 3.28)
-project(core_doc)
+project(riscv_doc)
 
 include(../../core/cmake/support.cmake)
 
