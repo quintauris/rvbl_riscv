@@ -4,4 +4,11 @@
   https://www.apache.org/licenses/LICENSE-2.0
 ////
 
-include::../../core/doc/common.adoc[]
+:toc: left
+:toclevels: 3
+:stylesheet: ../../doc/stylesheet.css
+:docinfodir: ../../doc
+:docinfo: shared
+:nofooter:
+:project: RISC-V Base Layer
+include::../../doc/common.adoc[]
