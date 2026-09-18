@@ -5,12 +5,22 @@
     "$comment": "Copyright 2026 Quintauris GmbH. Licensed under the Apache License, Version 2.0 (the \"License\", https://www.apache.org/licenses/LICENSE-2.0)",
     "description": "Models a RISC-V RVI20U32 CPU plus M-Mode CSRs.",
     "word_size": 32,
-    "addressables": [
+    "imports": [
         {
-            "include": "riscv/model/privileged/model.json"
+            "name": "privileged",
+            "file": "riscv/model/privileged/model.json"
         },
         {
-            "include": "riscv/model/privileged/model_32.json"
+            "name": "privileged_32",
+            "file": "riscv/model/privileged/model_32.json"
+        }
+    ],
+    "addressables": [
+        {
+            "reference": "privileged"
+        },
+        {
+            "reference": "privileged_32"
         }
     ]
 }
