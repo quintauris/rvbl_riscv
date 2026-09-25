@@ -3,7 +3,9 @@
     "name": "imsic",
     "instance": "$INSTANCE",
     "$comment": "Copyright 2026 Quintauris GmbH. Licensed under the Apache License, Version 2.0 (the \"License\", https://www.apache.org/licenses/LICENSE-2.0)",
-    "description": "Incoming Message-Signaled Interrrupt Controller (IMSIC) Device Model.\nSee https://riscv.atlassian.net/wiki/spaces/HOME/pages/806289428/RISC-V+Advanced+Interrupt+Architecture.",
+    "description": {
+        "content": "Incoming Message-Signaled Interrrupt Controller (IMSIC) Device Model.\nSee https://riscv.atlassian.net/wiki/spaces/HOME/pages/806289428/RISC-V+Advanced+Interrupt+Architecture."
+    },
     "addressables": [
         {
             "name": "machine_files",
