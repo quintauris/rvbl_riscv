@@ -3,7 +3,9 @@
     "name": "aclint",
     "instance": "$INSTANCE",
     "$comment": "Copyright 2026 Quintauris GmbH. Licensed under the Apache License, Version 2.0 (the \"License\", https://www.apache.org/licenses/LICENSE-2.0)",
-    "description": "Advanced Core-Local Interrruptor (ACLINT) Device Model.\nSee https://github.com/riscvarchive/riscv-aclint.",
+    "description": {
+        "content": "Advanced Core-Local Interrruptor (ACLINT) Device Model.\nSee https://github.com/riscvarchive/riscv-aclint."
+    },
     "addressables": [
         {
             "name": "mtimer_time",

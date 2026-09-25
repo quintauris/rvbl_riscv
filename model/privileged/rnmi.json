@@ -2,7 +2,9 @@
     "$schema": "../../../core/meta/addressable.schema.json",
     "name": "rnmi",
     "$comment": "Copyright 2026 Quintauris GmbH. Licensed under the Apache License, Version 2.0 (the \"License\", https://www.apache.org/licenses/LICENSE-2.0)",
-    "description": "Models RISC-V Smrnmi extension CSRs.",
+    "description": {
+        "content": "Models RISC-V Smrnmi extension CSRs."
+    },
     "size": "64K",
     "base": "0",
     "default_register_class": "control_status",
