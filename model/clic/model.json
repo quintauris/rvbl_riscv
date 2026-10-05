@@ -1,7 +1,6 @@
 {
     "$schema": "../../../core/meta/peripheral.schema.json",
     "name": "clic",
-    "instance": "$INSTANCE",
     "$comment": "Copyright 2026 Quintauris GmbH. Licensed under the Apache License, Version 2.0 (the \"License\", https://www.apache.org/licenses/LICENSE-2.0)",
     "description": {
         "content": "Core-Local Interrrupt Controller (CLIC) Device Model.\nSee https://riscv.atlassian.net/wiki/spaces/HOME/pages/16154646/Fast+Interrupts+TG."
@@ -21,7 +20,7 @@
         },
         {
             "name": "registers",
-            "base": "$BASE",
+            "base": "0",
             "size": "64M",
             "default_register_class": "memory_mapped",
             "registers": [

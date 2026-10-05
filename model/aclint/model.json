@@ -1,7 +1,6 @@
 {
     "$schema": "../../../core/meta/peripheral.schema.json",
     "name": "aclint",
-    "instance": "$INSTANCE",
     "$comment": "Copyright 2026 Quintauris GmbH. Licensed under the Apache License, Version 2.0 (the \"License\", https://www.apache.org/licenses/LICENSE-2.0)",
     "description": {
         "content": "Advanced Core-Local Interrruptor (ACLINT) Device Model.\nSee https://github.com/riscvarchive/riscv-aclint."
@@ -9,7 +8,7 @@
     "addressables": [
         {
             "name": "mtimer_time",
-            "base": "$BASE + $MTIMER_TIME_OFFSET",
+            "base": "$MTIMER_TIME_OFFSET",
             "size": "8",
             "default_register_class": "memory_mapped",
             "registers": [
@@ -22,7 +21,7 @@
         },
         {
             "name": "mtimer_compare",
-            "base": "$BASE + $MTIMER_COMPARE_OFFSET",
+            "base": "$MTIMER_COMPARE_OFFSET",
             "size": "8 * $HART_COUNT",
             "default_register_class": "memory_mapped",
             "registers": [
@@ -38,7 +37,7 @@
         },
         {
             "name": "machine_interrupt",
-            "base": "$BASE + $MSWI_MSIP_OFFSET",
+            "base": "$MSWI_MSIP_OFFSET",
             "size": "4 * ${HART_COUNT}",
             "default_register_class": "memory_mapped",
             "registers": [
@@ -54,7 +53,7 @@
         },
         {
             "name": "supervisor_interrupt",
-            "base": "$BASE + $SSWI_SETSSIP_OFFSET",
+            "base": "$SSWI_SETSSIP_OFFSET",
             "size": "4 * ${HART_COUNT}",
             "default_register_class": "memory_mapped",
             "registers": [
