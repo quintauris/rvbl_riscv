@@ -22,8 +22,17 @@
                     "offset": "0x0",
                     "width": 32,
                     "indexing": {
-                        "lower_bound": "1",
-                        "upper_bound": "$INTERRUPT_SOURCES - 1"
+                        "dimensions": [
+                            {
+                                "name": "dim0",
+                                "ranges": [
+                                    [
+                                        "1",
+                                        "$INTERRUPT_SOURCES - 1"
+                                    ]
+                                ]
+                            }
+                        ]
                     }
                 },
                 {
@@ -31,7 +40,17 @@
                     "offset": "0x1000",
                     "width": 32,
                     "indexing": {
-                        "upper_bound": "($INTERRUPT_SOURCES / 32) - 1"
+                        "dimensions": [
+                            {
+                                "name": "dim0",
+                                "ranges": [
+                                    [
+                                        "0",
+                                        "($INTERRUPT_SOURCES / 32) - 1"
+                                    ]
+                                ]
+                            }
+                        ]
                     }
                 },
                 {
@@ -39,7 +58,17 @@
                     "offset": "0x2000",
                     "width": 32,
                     "indexing": {
-                        "upper_bound": "($HART_COUNT * ($INTERRUPT_SOURCES / 32)) - 1"
+                        "dimensions": [
+                            {
+                                "name": "dim0",
+                                "ranges": [
+                                    [
+                                        "0",
+                                        "($HART_COUNT * ($INTERRUPT_SOURCES / 32)) - 1"
+                                    ]
+                                ]
+                            }
+                        ]
                     }
                 },
                 {
@@ -47,8 +76,18 @@
                     "offset": "0x200000",
                     "width": 32,
                     "indexing": {
-                        "upper_bound": "$CONTEXTS - 1",
-                        "stride": "4K"
+                        "dimensions": [
+                            {
+                                "name": "dim0",
+                                "ranges": [
+                                    [
+                                        "0",
+                                        "$CONTEXTS - 1"
+                                    ]
+                                ],
+                                "stride": "4K"
+                            }
+                        ]
                     }
                 },
                 {
@@ -56,8 +95,18 @@
                     "offset": "0x200004",
                     "width": 32,
                     "indexing": {
-                        "upper_bound": "$CONTEXTS - 1",
-                        "stride": "4K"
+                        "dimensions": [
+                            {
+                                "name": "dim0",
+                                "ranges": [
+                                    [
+                                        "0",
+                                        "$CONTEXTS - 1"
+                                    ]
+                                ],
+                                "stride": "4K"
+                            }
+                        ]
                     }
                 }
             ]

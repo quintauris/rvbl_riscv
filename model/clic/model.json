@@ -83,9 +83,18 @@
                     "offset": "0x1000",
                     "width": 32,
                     "indexing": {
-                        "lower_bound": "0",
-                        "upper_bound": "$INTERRUPT_INPUTS - 1",
-                        "stride": "4"
+                        "dimensions": [
+                            {
+                                "name": "dim0",
+                                "ranges": [
+                                    [
+                                        "0",
+                                        "$INTERRUPT_INPUTS - 1"
+                                    ]
+                                ],
+                                "stride": "4"
+                            }
+                        ]
                     },
                     "fields": [
                         {

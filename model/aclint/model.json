@@ -30,7 +30,17 @@
                     "offset": "0x0",
                     "width": 64,
                     "indexing": {
-                        "upper_bound": "$HART_COUNT - 1"
+                        "dimensions": [
+                            {
+                                "name": "dim0",
+                                "ranges": [
+                                    [
+                                        "0",
+                                        "$HART_COUNT - 1"
+                                    ]
+                                ]
+                            }
+                        ]
                     }
                 }
             ]
@@ -46,7 +56,17 @@
                     "offset": "0x0",
                     "width": 32,
                     "indexing": {
-                        "upper_bound": "$HART_COUNT - 1"
+                        "dimensions": [
+                            {
+                                "name": "dim0",
+                                "ranges": [
+                                    [
+                                        "0",
+                                        "$HART_COUNT - 1"
+                                    ]
+                                ]
+                            }
+                        ]
                     }
                 }
             ]
@@ -62,7 +82,17 @@
                     "offset": "0x0",
                     "width": 32,
                     "indexing": {
-                        "upper_bound": "$HART_COUNT - 1"
+                        "dimensions": [
+                            {
+                                "name": "dim0",
+                                "ranges": [
+                                    [
+                                        "0",
+                                        "$HART_COUNT - 1"
+                                    ]
+                                ]
+                            }
+                        ]
                     }
                 }
             ]
