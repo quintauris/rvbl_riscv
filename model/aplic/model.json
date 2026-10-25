@@ -92,8 +92,17 @@
                         }
                     ],
                     "indexing": {
-                        "lower_bound": "1",
-                        "upper_bound": "1023"
+                        "dimensions": [
+                            {
+                                "name": "dim0",
+                                "ranges": [
+                                    [
+                                        "1",
+                                        "1023"
+                                    ]
+                                ]
+                            }
+                        ]
                     }
                 },
                 {
@@ -179,7 +188,17 @@
                     "offset": "0x1C00",
                     "width": 32,
                     "indexing": {
-                        "upper_bound": "31"
+                        "dimensions": [
+                            {
+                                "name": "dim0",
+                                "ranges": [
+                                    [
+                                        "0",
+                                        "31"
+                                    ]
+                                ]
+                            }
+                        ]
                     }
                 },
                 {
@@ -192,7 +211,17 @@
                     "offset": "0x1D00",
                     "width": 32,
                     "indexing": {
-                        "upper_bound": "31"
+                        "dimensions": [
+                            {
+                                "name": "dim0",
+                                "ranges": [
+                                    [
+                                        "0",
+                                        "31"
+                                    ]
+                                ]
+                            }
+                        ]
                     }
                 },
                 {
@@ -205,7 +234,17 @@
                     "offset": "0x1E00",
                     "width": 32,
                     "indexing": {
-                        "upper_bound": "31"
+                        "dimensions": [
+                            {
+                                "name": "dim0",
+                                "ranges": [
+                                    [
+                                        "0",
+                                        "31"
+                                    ]
+                                ]
+                            }
+                        ]
                     }
                 },
                 {
@@ -218,7 +257,17 @@
                     "offset": "0x1F00",
                     "width": 32,
                     "indexing": {
-                        "upper_bound": "31"
+                        "dimensions": [
+                            {
+                                "name": "dim0",
+                                "ranges": [
+                                    [
+                                        "0",
+                                        "31"
+                                    ]
+                                ]
+                            }
+                        ]
                     }
                 },
                 {
@@ -274,8 +323,17 @@
                         }
                     ],
                     "indexing": {
-                        "lower_bound": "1",
-                        "upper_bound": "1023"
+                        "dimensions": [
+                            {
+                                "name": "dim0",
+                                "ranges": [
+                                    [
+                                        "1",
+                                        "1023"
+                                    ]
+                                ]
+                            }
+                        ]
                     }
                 }
             ]
@@ -291,8 +349,18 @@
                     "offset": "0x0",
                     "width": 32,
                     "indexing": {
-                        "stride": "32",
-                        "upper_bound": "$HART_COUNT - 1"
+                        "dimensions": [
+                            {
+                                "name": "dim0",
+                                "stride": "32",
+                                "ranges": [
+                                    [
+                                        "0",
+                                        "$HART_COUNT - 1"
+                                    ]
+                                ]
+                            }
+                        ]
                     }
                 },
                 {
@@ -300,8 +368,18 @@
                     "offset": "0x0004",
                     "width": 32,
                     "indexing": {
-                        "stride": "32",
-                        "upper_bound": "$HART_COUNT - 1"
+                        "dimensions": [
+                            {
+                                "name": "dim0",
+                                "stride": "32",
+                                "ranges": [
+                                    [
+                                        "0",
+                                        "$HART_COUNT - 1"
+                                    ]
+                                ]
+                            }
+                        ]
                     }
                 },
                 {
@@ -309,8 +387,18 @@
                     "offset": "0x0008",
                     "width": 32,
                     "indexing": {
-                        "stride": "32",
-                        "upper_bound": "$HART_COUNT - 1"
+                        "dimensions": [
+                            {
+                                "name": "dim0",
+                                "stride": "32",
+                                "ranges": [
+                                    [
+                                        "0",
+                                        "$HART_COUNT - 1"
+                                    ]
+                                ]
+                            }
+                        ]
                     }
                 },
                 {
@@ -318,8 +406,18 @@
                     "offset": "0x0018",
                     "width": 32,
                     "indexing": {
-                        "stride": "32",
-                        "upper_bound": "$HART_COUNT - 1"
+                        "dimensions": [
+                            {
+                                "name": "dim0",
+                                "stride": "32",
+                                "ranges": [
+                                    [
+                                        "0",
+                                        "$HART_COUNT - 1"
+                                    ]
+                                ]
+                            }
+                        ]
                     }
                 },
                 {
@@ -327,8 +425,18 @@
                     "offset": "0x001C",
                     "width": 32,
                     "indexing": {
-                        "stride": "32",
-                        "upper_bound": "$HART_COUNT - 1"
+                        "dimensions": [
+                            {
+                                "name": "dim0",
+                                "stride": "32",
+                                "ranges": [
+                                    [
+                                        "0",
+                                        "$HART_COUNT - 1"
+                                    ]
+                                ]
+                            }
+                        ]
                     }
                 }
             ]
