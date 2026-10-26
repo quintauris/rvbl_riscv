@@ -10,7 +10,11 @@
             "name": "registers",
             "base": "0",
             "size": "16K",
-            "default_register_class": "memory_mapped",
+            "default": {
+                "register": {
+                    "class": "memory_mapped"
+                }
+            },
             "registers": [
                 {
                     "name": "domaincfg",
@@ -342,7 +346,11 @@
             "name": "interrupt_delivery_control",
             "base": "16K",
             "size": "$HART_COUNT * 32",
-            "default_register_class": "memory_mapped",
+            "default": {
+                "register": {
+                    "class": "memory_mapped"
+                }
+            },
             "registers": [
                 {
                     "name": "idelivery",

@@ -10,7 +10,11 @@
             "name": "mtimer_time",
             "base": "$MTIMER_TIME_OFFSET",
             "size": "8",
-            "default_register_class": "memory_mapped",
+            "default": {
+                "register": {
+                    "class": "memory_mapped"
+                }
+            },
             "registers": [
                 {
                     "name": "mtime",
@@ -23,7 +27,11 @@
             "name": "mtimer_compare",
             "base": "$MTIMER_COMPARE_OFFSET",
             "size": "8 * $HART_COUNT",
-            "default_register_class": "memory_mapped",
+            "default": {
+                "register": {
+                    "class": "memory_mapped"
+                }
+            },
             "registers": [
                 {
                     "name": "mtimecmp",
@@ -49,7 +57,11 @@
             "name": "machine_interrupt",
             "base": "$MSWI_MSIP_OFFSET",
             "size": "4 * ${HART_COUNT}",
-            "default_register_class": "memory_mapped",
+            "default": {
+                "register": {
+                    "class": "memory_mapped"
+                }
+            },
             "registers": [
                 {
                     "name": "msip",
@@ -75,7 +87,11 @@
             "name": "supervisor_interrupt",
             "base": "$SSWI_SETSSIP_OFFSET",
             "size": "4 * ${HART_COUNT}",
-            "default_register_class": "memory_mapped",
+            "default": {
+                "register": {
+                    "class": "memory_mapped"
+                }
+            },
             "registers": [
                 {
                     "name": "setssip",

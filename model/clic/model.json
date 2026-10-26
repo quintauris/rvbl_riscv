@@ -10,7 +10,11 @@
             "name": "control_status_registers",
             "base": "0",
             "size": "64K",
-            "default_register_class": "control_status",
+            "default": {
+                "register": {
+                    "class": "control_status"
+                }
+            },
             "registers": [
                 {
                     "name": "mtvt",
@@ -22,7 +26,11 @@
             "name": "registers",
             "base": "0",
             "size": "64M",
-            "default_register_class": "memory_mapped",
+            "default": {
+                "register": {
+                    "class": "memory_mapped"
+                }
+            },
             "registers": [
                 {
                     "name": "cfg",
