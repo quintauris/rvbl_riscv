@@ -10,7 +10,11 @@
             "name": "machine_files",
             "base": "$MACHINE_FILES_BASE",
             "size": "$HART_COUNT * $PAGE_SIZE",
-            "default_register_class": "memory_mapped",
+            "default": {
+                "register": {
+                    "class": "memory_mapped"
+                }
+            },
             "registers": [
                 {
                     "name": "mseteipnum_le",
@@ -56,7 +60,11 @@
             "name": "supervisor_files",
             "base": "$SUPERVISOR_FILES_BASE",
             "size": "$HART_COUNT * $PAGE_SIZE",
-            "default_register_class": "memory_mapped",
+            "default": {
+                "register": {
+                    "class": "memory_mapped"
+                }
+            },
             "registers": [
                 {
                     "name": "sseteipnum_le",
