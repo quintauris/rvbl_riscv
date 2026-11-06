@@ -15,12 +15,11 @@
                     "class": "control_status"
                 }
             },
-            "registers": [
-                {
-                    "name": "mtvt",
+            "registers": {
+                "mtvt": {
                     "offset": "0x307"
                 }
-            ]
+            }
         },
         {
             "name": "registers",
@@ -31,69 +30,57 @@
                     "class": "memory_mapped"
                 }
             },
-            "registers": [
-                {
-                    "name": "cfg",
+            "registers": {
+                "cfg": {
                     "offset": "0x0000",
                     "width": 8,
-                    "fields": [
-                        {
-                            "name": "nvbits",
+                    "fields": {
+                        "nvbits": {
                             "length": 1,
                             "position": 0
                         },
-                        {
-                            "name": "nlbits",
+                        "nlbits": {
                             "length": 4,
                             "position": 1
                         },
-                        {
-                            "name": "nmbits",
+                        "nmbits": {
                             "length": 2,
                             "position": 5
                         }
-                    ]
+                    }
                 },
-                {
-                    "name": "info",
+                "info": {
                     "offset": "0x0004",
                     "width": 32,
-                    "fields": [
-                        {
-                            "name": "num_interrupt",
+                    "fields": {
+                        "num_interrupt": {
                             "length": 13,
                             "position": 0
                         },
-                        {
-                            "name": "clicintctlbits",
+                        "clicintctlbits": {
                             "length": 4,
                             "position": 21
                         },
-                        {
-                            "name": "version_implementation",
+                        "version_implementation": {
                             "length": 4,
                             "position": 13
                         },
-                        {
-                            "name": "version_architecture",
+                        "version_architecture": {
                             "length": 4,
                             "position": 17
                         },
-                        {
-                            "name": "clicintbits",
+                        "clicintbits": {
                             "length": 4,
                             "position": 21
                         }
-                    ]
+                    }
                 },
-                {
-                    "name": "_int",
+                "_int": {
                     "offset": "0x1000",
                     "width": 32,
                     "indexing": {
-                        "dimensions": [
-                            {
-                                "name": "dim0",
+                        "dimensions": {
+                            "dim0": {
                                 "ranges": [
                                     [
                                         "0",
@@ -102,74 +89,61 @@
                                 ],
                                 "stride": "4"
                             }
-                        ]
+                        }
                     },
-                    "fields": [
-                        {
-                            "name": "ip",
+                    "fields": {
+                        "ip": {
                             "length": 8,
                             "position": 0
                         },
-                        {
-                            "name": "ie",
+                        "ie": {
                             "length": 8,
                             "position": 8
                         },
-                        {
-                            "name": "attr_shv",
+                        "attr_shv": {
                             "length": 1,
                             "position": 16
                         },
-                        {
-                            "name": "attr_trig",
+                        "attr_trig": {
                             "length": 2,
                             "position": 17,
-                            "values": [
-                                {
-                                    "name": "positive_level",
+                            "values": {
+                                "positive_level": {
                                     "value": "0"
                                 },
-                                {
-                                    "name": "positive_edge",
+                                "positive_edge": {
                                     "value": "1"
                                 },
-                                {
-                                    "name": "negative_level",
+                                "negative_level": {
                                     "value": "2"
                                 },
-                                {
-                                    "name": "negative_edge",
+                                "negative_edge": {
                                     "value": "3"
                                 }
-                            ]
+                            }
                         },
-                        {
-                            "name": "attr_mode",
+                        "attr_mode": {
                             "length": 2,
                             "position": 19,
-                            "values": [
-                                {
-                                    "name": "machine",
+                            "values": {
+                                "machine": {
                                     "value": "3"
                                 },
-                                {
-                                    "name": "supervisor",
+                                "supervisor": {
                                     "value": "1"
                                 },
-                                {
-                                    "name": "user",
+                                "user": {
                                     "value": "0"
                                 }
-                            ]
+                            }
                         },
-                        {
-                            "name": "ctl",
+                        "ctl": {
                             "length": 8,
                             "position": 24
                         }
-                    ]
+                    }
                 }
-            ]
+            }
         }
     ],
     "parameters": [

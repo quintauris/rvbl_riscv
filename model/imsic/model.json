@@ -15,15 +15,13 @@
                     "class": "memory_mapped"
                 }
             },
-            "registers": [
-                {
-                    "name": "mseteipnum_le",
+            "registers": {
+                "mseteipnum_le": {
                     "width": 32,
                     "offset": "0x0",
                     "indexing": {
-                        "dimensions": [
-                            {
-                                "name": "dim0",
+                        "dimensions": {
+                            "dim0": {
                                 "ranges": [
                                     [
                                         "0",
@@ -32,17 +30,15 @@
                                 ],
                                 "stride": "$PAGE_SIZE"
                             }
-                        ]
+                        }
                     }
                 },
-                {
-                    "name": "mseteipnum_be",
+                "mseteipnum_be": {
                     "width": 32,
                     "offset": "0x0004",
                     "indexing": {
-                        "dimensions": [
-                            {
-                                "name": "dim0",
+                        "dimensions": {
+                            "dim0": {
                                 "ranges": [
                                     [
                                         "0",
@@ -51,10 +47,10 @@
                                 ],
                                 "stride": "$PAGE_SIZE"
                             }
-                        ]
+                        }
                     }
                 }
-            ]
+            }
         },
         {
             "name": "supervisor_files",
@@ -65,15 +61,13 @@
                     "class": "memory_mapped"
                 }
             },
-            "registers": [
-                {
-                    "name": "sseteipnum_le",
+            "registers": {
+                "sseteipnum_le": {
                     "width": 32,
                     "offset": "0x0",
                     "indexing": {
-                        "dimensions": [
-                            {
-                                "name": "dim0",
+                        "dimensions": {
+                            "dim0": {
                                 "ranges": [
                                     [
                                         "0",
@@ -82,17 +76,15 @@
                                 ],
                                 "stride": "$PAGE_SIZE"
                             }
-                        ]
+                        }
                     }
                 },
-                {
-                    "name": "sseteipnum_be",
+                "sseteipnum_be": {
                     "width": 32,
                     "offset": "0x0004",
                     "indexing": {
-                        "dimensions": [
-                            {
-                                "name": "dim0",
+                        "dimensions": {
+                            "dim0": {
                                 "ranges": [
                                     [
                                         "0",
@@ -101,10 +93,10 @@
                                 ],
                                 "stride": "$PAGE_SIZE"
                             }
-                        ]
+                        }
                     }
                 }
-            ]
+            }
         }
     ],
     "parameters": [

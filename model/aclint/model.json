@@ -5,9 +5,8 @@
     "description": {
         "content": "Advanced Core-Local Interrruptor (ACLINT) Device Model.\nSee https://github.com/riscvarchive/riscv-aclint."
     },
-    "addressables": [
-        {
-            "name": "mtimer_time",
+    "addressables": {
+        "mtimer_time": {
             "base": "$MTIMER_TIME_OFFSET",
             "size": "8",
             "default": {
@@ -15,16 +14,14 @@
                     "class": "memory_mapped"
                 }
             },
-            "registers": [
-                {
-                    "name": "mtime",
+            "registers": {
+                "mtime": {
                     "offset": "0x0",
                     "width": 64
                 }
-            ]
+            }
         },
-        {
-            "name": "mtimer_compare",
+        "mtimer_compare": {
             "base": "$MTIMER_COMPARE_OFFSET",
             "size": "8 * $HART_COUNT",
             "default": {
@@ -32,15 +29,13 @@
                     "class": "memory_mapped"
                 }
             },
-            "registers": [
-                {
-                    "name": "mtimecmp",
+            "registers": {
+                "mtimecmp": {
                     "offset": "0x0",
                     "width": 64,
                     "indexing": {
-                        "dimensions": [
-                            {
-                                "name": "dim0",
+                        "dimensions": {
+                            "dim0": {
                                 "ranges": [
                                     [
                                         "0",
@@ -48,13 +43,12 @@
                                     ]
                                 ]
                             }
-                        ]
+                        }
                     }
                 }
-            ]
+            }
         },
-        {
-            "name": "machine_interrupt",
+        "machine_interrupt": {
             "base": "$MSWI_MSIP_OFFSET",
             "size": "4 * ${HART_COUNT}",
             "default": {
@@ -62,15 +56,13 @@
                     "class": "memory_mapped"
                 }
             },
-            "registers": [
-                {
-                    "name": "msip",
+            "registers": {
+                "msip": {
                     "offset": "0x0",
                     "width": 32,
                     "indexing": {
-                        "dimensions": [
-                            {
-                                "name": "dim0",
+                        "dimensions": {
+                            "dim0": {
                                 "ranges": [
                                     [
                                         "0",
@@ -78,13 +70,12 @@
                                     ]
                                 ]
                             }
-                        ]
+                        }
                     }
                 }
-            ]
+            }
         },
-        {
-            "name": "supervisor_interrupt",
+        "supervisor_interrupt": {
             "base": "$SSWI_SETSSIP_OFFSET",
             "size": "4 * ${HART_COUNT}",
             "default": {
@@ -92,15 +83,13 @@
                     "class": "memory_mapped"
                 }
             },
-            "registers": [
-                {
-                    "name": "setssip",
+            "registers": {
+                "setssip": {
                     "offset": "0x0",
                     "width": 32,
                     "indexing": {
-                        "dimensions": [
-                            {
-                                "name": "dim0",
+                        "dimensions": {
+                            "dim0": {
                                 "ranges": [
                                     [
                                         "0",
@@ -108,18 +97,17 @@
                                     ]
                                 ]
                             }
-                        ]
+                        }
                     }
                 }
-            ]
+            }
         }
-    ],
-    "parameters": [
-        {
-            "name": "hart_count",
+    },
+    "parameters": {
+        "hart_count": {
             "stage": "compile",
             "class": "uint32",
             "value": "$HART_COUNT"
         }
-    ]
+    }
 }

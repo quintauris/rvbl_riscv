@@ -12,78 +12,64 @@
             "class": "control_status"
         }
     },
-    "registers": [
-        {
-            "name": "sstatus",
+    "registers": {
+        "sstatus": {
             "width": 32,
             "offset": "0x100",
-            "fields": [
-                {
-                    "name": "sie",
+            "fields": {
+                "sie": {
                     "position": 1,
                     "length": 1
                 },
-                {
-                    "name": "spie",
+                "spie": {
                     "position": 5,
                     "length": 1
                 },
-                {
-                    "name": "ube",
+                "ube": {
                     "position": 6,
                     "length": 1
                 },
-                {
-                    "name": "spp",
+                "spp": {
                     "position": 8,
                     "length": 1
                 },
-                {
-                    "name": "vs",
+                "vs": {
                     "position": 9,
                     "length": 2
                 },
-                {
-                    "name": "fs",
+                "fs": {
                     "position": 13,
                     "length": 2
                 },
-                {
-                    "name": "xs",
+                "xs": {
                     "position": 15,
                     "length": 2
                 },
-                {
-                    "name": "sum",
+                "sum": {
                     "position": 18,
                     "length": 1
                 },
-                {
-                    "name": "mxr",
+                "mxr": {
                     "position": 19,
                     "length": 1
                 },
-                {
-                    "name": "sdt",
+                "sdt": {
                     "position": 24,
                     "length": 1
                 },
-                {
-                    "name": "sd",
+                "sd": {
                     "position": 31,
                     "length": 1
                 }
-            ]
+            }
         },
-        {
-            "name": "stimecmp",
+        "stimecmp": {
             "width": 32,
             "offset": "0x14D"
         },
-        {
-            "name": "stimecmph",
+        "stimecmph": {
             "width": 32,
             "offset": "0x15D"
         }
-    ]
+    }
 }

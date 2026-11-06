@@ -12,163 +12,128 @@
             "class": "control_status"
         }
     },
-    "registers": [
-        {
-            "name": "mnscratch",
+    "registers": {
+        "mnscratch": {
             "offset": "0x740",
             "width": 32
         },
-        {
-            "name": "mnepc",
+        "mnepc": {
             "offset": "0x741",
             "width": 32
         },
-        {
-            "name": "mncause",
+        "mncause": {
             "offset": "0x742",
-            "fields": [
-                {
-                    "name": "code",
+            "fields": {
+                "code": {
                     "position": 0,
                     "length": 31,
-                    "values": [
-                        {
-                            "name": "Interrupt_SupervisorSoftware",
+                    "values": {
+                        "Interrupt_SupervisorSoftware": {
                             "value": "1"
                         },
-                        {
-                            "name": "Interrupt_MachineSoftware",
+                        "Interrupt_MachineSoftware": {
                             "value": "3"
                         },
-                        {
-                            "name": "Interrupt_SupervisorTimer",
+                        "Interrupt_SupervisorTimer": {
                             "value": "5"
                         },
-                        {
-                            "name": "Interrupt_MachineTimer",
+                        "Interrupt_MachineTimer": {
                             "value": "7"
                         },
-                        {
-                            "name": "Interrupt_SupervisorExternal",
+                        "Interrupt_SupervisorExternal": {
                             "value": "9"
                         },
-                        {
-                            "name": "Interrupt_MachineExternal",
+                        "Interrupt_MachineExternal": {
                             "value": "11"
                         },
-                        {
-                            "name": "Interrupt_CounterOverflow",
+                        "Interrupt_CounterOverflow": {
                             "value": "13"
                         },
-                        {
-                            "name": "Exception_InstructionAddressMisaligned",
+                        "Exception_InstructionAddressMisaligned": {
                             "value": "0"
                         },
-                        {
-                            "name": "Exception_InstructionAccessFault",
+                        "Exception_InstructionAccessFault": {
                             "value": "1"
                         },
-                        {
-                            "name": "Exception_IllegalInstruction",
+                        "Exception_IllegalInstruction": {
                             "value": "2"
                         },
-                        {
-                            "name": "Exception_Breakpoint",
+                        "Exception_Breakpoint": {
                             "value": "3"
                         },
-                        {
-                            "name": "Exception_LoadAddressMisaligned",
+                        "Exception_LoadAddressMisaligned": {
                             "value": "4"
                         },
-                        {
-                            "name": "Exception_LoadAccessFault",
+                        "Exception_LoadAccessFault": {
                             "value": "5"
                         },
-                        {
-                            "name": "Exception_StoreAddressMisaligned",
+                        "Exception_StoreAddressMisaligned": {
                             "value": "6"
                         },
-                        {
-                            "name": "Exception_StoreAccessFault",
+                        "Exception_StoreAccessFault": {
                             "value": "7"
                         },
-                        {
-                            "name": "Exception_EnvironmentCallFromUMode",
+                        "Exception_EnvironmentCallFromUMode": {
                             "value": "8"
                         },
-                        {
-                            "name": "Exception_EnvironmentCallFromSMode",
+                        "Exception_EnvironmentCallFromSMode": {
                             "value": "9"
                         },
-                        {
-                            "name": "Exception_EnvironmentCallFromMMode",
+                        "Exception_EnvironmentCallFromMMode": {
                             "value": "11"
                         },
-                        {
-                            "name": "Exception_InstructionPageFault",
+                        "Exception_InstructionPageFault": {
                             "value": "12"
                         },
-                        {
-                            "name": "Exception_LoadPageFault",
+                        "Exception_LoadPageFault": {
                             "value": "13"
                         },
-                        {
-                            "name": "Exception_StorePageFault",
+                        "Exception_StorePageFault": {
                             "value": "15"
                         },
-                        {
-                            "name": "Exception_SofwareCheck",
+                        "Exception_SofwareCheck": {
                             "value": "18"
                         },
-                        {
-                            "name": "Exception_HardwareError",
+                        "Exception_HardwareError": {
                             "value": "19"
                         }
-                    ]
+                    }
                 },
-                {
-                    "name": "interrupt",
+                "interrupt": {
                     "position": 31,
                     "length": 1,
-                    "values": [
-                        {
-                            "name": "Exception",
+                    "values": {
+                        "Exception": {
                             "value": "0"
                         },
-                        {
-                            "name": "Interrupt",
+                        "Interrupt": {
                             "value": "1"
                         }
-                    ]
+                    }
                 }
-            ]
+            }
         },
-        {
-            "name": "mnstatus",
+        "mnstatus": {
             "width": 32,
             "offset": "0x744",
-            "fields": [
-                {
-                    "name": "nmie",
+            "fields": {
+                "nmie": {
                     "position": 3,
                     "length": 1
                 },
-                {
-                    "name": "mnvp",
+                "mnvp": {
                     "position": 7,
                     "length": 1
                 },
-                {
-                    "name": "mnpelp",
+                "mnpelp": {
                     "position": 9,
                     "length": 1
                 },
-                {
-                    "name": "mnpp",
+                "mnpp": {
                     "position": 11,
                     "length": 2
                 }
-            ]
+            }
         }
-    ]
+    }
 }

@@ -12,688 +12,553 @@
             "class": "control_status"
         }
     },
-    "registers": [
-        {
-            "name": "mstatus",
+    "registers": {
+        "mstatus": {
             "width": 32,
             "offset": "0x300",
-            "fields": [
-                {
-                    "name": "sie",
+            "fields": {
+                "sie": {
                     "position": 1,
                     "length": 1
                 },
-                {
-                    "name": "mie",
+                "mie": {
                     "position": 3,
                     "length": 1
                 },
-                {
-                    "name": "spie",
+                "spie": {
                     "position": 5,
                     "length": 1
                 },
-                {
-                    "name": "ube",
+                "ube": {
                     "position": 6,
                     "length": 1
                 },
-                {
-                    "name": "mpie",
+                "mpie": {
                     "position": 7,
                     "length": 1
                 },
-                {
-                    "name": "spp",
+                "spp": {
                     "position": 8,
                     "length": 1
                 },
-                {
-                    "name": "vs",
+                "vs": {
                     "position": 9,
                     "length": 2
                 },
-                {
-                    "name": "mpp",
+                "mpp": {
                     "position": 11,
                     "length": 2,
-                    "values": [
-                        {
-                            "name": "user",
+                    "values": {
+                        "user": {
                             "value": "0"
                         },
-                        {
-                            "name": "supervisor",
+                        "supervisor": {
                             "value": "1"
                         },
-                        {
-                            "name": "machine",
+                        "machine": {
                             "value": "3"
                         }
-                    ]
+                    }
                 },
-                {
-                    "name": "fs",
+                "fs": {
                     "position": 13,
                     "length": 2
                 },
-                {
-                    "name": "xs",
+                "xs": {
                     "position": 15,
                     "length": 2
                 },
-                {
-                    "name": "mprv",
+                "mprv": {
                     "position": 17,
                     "length": 1
                 },
-                {
-                    "name": "sum",
+                "sum": {
                     "position": 18,
                     "length": 1
                 },
-                {
-                    "name": "mxr",
+                "mxr": {
                     "position": 19,
                     "length": 1
                 },
-                {
-                    "name": "tvm",
+                "tvm": {
                     "position": 20,
                     "length": 1
                 },
-                {
-                    "name": "tw",
+                "tw": {
                     "position": 21,
                     "length": 1
                 },
-                {
-                    "name": "tsr",
+                "tsr": {
                     "position": 22,
                     "length": 1
                 },
-                {
-                    "name": "sd",
+                "sd": {
                     "position": 31,
                     "length": 1
                 }
-            ]
+            }
         },
-        {
-            "name": "mstatush",
+        "mstatush": {
             "width": 32,
             "offset": "0x310",
-            "fields": [
-                {
-                    "name": "sbe",
+            "fields": {
+                "sbe": {
                     "position": 4,
                     "length": 1
                 },
-                {
-                    "name": "mbe",
+                "mbe": {
                     "position": 5,
                     "length": 1
                 },
-                {
-                    "name": "mdt",
+                "mdt": {
                     "position": 10,
                     "length": 1
                 }
-            ]
+            }
         },
-        {
-            "name": "mcycle",
+        "mcycle": {
             "width": 32,
             "offset": "0xB00"
         },
-        {
-            "name": "mcycleh",
+        "mcycleh": {
             "width": 32,
             "offset": "0xB80"
         },
-        {
-            "name": "minstret",
+        "minstret": {
             "width": 32,
             "offset": "0xB02"
         },
-        {
-            "name": "minstreth",
+        "minstreth": {
             "width": 32,
             "offset": "0xB82"
         },
-        {
-            "name": "mhpmcounter3",
+        "mhpmcounter3": {
             "width": 32,
             "offset": "0xB03"
         },
-        {
-            "name": "mhpmcounter3h",
+        "mhpmcounter3h": {
             "width": 32,
             "offset": "0xB83"
         },
-        {
-            "name": "mhpmcounter4",
+        "mhpmcounter4": {
             "width": 32,
             "offset": "0xB04"
         },
-        {
-            "name": "mhpmcounter4h",
+        "mhpmcounter4h": {
             "width": 32,
             "offset": "0xB84"
         },
-        {
-            "name": "menvcfg",
+        "menvcfg": {
             "offset": "0x30A",
-            "fields": [
-                {
-                    "name": "fiom",
+            "fields": {
+                "fiom": {
                     "position": 0,
                     "length": 1
                 },
-                {
-                    "name": "cbie",
+                "cbie": {
                     "position": 4,
                     "length": 2
                 },
-                {
-                    "name": "cbcfe",
+                "cbcfe": {
                     "position": 6,
                     "length": 1
                 },
-                {
-                    "name": "cbze",
+                "cbze": {
                     "position": 7,
                     "length": 1
                 },
-                {
-                    "name": "pmm",
+                "pmm": {
                     "position": 31,
                     "length": 1
                 }
-            ]
+            }
         },
-        {
-            "name": "menvcfgh",
+        "menvcfgh": {
             "offset": "0x31A",
-            "fields": [
-                {
-                    "name": "pmm",
+            "fields": {
+                "pmm": {
                     "position": 0,
                     "length": 1
                 },
-                {
-                    "name": "cdd",
+                "cdd": {
                     "position": 28,
                     "length": 1
                 },
-                {
-                    "name": "adue",
+                "adue": {
                     "position": 29,
                     "length": 1
                 },
-                {
-                    "name": "pbmte",
+                "pbmte": {
                     "position": 30,
                     "length": 1
                 },
-                {
-                    "name": "stce",
+                "stce": {
                     "position": 31,
                     "length": 1
                 }
-            ]
+            }
         },
-        {
-            "name": "mseccfg",
+        "mseccfg": {
             "offset": "0x747",
-            "fields": [
-                {
-                    "name": "mml",
+            "fields": {
+                "mml": {
                     "position": 0,
                     "length": 1
                 },
-                {
-                    "name": "mmwp",
+                "mmwp": {
                     "position": 1,
                     "length": 1
                 },
-                {
-                    "name": "rlb",
+                "rlb": {
                     "position": 2,
                     "length": 1
                 },
-                {
-                    "name": "useed",
+                "useed": {
                     "position": 8,
                     "length": 1
                 },
-                {
-                    "name": "sseed",
+                "sseed": {
                     "position": 9,
                     "length": 1
                 }
-            ]
+            }
         },
-        {
-            "name": "mseccfgh",
+        "mseccfgh": {
             "offset": "0x757",
-            "fields": [
-                {
-                    "name": "pmm",
+            "fields": {
+                "pmm": {
                     "position": 0,
                     "length": 2
                 }
-            ]
+            }
         },
-        {
-            "name": "medeleg",
+        "medeleg": {
             "offset": "0x302",
             "width": 32
         },
-        {
-            "name": "medelegh",
+        "medelegh": {
             "offset": "0x312",
             "width": 32
         },
-        {
-            "name": "pmpcfg0",
+        "pmpcfg0": {
             "offset": "0x3A0",
             "width": 32
         },
-        {
-            "name": "pmpcfg1",
+        "pmpcfg1": {
             "offset": "0x3A1",
             "width": 32
         },
-        {
-            "name": "pmpcfg2",
+        "pmpcfg2": {
             "offset": "0x3A2",
             "width": 32
         },
-        {
-            "name": "pmpcfg3",
+        "pmpcfg3": {
             "offset": "0x3A3",
             "width": 32
         },
-        {
-            "name": "pmpcfg4",
+        "pmpcfg4": {
             "offset": "0x3A4",
             "width": 32
         },
-        {
-            "name": "pmpcfg5",
+        "pmpcfg5": {
             "offset": "0x3A5",
             "width": 32
         },
-        {
-            "name": "pmpcfg6",
+        "pmpcfg6": {
             "offset": "0x3A6",
             "width": 32
         },
-        {
-            "name": "pmpcfg7",
+        "pmpcfg7": {
             "offset": "0x3A7",
             "width": 32
         },
-        {
-            "name": "pmpcfg8",
+        "pmpcfg8": {
             "offset": "0x3A8",
             "width": 32
         },
-        {
-            "name": "pmpcfg9",
+        "pmpcfg9": {
             "offset": "0x3A9",
             "width": 32
         },
-        {
-            "name": "pmpcfg10",
+        "pmpcfg10": {
             "offset": "0x3AA",
             "width": 32
         },
-        {
-            "name": "pmpcfg11",
+        "pmpcfg11": {
             "offset": "0x3AB",
             "width": 32
         },
-        {
-            "name": "pmpcfg12",
+        "pmpcfg12": {
             "offset": "0x3AC",
             "width": 32
         },
-        {
-            "name": "pmpcfg13",
+        "pmpcfg13": {
             "offset": "0x3AD",
             "width": 32
         },
-        {
-            "name": "pmpcfg14",
+        "pmpcfg14": {
             "offset": "0x3AE",
             "width": 32
         },
-        {
-            "name": "pmpcfg15",
+        "pmpcfg15": {
             "offset": "0x3AF",
             "width": 32
         },
-        {
-            "name": "pmpaddr0",
+        "pmpaddr0": {
             "offset": "0x3B0",
             "width": 32
         },
-        {
-            "name": "pmpaddr1",
+        "pmpaddr1": {
             "offset": "0x3B1",
             "width": 32
         },
-        {
-            "name": "pmpaddr2",
+        "pmpaddr2": {
             "offset": "0x3B2",
             "width": 32
         },
-        {
-            "name": "pmpaddr3",
+        "pmpaddr3": {
             "offset": "0x3B3",
             "width": 32
         },
-        {
-            "name": "pmpaddr4",
+        "pmpaddr4": {
             "offset": "0x3B4",
             "width": 32
         },
-        {
-            "name": "pmpaddr5",
+        "pmpaddr5": {
             "offset": "0x3B5",
             "width": 32
         },
-        {
-            "name": "pmpaddr6",
+        "pmpaddr6": {
             "offset": "0x3B6",
             "width": 32
         },
-        {
-            "name": "pmpaddr7",
+        "pmpaddr7": {
             "offset": "0x3B7",
             "width": 32
         },
-        {
-            "name": "pmpaddr8",
+        "pmpaddr8": {
             "offset": "0x3B8",
             "width": 32
         },
-        {
-            "name": "pmpaddr9",
+        "pmpaddr9": {
             "offset": "0x3B9",
             "width": 32
         },
-        {
-            "name": "pmpaddr10",
+        "pmpaddr10": {
             "offset": "0x3BA",
             "width": 32
         },
-        {
-            "name": "pmpaddr11",
+        "pmpaddr11": {
             "offset": "0x3BB",
             "width": 32
         },
-        {
-            "name": "pmpaddr12",
+        "pmpaddr12": {
             "offset": "0x3BC",
             "width": 32
         },
-        {
-            "name": "pmpaddr13",
+        "pmpaddr13": {
             "offset": "0x3BD",
             "width": 32
         },
-        {
-            "name": "pmpaddr14",
+        "pmpaddr14": {
             "offset": "0x3BE",
             "width": 32
         },
-        {
-            "name": "pmpaddr15",
+        "pmpaddr15": {
             "offset": "0x3BF",
             "width": 32
         },
-        {
-            "name": "pmpaddr16",
+        "pmpaddr16": {
             "offset": "0x3C0",
             "width": 32
         },
-        {
-            "name": "pmpaddr17",
+        "pmpaddr17": {
             "offset": "0x3C1",
             "width": 32
         },
-        {
-            "name": "pmpaddr18",
+        "pmpaddr18": {
             "offset": "0x3C2",
             "width": 32
         },
-        {
-            "name": "pmpaddr19",
+        "pmpaddr19": {
             "offset": "0x3C3",
             "width": 32
         },
-        {
-            "name": "pmpaddr20",
+        "pmpaddr20": {
             "offset": "0x3C4",
             "width": 32
         },
-        {
-            "name": "pmpaddr21",
+        "pmpaddr21": {
             "offset": "0x3C5",
             "width": 32
         },
-        {
-            "name": "pmpaddr22",
+        "pmpaddr22": {
             "offset": "0x3C6",
             "width": 32
         },
-        {
-            "name": "pmpaddr23",
+        "pmpaddr23": {
             "offset": "0x3C7",
             "width": 32
         },
-        {
-            "name": "pmpaddr24",
+        "pmpaddr24": {
             "offset": "0x3C8",
             "width": 32
         },
-        {
-            "name": "pmpaddr25",
+        "pmpaddr25": {
             "offset": "0x3C9",
             "width": 32
         },
-        {
-            "name": "pmpaddr26",
+        "pmpaddr26": {
             "offset": "0x3CA",
             "width": 32
         },
-        {
-            "name": "pmpaddr27",
+        "pmpaddr27": {
             "offset": "0x3CB",
             "width": 32
         },
-        {
-            "name": "pmpaddr28",
+        "pmpaddr28": {
             "offset": "0x3CC",
             "width": 32
         },
-        {
-            "name": "pmpaddr29",
+        "pmpaddr29": {
             "offset": "0x3CD",
             "width": 32
         },
-        {
-            "name": "pmpaddr30",
+        "pmpaddr30": {
             "offset": "0x3CE",
             "width": 32
         },
-        {
-            "name": "pmpaddr31",
+        "pmpaddr31": {
             "offset": "0x3CF",
             "width": 32
         },
-        {
-            "name": "pmpaddr32",
+        "pmpaddr32": {
             "offset": "0x3D0",
             "width": 32
         },
-        {
-            "name": "pmpaddr33",
+        "pmpaddr33": {
             "offset": "0x3D1",
             "width": 32
         },
-        {
-            "name": "pmpaddr34",
+        "pmpaddr34": {
             "offset": "0x3D2",
             "width": 32
         },
-        {
-            "name": "pmpaddr35",
+        "pmpaddr35": {
             "offset": "0x3D3",
             "width": 32
         },
-        {
-            "name": "pmpaddr36",
+        "pmpaddr36": {
             "offset": "0x3D4",
             "width": 32
         },
-        {
-            "name": "pmpaddr37",
+        "pmpaddr37": {
             "offset": "0x3D5",
             "width": 32
         },
-        {
-            "name": "pmpaddr38",
+        "pmpaddr38": {
             "offset": "0x3D6",
             "width": 32
         },
-        {
-            "name": "pmpaddr39",
+        "pmpaddr39": {
             "offset": "0x3D7",
             "width": 32
         },
-        {
-            "name": "pmpaddr40",
+        "pmpaddr40": {
             "offset": "0x3D8",
             "width": 32
         },
-        {
-            "name": "pmpaddr41",
+        "pmpaddr41": {
             "offset": "0x3D9",
             "width": 32
         },
-        {
-            "name": "pmpaddr42",
+        "pmpaddr42": {
             "offset": "0x3DA",
             "width": 32
         },
-        {
-            "name": "pmpaddr43",
+        "pmpaddr43": {
             "offset": "0x3DB",
             "width": 32
         },
-        {
-            "name": "pmpaddr44",
+        "pmpaddr44": {
             "offset": "0x3DC",
             "width": 32
         },
-        {
-            "name": "pmpaddr45",
+        "pmpaddr45": {
             "offset": "0x3DD",
             "width": 32
         },
-        {
-            "name": "pmpaddr46",
+        "pmpaddr46": {
             "offset": "0x3DE",
             "width": 32
         },
-        {
-            "name": "pmpaddr47",
+        "pmpaddr47": {
             "offset": "0x3DF",
             "width": 32
         },
-        {
-            "name": "pmpaddr48",
+        "pmpaddr48": {
             "offset": "0x3E0",
             "width": 32
         },
-        {
-            "name": "pmpaddr49",
+        "pmpaddr49": {
             "offset": "0x3E1",
             "width": 32
         },
-        {
-            "name": "pmpaddr50",
+        "pmpaddr50": {
             "offset": "0x3E2",
             "width": 32
         },
-        {
-            "name": "pmpaddr51",
+        "pmpaddr51": {
             "offset": "0x3E3",
             "width": 32
         },
-        {
-            "name": "pmpaddr52",
+        "pmpaddr52": {
             "offset": "0x3E4",
             "width": 32
         },
-        {
-            "name": "pmpaddr53",
+        "pmpaddr53": {
             "offset": "0x3E5",
             "width": 32
         },
-        {
-            "name": "pmpaddr54",
+        "pmpaddr54": {
             "offset": "0x3E6",
             "width": 32
         },
-        {
-            "name": "pmpaddr55",
+        "pmpaddr55": {
             "offset": "0x3E7",
             "width": 32
         },
-        {
-            "name": "pmpaddr56",
+        "pmpaddr56": {
             "offset": "0x3E8",
             "width": 32
         },
-        {
-            "name": "pmpaddr57",
+        "pmpaddr57": {
             "offset": "0x3E9",
             "width": 32
         },
-        {
-            "name": "pmpaddr58",
+        "pmpaddr58": {
             "offset": "0x3EA",
             "width": 32
         },
-        {
-            "name": "pmpaddr59",
+        "pmpaddr59": {
             "offset": "0x3EB",
             "width": 32
         },
-        {
-            "name": "pmpaddr60",
+        "pmpaddr60": {
             "offset": "0x3EC",
             "width": 32
         },
-        {
-            "name": "pmpaddr61",
+        "pmpaddr61": {
             "offset": "0x3ED",
             "width": 32
         },
-        {
-            "name": "pmpaddr62",
+        "pmpaddr62": {
             "offset": "0x3EE",
             "width": 32
         },
-        {
-            "name": "pmpaddr63",
+        "pmpaddr63": {
             "offset": "0x3EF",
             "width": 32
         }
-    ]
+    }
 }
