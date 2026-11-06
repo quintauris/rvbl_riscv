@@ -15,20 +15,17 @@
                     "class": "memory_mapped"
                 }
             },
-            "registers": [
-                {
-                    "name": "reserved",
+            "registers": {
+                "reserved": {
                     "offset": "0x0",
                     "width": 32
                 },
-                {
-                    "name": "priority",
+                "priority": {
                     "offset": "0x0",
                     "width": 32,
                     "indexing": {
-                        "dimensions": [
-                            {
-                                "name": "dim0",
+                        "dimensions": {
+                            "dim0": {
                                 "ranges": [
                                     [
                                         "1",
@@ -36,17 +33,15 @@
                                     ]
                                 ]
                             }
-                        ]
+                        }
                     }
                 },
-                {
-                    "name": "pending",
+                "pending": {
                     "offset": "0x1000",
                     "width": 32,
                     "indexing": {
-                        "dimensions": [
-                            {
-                                "name": "dim0",
+                        "dimensions": {
+                            "dim0": {
                                 "ranges": [
                                     [
                                         "0",
@@ -54,17 +49,15 @@
                                     ]
                                 ]
                             }
-                        ]
+                        }
                     }
                 },
-                {
-                    "name": "enable",
+                "enable": {
                     "offset": "0x2000",
                     "width": 32,
                     "indexing": {
-                        "dimensions": [
-                            {
-                                "name": "dim0",
+                        "dimensions": {
+                            "dim0": {
                                 "ranges": [
                                     [
                                         "0",
@@ -72,17 +65,15 @@
                                     ]
                                 ]
                             }
-                        ]
+                        }
                     }
                 },
-                {
-                    "name": "threshold",
+                "threshold": {
                     "offset": "0x200000",
                     "width": 32,
                     "indexing": {
-                        "dimensions": [
-                            {
-                                "name": "dim0",
+                        "dimensions": {
+                            "dim0": {
                                 "ranges": [
                                     [
                                         "0",
@@ -91,17 +82,15 @@
                                 ],
                                 "stride": "4K"
                             }
-                        ]
+                        }
                     }
                 },
-                {
-                    "name": "claim_complete",
+                "claim_complete": {
                     "offset": "0x200004",
                     "width": 32,
                     "indexing": {
-                        "dimensions": [
-                            {
-                                "name": "dim0",
+                        "dimensions": {
+                            "dim0": {
                                 "ranges": [
                                     [
                                         "0",
@@ -110,10 +99,10 @@
                                 ],
                                 "stride": "4K"
                             }
-                        ]
+                        }
                     }
                 }
-            ]
+            }
         }
     ],
     "parameters": [

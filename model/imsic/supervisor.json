@@ -13,17 +13,15 @@
         "name": "stopei",
         "class": "control_status",
         "offset": "0x15C",
-        "fields": [
-            {
-                "name": "priority",
+        "fields": {
+            "priority": {
                 "position": 0,
                 "length": 11
             },
-            {
-                "name": "identity",
+            "identity": {
                 "position": 16,
                 "length": 11
             }
-        ]
+        }
     }
 ]

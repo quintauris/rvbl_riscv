@@ -12,428 +12,337 @@
             "class": "control_status"
         }
     },
-    "registers": [
-        {
-            "name": "misa",
+    "registers": {
+        "misa": {
             "offset": "0x301",
-            "fields": [
-                {
-                    "name": "extensions",
+            "fields": {
+                "extensions": {
                     "position": 0,
                     "length": 26,
-                    "values": [
-                        {
-                            "name": "Atomic",
+                    "values": {
+                        "Atomic": {
                             "value": "0"
                         },
-                        {
-                            "name": "BitManipulation",
+                        "BitManipulation": {
                             "value": "1"
                         },
-                        {
-                            "name": "Compressed",
+                        "Compressed": {
                             "value": "2"
                         },
-                        {
-                            "name": "DoublePrecisionFloatingPoint",
+                        "DoublePrecisionFloatingPoint": {
                             "value": "3"
                         },
-                        {
-                            "name": "RVE",
+                        "RVE": {
                             "value": "4"
                         },
-                        {
-                            "name": "SinglePrecisionFloatingPoint",
+                        "SinglePrecisionFloatingPoint": {
                             "value": "5"
                         },
-                        {
-                            "name": "Hypervisor",
+                        "Hypervisor": {
                             "value": "7"
                         },
-                        {
-                            "name": "RVI",
+                        "RVI": {
                             "value": "8"
                         },
-                        {
-                            "name": "MultiplyDivide",
+                        "MultiplyDivide": {
                             "value": "12"
                         },
-                        {
-                            "name": "QuadPrecisionFloatingPoint",
+                        "QuadPrecisionFloatingPoint": {
                             "value": "16"
                         },
-                        {
-                            "name": "SupervisorMode",
+                        "SupervisorMode": {
                             "value": "18"
                         },
-                        {
-                            "name": "UserMode",
+                        "UserMode": {
                             "value": "20"
                         },
-                        {
-                            "name": "Vector",
+                        "Vector": {
                             "value": "21"
                         },
-                        {
-                            "name": "NonStandard",
+                        "NonStandard": {
                             "value": "23"
                         }
-                    ]
+                    }
                 },
-                {
-                    "name": "machine_xlen",
+                "machine_xlen": {
                     "position": -2,
-                    "values": [
-                        {
-                            "name": "_32",
+                    "values": {
+                        "_32": {
                             "value": "1"
                         },
-                        {
-                            "name": "_64",
+                        "_64": {
                             "value": "2"
                         },
-                        {
-                            "name": "_128",
+                        "_128": {
                             "value": "3"
                         }
-                    ]
+                    }
                 }
-            ]
+            }
         },
-        {
-            "name": "mvendorid",
+        "mvendorid": {
             "width": 32,
             "offset": "0xF11",
-            "fields": [
-                {
-                    "name": "offset",
+            "fields": {
+                "offset": {
                     "position": 0,
                     "length": 7
                 },
-                {
-                    "name": "bank",
+                "bank": {
                     "position": 7,
                     "length": 25
                 }
-            ]
+            }
         },
-        {
-            "name": "marchid",
+        "marchid": {
             "offset": "0xF12"
         },
-        {
-            "name": "mimpid",
+        "mimpid": {
             "offset": "0xF13"
         },
-        {
-            "name": "mhartid",
+        "mhartid": {
             "offset": "0xF14"
         },
-        {
-            "name": "mtvec",
+        "mtvec": {
             "offset": "0x305",
-            "fields": [
-                {
-                    "name": "mode",
+            "fields": {
+                "mode": {
                     "position": 0,
                     "length": 2,
-                    "values": [
-                        {
-                            "name": "Direct",
+                    "values": {
+                        "Direct": {
                             "value": "0"
                         },
-                        {
-                            "name": "Vectored",
+                        "Vectored": {
                             "value": "1"
                         }
-                    ]
+                    }
                 },
-                {
-                    "name": "base",
+                "base": {
                     "position": 2
                 }
-            ]
+            }
         },
-        {
-            "name": "mideleg",
+        "mideleg": {
             "offset": "0x303"
         },
-        {
-            "name": "mip",
+        "mip": {
             "offset": "0x344",
-            "fields": [
-                {
-                    "name": "ssip",
+            "fields": {
+                "ssip": {
                     "position": 1,
                     "length": 1
                 },
-                {
-                    "name": "msip",
+                "msip": {
                     "position": 3,
                     "length": 1
                 },
-                {
-                    "name": "stip",
+                "stip": {
                     "position": 5,
                     "length": 1
                 },
-                {
-                    "name": "mtip",
+                "mtip": {
                     "position": 7,
                     "length": 1
                 },
-                {
-                    "name": "seip",
+                "seip": {
                     "position": 9,
                     "length": 1
                 },
-                {
-                    "name": "meip",
+                "meip": {
                     "position": 11,
                     "length": 1
                 },
-                {
-                    "name": "lcofip",
+                "lcofip": {
                     "position": 13,
                     "length": 1
                 }
-            ]
+            }
         },
-        {
-            "name": "mie",
+        "mie": {
             "offset": "0x304",
-            "fields": [
-                {
-                    "name": "ssie",
+            "fields": {
+                "ssie": {
                     "position": 1,
                     "length": 1
                 },
-                {
-                    "name": "msie",
+                "msie": {
                     "position": 3,
                     "length": 1
                 },
-                {
-                    "name": "stie",
+                "stie": {
                     "position": 5,
                     "length": 1
                 },
-                {
-                    "name": "mtie",
+                "mtie": {
                     "position": 7,
                     "length": 1
                 },
-                {
-                    "name": "seie",
+                "seie": {
                     "position": 9,
                     "length": 1
                 },
-                {
-                    "name": "meie",
+                "meie": {
                     "position": 11,
                     "length": 1
                 },
-                {
-                    "name": "lcofie",
+                "lcofie": {
                     "position": 13,
                     "length": 1
                 }
-            ]
+            }
         },
-        {
-            "name": "mcounteren",
+        "mcounteren": {
             "width": 32,
             "offset": "0x306",
-            "fields": [
-                {
-                    "name": "cy",
+            "fields": {
+                "cy": {
                     "position": 0,
                     "length": 1
                 },
-                {
-                    "name": "tm",
+                "tm": {
                     "position": 1,
                     "length": 1
                 },
-                {
-                    "name": "ir",
+                "ir": {
                     "position": 2,
                     "length": 1
                 },
-                {
-                    "name": "hpm3",
+                "hpm3": {
                     "position": 3,
                     "length": 1
                 },
-                {
-                    "name": "hpm4",
+                "hpm4": {
                     "position": 4,
                     "length": 1
                 }
-            ]
+            }
         },
-        {
-            "name": "mcountinhibit",
+        "mcountinhibit": {
             "width": 32,
             "offset": "0x320",
-            "fields": [
-                {
-                    "name": "cy",
+            "fields": {
+                "cy": {
                     "position": 0,
                     "length": 1
                 },
-                {
-                    "name": "ir",
+                "ir": {
                     "position": 2,
                     "length": 1
                 },
-                {
-                    "name": "hpm3",
+                "hpm3": {
                     "position": 3,
                     "length": 1
                 },
-                {
-                    "name": "hpm4",
+                "hpm4": {
                     "position": 4,
                     "length": 1
                 }
-            ]
+            }
         },
-        {
-            "name": "mscratch",
+        "mscratch": {
             "offset": "0x340"
         },
-        {
-            "name": "mepc",
+        "mepc": {
             "offset": "0x341"
         },
-        {
-            "name": "mcause",
+        "mcause": {
             "offset": "0x342",
-            "fields": [
-                {
-                    "name": "code",
+            "fields": {
+                "code": {
                     "position": 0,
                     "length": 31,
-                    "values": [
-                        {
-                            "name": "Interrupt_SupervisorSoftware",
+                    "values": {
+                        "Interrupt_SupervisorSoftware": {
                             "value": "1"
                         },
-                        {
-                            "name": "Interrupt_MachineSoftware",
+                        "Interrupt_MachineSoftware": {
                             "value": "3"
                         },
-                        {
-                            "name": "Interrupt_SupervisorTimer",
+                        "Interrupt_SupervisorTimer": {
                             "value": "5"
                         },
-                        {
-                            "name": "Interrupt_MachineTimer",
+                        "Interrupt_MachineTimer": {
                             "value": "7"
                         },
-                        {
-                            "name": "Interrupt_SupervisorExternal",
+                        "Interrupt_SupervisorExternal": {
                             "value": "9"
                         },
-                        {
-                            "name": "Interrupt_MachineExternal",
+                        "Interrupt_MachineExternal": {
                             "value": "11"
                         },
-                        {
-                            "name": "Interrupt_CounterOverflow",
+                        "Interrupt_CounterOverflow": {
                             "value": "13"
                         },
-                        {
-                            "name": "Exception_InstructionAddressMisaligned",
+                        "Exception_InstructionAddressMisaligned": {
                             "value": "0"
                         },
-                        {
-                            "name": "Exception_InstructionAccessFault",
+                        "Exception_InstructionAccessFault": {
                             "value": "1"
                         },
-                        {
-                            "name": "Exception_IllegalInstruction",
+                        "Exception_IllegalInstruction": {
                             "value": "2"
                         },
-                        {
-                            "name": "Exception_Breakpoint",
+                        "Exception_Breakpoint": {
                             "value": "3"
                         },
-                        {
-                            "name": "Exception_LoadAddressMisaligned",
+                        "Exception_LoadAddressMisaligned": {
                             "value": "4"
                         },
-                        {
-                            "name": "Exception_LoadAccessFault",
+                        "Exception_LoadAccessFault": {
                             "value": "5"
                         },
-                        {
-                            "name": "Exception_StoreAddressMisaligned",
+                        "Exception_StoreAddressMisaligned": {
                             "value": "6"
                         },
-                        {
-                            "name": "Exception_StoreAccessFault",
+                        "Exception_StoreAccessFault": {
                             "value": "7"
                         },
-                        {
-                            "name": "Exception_EnvironmentCallFromUMode",
+                        "Exception_EnvironmentCallFromUMode": {
                             "value": "8"
                         },
-                        {
-                            "name": "Exception_EnvironmentCallFromSMode",
+                        "Exception_EnvironmentCallFromSMode": {
                             "value": "9"
                         },
-                        {
-                            "name": "Exception_EnvironmentCallFromMMode",
+                        "Exception_EnvironmentCallFromMMode": {
                             "value": "11"
                         },
-                        {
-                            "name": "Exception_InstructionPageFault",
+                        "Exception_InstructionPageFault": {
                             "value": "12"
                         },
-                        {
-                            "name": "Exception_LoadPageFault",
+                        "Exception_LoadPageFault": {
                             "value": "13"
                         },
-                        {
-                            "name": "Exception_StorePageFault",
+                        "Exception_StorePageFault": {
                             "value": "15"
                         },
-                        {
-                            "name": "Exception_SofwareCheck",
+                        "Exception_SofwareCheck": {
                             "value": "18"
                         },
-                        {
-                            "name": "Exception_HardwareError",
+                        "Exception_HardwareError": {
                             "value": "19"
                         }
-                    ]
+                    }
                 },
-                {
-                    "name": "interrupt",
+                "interrupt": {
                     "position": 31,
                     "length": 1,
-                    "values": [
-                        {
-                            "name": "Exception",
+                    "values": {
+                        "Exception": {
                             "value": "0"
                         },
-                        {
-                            "name": "Interrupt",
+                        "Interrupt": {
                             "value": "1"
                         }
-                    ]
+                    }
                 }
-            ]
+            }
         },
-        {
-            "name": "mtval",
+        "mtval": {
             "offset": "0x343"
         },
-        {
-            "name": "mconfigptr",
+        "mconfigptr": {
             "offset": "0xF15"
         }
-    ]
+    }
 }

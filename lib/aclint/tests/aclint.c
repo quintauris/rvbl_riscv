@@ -19,9 +19,9 @@ void machine_timer_handler(volatile rvbl_interrupt_hart_context *context)
 
     ++count;
     rvbl_aclint_set_compare(
-        &rvbl_aclint_instance_default,
+        &rvbl_aclint_instance_aclint_default,
         0,
-        RVBL_REGISTER_READ(aclint, mtimer_time, &rvbl_aclint_instance_default, mtime) +
+        RVBL_REGISTER_READ(aclint, mtimer_time, &rvbl_aclint_instance_aclint_default, mtime) +
             RVBL_CONFIGURATION_MTIME_FREQUENCY
     );
 }
@@ -45,11 +45,11 @@ int main(void)
         rvbl_result_success
     );
 
-    rvbl_aclint_set_compare(&rvbl_aclint_instance_default, 0, 0);
+    rvbl_aclint_set_compare(&rvbl_aclint_instance_aclint_default, 0, 0);
     rvbl_aclint_set_compare(
-        &rvbl_aclint_instance_default,
+        &rvbl_aclint_instance_aclint_default,
         0,
-        RVBL_REGISTER_READ(aclint, mtimer_time, &rvbl_aclint_instance_default, mtime) +
+        RVBL_REGISTER_READ(aclint, mtimer_time, &rvbl_aclint_instance_aclint_default, mtime) +
             RVBL_CONFIGURATION_MTIME_FREQUENCY
     );
     count = 0;

@@ -6,22 +6,20 @@
         "content": "Models a RISC-V RVI20U32 CPU plus M-Mode CSRs."
     },
     "word_size": 32,
-    "imports": [
-        {
-            "name": "privileged",
+    "imports": {
+        "privileged": {
             "file": "riscv/model/privileged/model.json"
         },
-        {
-            "name": "privileged_32",
+        "privileged_32": {
             "file": "riscv/model/privileged/model_32.json"
         }
-    ],
-    "addressables": [
-        {
+    },
+    "addressables": {
+        "privileged": {
             "reference": "privileged"
         },
-        {
+        "privileged_32": {
             "reference": "privileged_32"
         }
-    ]
+    }
 }
