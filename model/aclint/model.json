@@ -7,7 +7,7 @@
     },
     "addressables": {
         "mtimer_time": {
-            "base": "$MTIMER_TIME_OFFSET",
+            "offset": "$MTIMER_TIME_OFFSET",
             "size": "8",
             "default": {
                 "register": {
@@ -22,7 +22,7 @@
             }
         },
         "mtimer_compare": {
-            "base": "$MTIMER_COMPARE_OFFSET",
+            "offset": "$MTIMER_COMPARE_OFFSET",
             "size": "8 * $HART_COUNT",
             "default": {
                 "register": {
@@ -49,7 +49,7 @@
             }
         },
         "machine_interrupt": {
-            "base": "$MSWI_MSIP_OFFSET",
+            "offset": "$MSWI_MSIP_OFFSET",
             "size": "4 * ${HART_COUNT}",
             "default": {
                 "register": {
@@ -76,7 +76,7 @@
             }
         },
         "supervisor_interrupt": {
-            "base": "$SSWI_SETSSIP_OFFSET",
+            "offset": "$SSWI_SETSSIP_OFFSET",
             "size": "4 * ${HART_COUNT}",
             "default": {
                 "register": {

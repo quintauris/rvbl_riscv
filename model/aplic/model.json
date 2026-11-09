@@ -8,7 +8,7 @@
     "addressables": [
         {
             "name": "registers",
-            "base": "0",
+            "offset": "0",
             "size": "16K",
             "default": {
                 "register": {
@@ -291,7 +291,7 @@
         },
         {
             "name": "interrupt_delivery_control",
-            "base": "16K",
+            "offset": "16K",
             "size": "$HART_COUNT * 32",
             "default": {
                 "register": {

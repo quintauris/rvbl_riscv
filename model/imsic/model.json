@@ -8,7 +8,7 @@
     "addressables": [
         {
             "name": "machine_files",
-            "base": "$MACHINE_FILES_BASE",
+            "offset": "$MACHINE_FILES_BASE",
             "size": "$HART_COUNT * $PAGE_SIZE",
             "default": {
                 "register": {
@@ -54,7 +54,7 @@
         },
         {
             "name": "supervisor_files",
-            "base": "$SUPERVISOR_FILES_BASE",
+            "offset": "$SUPERVISOR_FILES_BASE",
             "size": "$HART_COUNT * $PAGE_SIZE",
             "default": {
                 "register": {
