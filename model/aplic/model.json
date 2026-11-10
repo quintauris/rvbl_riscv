@@ -83,10 +83,10 @@
                         "dimensions": {
                             "dim0": {
                                 "ranges": [
-                                    [
-                                        "1",
-                                        "1023"
-                                    ]
+                                    {
+                                        "lower": "1",
+                                        "upper": "1023"
+                                    }
                                 ]
                             }
                         }
@@ -163,10 +163,10 @@
                         "dimensions": {
                             "dim0": {
                                 "ranges": [
-                                    [
-                                        "0",
-                                        "31"
-                                    ]
+                                    {
+                                        "lower": "0",
+                                        "upper": "31"
+                                    }
                                 ]
                             }
                         }
@@ -183,10 +183,10 @@
                         "dimensions": {
                             "dim0": {
                                 "ranges": [
-                                    [
-                                        "0",
-                                        "31"
-                                    ]
+                                    {
+                                        "lower": "0",
+                                        "upper": "31"
+                                    }
                                 ]
                             }
                         }
@@ -203,10 +203,10 @@
                         "dimensions": {
                             "dim0": {
                                 "ranges": [
-                                    [
-                                        "0",
-                                        "31"
-                                    ]
+                                    {
+                                        "lower": "0",
+                                        "upper": "31"
+                                    }
                                 ]
                             }
                         }
@@ -223,10 +223,10 @@
                         "dimensions": {
                             "dim0": {
                                 "ranges": [
-                                    [
-                                        "0",
-                                        "31"
-                                    ]
+                                    {
+                                        "lower": "0",
+                                        "upper": "31"
+                                    }
                                 ]
                             }
                         }
@@ -278,10 +278,10 @@
                         "dimensions": {
                             "dim0": {
                                 "ranges": [
-                                    [
-                                        "1",
-                                        "1023"
-                                    ]
+                                    {
+                                        "lower": "1",
+                                        "upper": "1023"
+                                    }
                                 ]
                             }
                         }
@@ -307,10 +307,10 @@
                             "dim0": {
                                 "stride": "32",
                                 "ranges": [
-                                    [
-                                        "0",
-                                        "$HART_COUNT - 1"
-                                    ]
+                                    {
+                                        "lower": "0",
+                                        "upper": "$HART_COUNT - 1"
+                                    }
                                 ]
                             }
                         }
@@ -324,10 +324,10 @@
                             "dim0": {
                                 "stride": "32",
                                 "ranges": [
-                                    [
-                                        "0",
-                                        "$HART_COUNT - 1"
-                                    ]
+                                    {
+                                        "lower": "0",
+                                        "upper": "$HART_COUNT - 1"
+                                    }
                                 ]
                             }
                         }
@@ -341,10 +341,10 @@
                             "dim0": {
                                 "stride": "32",
                                 "ranges": [
-                                    [
-                                        "0",
-                                        "$HART_COUNT - 1"
-                                    ]
+                                    {
+                                        "lower": "0",
+                                        "upper": "$HART_COUNT - 1"
+                                    }
                                 ]
                             }
                         }
@@ -358,10 +358,10 @@
                             "dim0": {
                                 "stride": "32",
                                 "ranges": [
-                                    [
-                                        "0",
-                                        "$HART_COUNT - 1"
-                                    ]
+                                    {
+                                        "lower": "0",
+                                        "upper": "$HART_COUNT - 1"
+                                    }
                                 ]
                             }
                         }
@@ -375,10 +375,10 @@
                             "dim0": {
                                 "stride": "32",
                                 "ranges": [
-                                    [
-                                        "0",
-                                        "$HART_COUNT - 1"
-                                    ]
+                                    {
+                                        "lower": "0",
+                                        "upper": "$HART_COUNT - 1"
+                                    }
                                 ]
                             }
                         }

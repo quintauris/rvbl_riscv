@@ -27,10 +27,10 @@
                         "dimensions": {
                             "dim0": {
                                 "ranges": [
-                                    [
-                                        "1",
-                                        "$INTERRUPT_SOURCES - 1"
-                                    ]
+                                    {
+                                        "lower": "1",
+                                        "upper": "$INTERRUPT_SOURCES - 1"
+                                    }
                                 ]
                             }
                         }
@@ -43,10 +43,10 @@
                         "dimensions": {
                             "dim0": {
                                 "ranges": [
-                                    [
-                                        "0",
-                                        "($INTERRUPT_SOURCES / 32) - 1"
-                                    ]
+                                    {
+                                        "lower": "0",
+                                        "upper": "($INTERRUPT_SOURCES / 32) - 1"
+                                    }
                                 ]
                             }
                         }
@@ -59,10 +59,10 @@
                         "dimensions": {
                             "dim0": {
                                 "ranges": [
-                                    [
-                                        "0",
-                                        "($HART_COUNT * ($INTERRUPT_SOURCES / 32)) - 1"
-                                    ]
+                                    {
+                                        "lower": "0",
+                                        "upper": "($HART_COUNT * ($INTERRUPT_SOURCES / 32)) - 1"
+                                    }
                                 ]
                             }
                         }
@@ -75,10 +75,10 @@
                         "dimensions": {
                             "dim0": {
                                 "ranges": [
-                                    [
-                                        "0",
-                                        "$CONTEXTS - 1"
-                                    ]
+                                    {
+                                        "lower": "0",
+                                        "upper": "$CONTEXTS - 1"
+                                    }
                                 ],
                                 "stride": "4K"
                             }
@@ -92,10 +92,10 @@
                         "dimensions": {
                             "dim0": {
                                 "ranges": [
-                                    [
-                                        "0",
-                                        "$CONTEXTS - 1"
-                                    ]
+                                    {
+                                        "lower": "0",
+                                        "upper": "$CONTEXTS - 1"
+                                    }
                                 ],
                                 "stride": "4K"
                             }

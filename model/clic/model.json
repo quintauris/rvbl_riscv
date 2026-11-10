@@ -82,10 +82,10 @@
                         "dimensions": {
                             "dim0": {
                                 "ranges": [
-                                    [
-                                        "0",
-                                        "$INTERRUPT_INPUTS - 1"
-                                    ]
+                                    {
+                                        "lower": "0",
+                                        "upper": "$INTERRUPT_INPUTS - 1"
+                                    }
                                 ],
                                 "stride": "4"
                             }

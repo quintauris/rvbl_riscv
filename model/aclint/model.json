@@ -37,10 +37,10 @@
                         "dimensions": {
                             "dim0": {
                                 "ranges": [
-                                    [
-                                        "0",
-                                        "$HART_COUNT - 1"
-                                    ]
+                                    {
+                                        "lower": "0",
+                                        "upper": "$HART_COUNT - 1"
+                                    }
                                 ]
                             }
                         }
@@ -64,10 +64,10 @@
                         "dimensions": {
                             "dim0": {
                                 "ranges": [
-                                    [
-                                        "0",
-                                        "$HART_COUNT - 1"
-                                    ]
+                                    {
+                                        "lower": "0",
+                                        "upper": "$HART_COUNT - 1"
+                                    }
                                 ]
                             }
                         }
@@ -91,10 +91,10 @@
                         "dimensions": {
                             "dim0": {
                                 "ranges": [
-                                    [
-                                        "0",
-                                        "$HART_COUNT - 1"
-                                    ]
+                                    {
+                                        "lower": "0",
+                                        "upper": "$HART_COUNT - 1"
+                                    }
                                 ]
                             }
                         }
