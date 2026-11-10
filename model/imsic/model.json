@@ -23,10 +23,10 @@
                         "dimensions": {
                             "dim0": {
                                 "ranges": [
-                                    [
-                                        "0",
-                                        "$HART_COUNT"
-                                    ]
+                                    {
+                                        "lower": "0",
+                                        "upper": "$HART_COUNT"
+                                    }
                                 ],
                                 "stride": "$PAGE_SIZE"
                             }
@@ -40,10 +40,10 @@
                         "dimensions": {
                             "dim0": {
                                 "ranges": [
-                                    [
-                                        "0",
-                                        "$HART_COUNT"
-                                    ]
+                                    {
+                                        "lower": "0",
+                                        "upper": "$HART_COUNT"
+                                    }
                                 ],
                                 "stride": "$PAGE_SIZE"
                             }
@@ -69,10 +69,10 @@
                         "dimensions": {
                             "dim0": {
                                 "ranges": [
-                                    [
-                                        "0",
-                                        "$HART_COUNT"
-                                    ]
+                                    {
+                                        "lower": "0",
+                                        "upper": "$HART_COUNT"
+                                    }
                                 ],
                                 "stride": "$PAGE_SIZE"
                             }
@@ -86,10 +86,10 @@
                         "dimensions": {
                             "dim0": {
                                 "ranges": [
-                                    [
-                                        "0",
-                                        "$HART_COUNT"
-                                    ]
+                                    {
+                                        "lower": "0",
+                                        "upper": "$HART_COUNT"
+                                    }
                                 ],
                                 "stride": "$PAGE_SIZE"
                             }
